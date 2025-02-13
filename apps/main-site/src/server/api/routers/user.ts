@@ -1,0 +1,49 @@
+import { z } from "zod";
+import { TRPCError } from "@trpc/server";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
+
+export const userRouter = createTRPCRouter({
+  userDetails: protectedProcedure.query(async ({ ctx }) => {
+    const user = await ctx.db.user.findUnique({
+      where: { id: ctx.session.user.id },
+      select: {
+        email: true,
+        name: true,
+        image: true,
+        college: true,
+      },
+    });
+    if (!user) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "User not found",
+      });
+    }
+
+    return user;
+  }),
+
+  updateUserDetails: protectedProcedure
+    .input(
+      z
+        .object({
+          college: z.string().optional(),
+          name: z.string().optional(),
+        })
+        .partial(),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const user = await ctx.db.user.update({
+        where: { id: ctx.session.user.id },
+        data: input,
+      });
+      return user;
+    }),
+});
+// hello: publicProcedure
+// .input(z.object({ text: z.string() }))
+// .query(({ input }) => {
+//   return {
+// greeting: `Hello ${input.text}`,
+//   };
+// }),

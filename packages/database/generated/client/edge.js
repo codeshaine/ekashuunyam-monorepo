@@ -185,7 +185,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/codeshaine/my-stuffs/node/ekashuunyam-repo/packages/database/generated/client",
+      "value": "D:\\swasthcodes\\Next\\ekashuunyam-monorepo\\packages\\database\\generated\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -194,12 +194,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-3.0.x",
+        "value": "windows",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/codeshaine/my-stuffs/node/ekashuunyam-repo/packages/database/prisma/schema.prisma",
+    "sourceFilePath": "D:\\swasthcodes\\Next\\ekashuunyam-monorepo\\packages\\database\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

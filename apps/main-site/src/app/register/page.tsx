@@ -94,7 +94,7 @@ export default function Page() {
   const formSubmission = api.form.submitForm.useMutation({
     onSuccess: () => {
       toast.success("Registration submitted successfully!");
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      localStorage.removeItem("eventRegistrationForm");
     },
     onError: () => {
       toast.error("Error submitting registration");
@@ -177,8 +177,8 @@ export default function Page() {
     return (
       <>
         <Toaster />
-        <Card className="overflow-hidden rounded-3xl border border-blue-100 bg-white/90 shadow-xl backdrop-blur-xl transition-all duration-200 hover:bg-white hover:shadow-2xl">
-          <CardHeader className="border-b border-blue-50 bg-gradient-to-r from-blue-50 to-sky-50">
+        <Card className="border border-blue-100 bg-white">
+          <CardHeader className="border-b border-blue-50 bg-blue-50">
             <div className="flex items-center justify-between">
               <CardTitle className="text-xl font-bold text-gray-800">
                 {eventLabel}

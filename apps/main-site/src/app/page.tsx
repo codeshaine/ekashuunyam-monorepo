@@ -3,15 +3,19 @@ import { FirstSection } from "./_components/section-split/first-section";
 import { SecondSection } from "./_components/section-split/second-section";
 import { ThirdSection } from "./_components/section-split/third-section";
 import { FourthSection } from "./_components/section-split/fourth-section";
+import { SixthSection } from "./_components/section-split/sixth-section";
+import { SeventhSection } from "./_components/section-split/seventh-section";
 
 export default async function Home() {
-  
   return (
     <main className="">
       <FirstSection />
+      <SeventhSection />
+      <SixthSection />
+      <FirstSection />
       <SecondSection />
       <ThirdSection />
-      <FourthSection/>
+      <FourthSection />
       <RulesSection />
     </main>
   );

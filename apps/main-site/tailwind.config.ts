@@ -12,13 +12,21 @@ export default {
 					...fontFamily.sans
 				],
 				sayyeda: ["Sayyeda", "sans-serif"],
+				heart: ["Always In My Heart", "cursive"],
+				playfair: ["PlayFair", "serif"],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
-			colors: {}
+			colors: {
+				'c-50': '#DADADA',
+				'c-100': '#450a0a',
+				'c-150': '#f5898930',
+				'c-200': '#F5EDE7',
+				'c-250': '#e9dbcf'
+			}
 		}
 	},
 	plugins: [require("tailwindcss-animate")],

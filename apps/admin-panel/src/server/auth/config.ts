@@ -1,8 +1,9 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { type DefaultSession, type NextAuthConfig } from "next-auth";
-import { prisma } from "@ekashuunyam/database";
+import { prisma } from "../db/prisma-client";
 import Google from "next-auth/providers/google";
 import Resend from "next-auth/providers/resend";
+import { env } from "@/env";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -42,8 +43,8 @@ declare module "next-auth" {
 export const authConfig: NextAuthConfig = {
   providers: [
     Google({
-      clientId: process.env.AUTH_GOOGLE_ID!,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET!,
+      clientId: env.AUTH_GOOGLE_ID,
+      clientSecret: env.AUTH_GOOGLE_SECRET!,
     }),
     Resend({
       from: "noreply@ekashunyam.tech",
@@ -56,11 +57,10 @@ export const authConfig: NextAuthConfig = {
     strategy: "jwt",
   },
   cookies: {
-    sessionToken: { name: "admin_session_token" },
-    csrfToken: { name: "admin_csrf_token" },
-    callbackUrl: { name: "admin_callback_url" },
+    sessionToken: { name: "user_session_token" },
+    csrfToken: { name: "user_csrf_token" },
+    callbackUrl: { name: "user_callback_url" },
   },
-
   callbacks: {
     redirect: async ({ url, baseUrl }) => {
       if (!url.includes("error")) return baseUrl;
@@ -69,7 +69,6 @@ export const authConfig: NextAuthConfig = {
     jwt: async ({ token, user, account }) => {
       if (account && user) {
         token.id = user.id;
-        token.isAdmin = user.isAdmin;
       }
       return token;
     },
@@ -79,7 +78,6 @@ export const authConfig: NextAuthConfig = {
         user: {
           ...session.user,
           id: token.id as string,
-          isAdmin: token.isAdmin as boolean,
         },
       };
     },

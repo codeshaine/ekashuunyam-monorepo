@@ -26,7 +26,6 @@ model User {
   image         String?
   college       String?
   contact       String?
-  isAdmin       Boolean   @default(false)
   accounts      Account[]
   sessions      Session[]
   form          Form[]

@@ -25,6 +25,7 @@ model User {
   emailVerified DateTime?
   image         String?
   college       String?
+  contact       String?
   isAdmin       Boolean   @default(false)
   accounts      Account[]
   sessions      Session[]

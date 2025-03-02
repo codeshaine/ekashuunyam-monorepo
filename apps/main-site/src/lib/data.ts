@@ -28,3 +28,16 @@ export const teamNames = [
   "Pirate's Paradise Crew",
   "One Piece Outlaws",
 ];
+
+export const pfp = [
+  { src: "/pfp/luffy.jpeg" },
+  { src: "/pfp/nami.jpeg" },
+  { src: "/pfp/robin.jpeg" },
+  { src: "/pfp/zoro.jpeg" },
+  { src: "/pfp/sanji.jpeg" },
+  { src: "/pfp/jimbei.jpeg" },
+  { src: "/pfp/usopp.jpeg" },
+  { src: "/pfp/chopper.jpeg" },
+  { src: "/pfp/brook.jpeg" },
+  { src: "/pfp/gear_5.jpg" },
+];

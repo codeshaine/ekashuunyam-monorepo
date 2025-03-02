@@ -11,8 +11,12 @@ import { api } from "@/trpc/react";
 import { formSchema, EventMembers } from "@/lib/type";
 import { formDefaultValues } from "@/lib/default";
 import { renderEventMembers } from "@/app/_components/form/renderEventMember";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
+  const { data: userStatus } = api.user.isUserInfoComplete.useQuery();
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: formDefaultValues,
@@ -20,11 +24,19 @@ export default function Page() {
 
   const formSubmission = api.form.submitForm.useMutation({
     onSuccess: () => {
-      toast.success("Registration submitted successfully!");
+      toast.success("Registration submitted successfully!", {
+        duration: 1000,
+        onAutoClose: () => {
+          router.push("/profile");
+        },
+        onDismiss: () => {
+          router.push("/profile");
+        },
+      });
       localStorage.removeItem("eventRegistrationForm");
     },
-    onError: () => {
-      toast.error("Error submitting registration");
+    onError: (err) => {
+      toast.error(err.message ?? "Failed to submit registration form");
     },
   });
 
@@ -46,6 +58,12 @@ export default function Page() {
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (!userStatus?.isComplete) {
+      toast.error(
+        "Please add your college name and contact number  in profile page",
+      );
+      return;
+    }
     const completeEvents = Object.entries(values).reduce<
       Record<string, EventMembers>
     >((acc, [key, members]) => {

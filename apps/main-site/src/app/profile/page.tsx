@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Wave from "@/components/svg/wave";
 import { toast, Toaster } from "sonner";
 import {
   User,
@@ -27,6 +28,7 @@ import {
   Anchor,
   Ship,
   X,
+  Phone,
 } from "lucide-react";
 import Image from "next/image";
 import { api } from "@/trpc/react";
@@ -42,24 +44,29 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { colleges } from "@/lib/data";
+import { colleges, pfp } from "@/lib/data";
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function PirateProfilePage() {
   const { data: profile, isLoading, refetch } = api.user.userDetails.useQuery();
-  const headerRef = useRef(null);
-  const wavesRef = useRef(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  // const searchParams = useSearchParams();
+  // const [autoEdit, setAutoEdit] = useState("");
+  // const editProfileRef = useRef<HTMLButtonElement | null>(null);
 
+  const [profilePic, setProfilePic] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     college: "",
+    contact: "",
   });
+  const [contactError, setContactError] = useState("");
 
   const { data: teamData, refetch: refetchTeams } =
     api.form.getAllForm.useQuery();
+  const { data: userStatus, refetch: userStatusRefetch } =
+    api.user.isUserInfoComplete.useQuery();
 
   const deleteForm = api.form.deleteForm.useMutation({
     onSuccess: () => {
@@ -76,62 +83,44 @@ export default function PirateProfilePage() {
   };
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Waves animation
-      gsap.to(wavesRef.current, {
-        y: 15,
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: "power1.inOut",
-      });
-
-      // Header animation with pirate theme
-      gsap.from(headerRef.current, {
-        y: -50,
-        opacity: 0,
-        rotation: -5,
-        duration: 0.8,
-        ease: "elastic.out(1, 0.5)",
-      });
-
-      // Cards animation with wave-like motion
-      cardsRef.current.forEach((card, index) => {
-        if (card) {
-          gsap.from(card, {
-            y: 100,
-            opacity: 0,
-            rotation: index % 2 === 0 ? 3 : -3,
-            duration: 0.6,
-            delay: index * 0.2,
-            ease: "back.out(1.2)",
-            scrollTrigger: {
-              trigger: card,
-              start: "top bottom-=100",
-              toggleActions: "play none none reverse",
-            },
-          });
-        }
-      });
-    });
-
-    return () => ctx.revert();
+    setProfilePic(() =>
+      pfp && pfp.length > 0
+        ? (pfp[Math.floor(Math.random() * pfp.length)]?.src ??
+          "/pfp/luffy.jpeg")
+        : "/pfp/luffy.jpeg",
+    );
   }, []);
+
+  // useEffect(() => {
+  //   setAutoEdit(() => searchParams.get("auto") ?? "");
+  // }, [searchParams]);
+
+  // useEffect(() => {
+  //   if (autoEdit == "true" && editProfileRef.current != null) {
+  //     console.log("Clicked");
+  //     editProfileRef.current?.click();
+  //   }
+  // }, [autoEdit]);
 
   useEffect(() => {
     if (profile) {
       setFormData({
         name: profile.name ?? "",
         college: profile.college ?? "",
+        contact: profile.contact ?? "",
       });
     }
   }, [profile]);
+
+  useEffect(() => {
+    void refetchTeams();
+  }, []);
 
   const updateProfile = api.user.updateUserDetails.useMutation({
     onSuccess: async () => {
       toast.success("Profile updated successfully");
       setIsSubmitting(false);
-      setIsEditingProfile(false);
+      await userStatusRefetch();
       await refetch();
     },
     onError: (error) => {
@@ -139,6 +128,26 @@ export default function PirateProfilePage() {
       setIsSubmitting(false);
     },
   });
+
+  // Validate phone number format
+  const validatePhoneNumber = (phoneNumber: string) => {
+    // Skip validation if empty (assuming it's optional)
+    if (!phoneNumber.trim()) return true;
+
+    // Pattern for 10-digit Indian phone number (optionally with +91 prefix)
+    const phonePattern = /^(\+91[\-\s]?)?[0]?(91)?[6789]\d{9}$/;
+    return phonePattern.test(phoneNumber);
+  };
+
+  const handleContactChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setFormData({ ...formData, contact: value });
+
+    // Clear error when field is empty or when user is typing
+    if (!value.trim() || validatePhoneNumber(value)) {
+      setContactError("");
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -148,10 +157,17 @@ export default function PirateProfilePage() {
       return;
     }
 
+    // Validate phone number if provided
+    if (formData.contact && !validatePhoneNumber(formData.contact)) {
+      setContactError("Please enter a valid 10-digit phone number");
+      return;
+    }
+
     setIsSubmitting(true);
     updateProfile.mutate({
       name: formData.name,
       college: formData.college,
+      contact: formData.contact,
     });
   };
 
@@ -168,134 +184,151 @@ export default function PirateProfilePage() {
   return (
     <div className="min-h-screen bg-sky-50">
       {/* Animated waves background */}
-      <div ref={wavesRef} className="fixed bottom-0 left-0 right-0 z-0">
-        <svg
-          className="h-64 w-full"
-          viewBox="0 0 1440 320"
-          preserveAspectRatio="none"
-        >
-          <path
-            fill="#60bff5"
-            fillOpacity="0.4"
-            d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,117.3C672,85,768,75,864,101.3C960,128,1056,192,1152,192C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-          />
-          <path
-            fill="#50a7e2"
-            fillOpacity="0.6"
-            d="M0,192L48,181.3C96,171,192,149,288,149.3C384,149,480,171,576,181.3C672,192,768,192,864,181.3C960,171,1056,149,1152,160C1248,171,1344,213,1392,234.7L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-          />
-          <path
-            fill="#2e63a4"
-            fillOpacity="0.8"
-            d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,266.7C960,267,1056,245,1152,224C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-          />
-        </svg>
+      <div className="fixed bottom-0 left-0 right-0 z-0">
+        <Wave />
       </div>
 
       <Toaster />
       <div className="container relative mx-auto max-w-7xl px-4">
-        <h1
-          ref={headerRef}
-          className="mb-12 text-center text-5xl font-bold tracking-tight"
-        >
+        <h1 className="mb-12 pt-10 text-center text-5xl font-bold tracking-tight">
           <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-            Nakama Profile
+            Profile
           </span>
         </h1>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           {/* Profile Card */}
-          <Card
-            ref={(el: HTMLDivElement | null) => {
-              if (el) cardsRef.current[0] = el;
-            }}
-            className="overflow-hidden border-none bg-white/80 shadow-xl backdrop-blur-sm transition-all duration-300 hover:bg-white/90 hover:shadow-2xl md:col-span-2"
-          >
+          <Card className="overflow-hidden border-none bg-white/80 shadow-xl backdrop-blur-sm transition-all duration-300 hover:bg-white/90 hover:shadow-2xl md:col-span-2">
             <CardHeader className="border-b border-blue-100 bg-gradient-to-br from-blue-500/5 to-blue-600/5">
               <div className="flex items-center space-x-4">
                 <div className="relative h-24 w-24 overflow-hidden rounded-full ring-4 ring-blue-200 transition-all duration-300 hover:ring-blue-300">
-                  {profile?.image ? (
-                    <Image
-                      src={profile?.image}
-                      alt="Profile"
-                      fill
-                      className="object-cover"
-                    />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-blue-400 to-blue-500">
-                      <User className="h-12 w-12 text-white" />
-                    </div>
-                  )}
+                  <Image
+                    src={profilePic || "/public/luffy.jpeg"}
+                    alt="Profile"
+                    fill
+                    sizes="100%"
+                    className="object-cover"
+                  />
                 </div>
                 <div>
-                  {isEditingProfile ? (
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                      <Input
-                        value={formData.name}
-                        onChange={(e) =>
-                          setFormData({ ...formData, name: e.target.value })
-                        }
-                        placeholder="Name"
-                        className="border-blue-200 bg-white/90 focus:border-blue-400 focus:ring-blue-400"
-                        required
-                      />
-                      <Select
-                        value={formData.college}
-                        onValueChange={(value) =>
-                          setFormData({ ...formData, college: value })
-                        }
-                      >
-                        <SelectTrigger className="w-full border-blue-200 bg-white/90 focus:border-blue-400 focus:ring-blue-400">
-                          <SelectValue placeholder="Select your college" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {colleges.map((college) => (
-                            <SelectItem
-                              key={college}
-                              value={college}
-                              className="focus:bg-blue-50"
-                            >
-                              {college}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <div className="flex gap-2">
-                        <Button
-                          type="submit"
-                          disabled={isSubmitting}
-                          className="bg-gradient-to-r from-blue-600 to-blue-500 text-white hover:from-blue-700 hover:to-blue-600"
-                        >
-                          Save
-                        </Button>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={() => setIsEditingProfile(false)}
-                          className="border-blue-200 hover:bg-blue-50"
-                        >
-                          Cancel
-                        </Button>
-                      </div>
-                    </form>
-                  ) : (
-                    <>
-                      <CardTitle className="text-2xl font-bold text-blue-900">
-                        {profile?.name}
-                      </CardTitle>
-                      <CardDescription className="text-blue-600">
-                        Captain
-                      </CardDescription>
+                  <CardTitle className="text-2xl font-bold text-blue-900">
+                    {profile?.name}
+                  </CardTitle>
+                  <CardDescription className="text-blue-600">
+                    Captain
+                  </CardDescription>
+                  <Dialog>
+                    <DialogTrigger asChild>
                       <Button
-                        onClick={() => setIsEditingProfile(true)}
+                        // ref={editProfileRef}
                         variant="outline"
                         className="mt-2 border-blue-200 hover:bg-blue-50"
                       >
                         <Edit className="mr-2 h-4 w-4" />
                         Edit Profile
                       </Button>
-                    </>
-                  )}
+                    </DialogTrigger>
+                    <DialogContent className="bg-white/95 sm:max-w-md">
+                      <DialogHeader>
+                        <DialogTitle className="text-2xl font-bold text-blue-900">
+                          Edit Profile
+                        </DialogTitle>
+                        <DialogDescription className="text-blue-600">
+                          Update your pirate information below
+                        </DialogDescription>
+                      </DialogHeader>
+                      <form onSubmit={handleSubmit} className="space-y-4 py-4">
+                        <div className="space-y-2">
+                          <label
+                            htmlFor="name"
+                            className="text-sm font-medium text-blue-900"
+                          >
+                            Name
+                          </label>
+                          <Input
+                            id="name"
+                            value={formData.name}
+                            onChange={(e) =>
+                              setFormData({ ...formData, name: e.target.value })
+                            }
+                            placeholder="Name"
+                            className="border-blue-200 bg-white/90 focus:border-blue-400 focus:ring-blue-400"
+                            required
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label
+                            htmlFor="contact"
+                            className="text-sm font-medium text-blue-900"
+                          >
+                            Phone Number
+                          </label>
+                          <div className="space-y-1">
+                            <Input
+                              id="contact"
+                              type="tel"
+                              value={formData.contact}
+                              onChange={handleContactChange}
+                              placeholder="Phone Number (e.g., 9876543210)"
+                              className={`border-blue-200 bg-white/90 focus:border-blue-400 focus:ring-blue-400 ${
+                                contactError ? "border-red-500" : ""
+                              }`}
+                            />
+                            {contactError && (
+                              <p className="text-xs text-red-500">
+                                {contactError}
+                              </p>
+                            )}
+                            <p className="text-xs text-gray-500">
+                              Format: 10-digit mobile number (e.g., 9876543210
+                              or +91 9876543210)
+                            </p>
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <label
+                            htmlFor="college"
+                            className="text-sm font-medium text-blue-900"
+                          >
+                            College
+                          </label>
+                          <Select
+                            value={formData.college}
+                            onValueChange={(value) =>
+                              setFormData({ ...formData, college: value })
+                            }
+                          >
+                            <SelectTrigger
+                              id="college"
+                              className="w-full border-blue-200 bg-white/90 focus:border-blue-400 focus:ring-blue-400"
+                            >
+                              <SelectValue placeholder="Select your college" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {colleges.map((college) => (
+                                <SelectItem
+                                  key={college}
+                                  value={college}
+                                  className="focus:bg-blue-50"
+                                >
+                                  {college}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <DialogFooter className="pt-4">
+                          <Button
+                            type="submit"
+                            disabled={isSubmitting}
+                            className="bg-gradient-to-r from-blue-600 to-blue-500 text-white hover:from-blue-700 hover:to-blue-600"
+                          >
+                            {isSubmitting ? "Saving..." : "Save Changes"}
+                          </Button>
+                        </DialogFooter>
+                      </form>
+                    </DialogContent>
+                  </Dialog>
                 </div>
               </div>
             </CardHeader>
@@ -304,6 +337,17 @@ export default function PirateProfilePage() {
                 <div className="flex items-center space-x-3">
                   <Mail className="h-5 w-5 text-blue-600 transition-transform duration-300 group-hover:scale-110" />
                   <span className="text-gray-700">{profile?.email}</span>
+                </div>
+              </div>
+              <div className="group rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 p-4 shadow-md transition-all duration-300 hover:shadow-lg">
+                <div className="flex items-center space-x-3">
+                  <Phone className="h-5 w-5 text-blue-600 transition-transform duration-300 group-hover:scale-110" />
+                  <span
+                    className={`text-gray-700 ${!profile?.contact ? "font-semibold text-red-500" : ""}`}
+                  >
+                    {profile?.contact ||
+                      "Click 'Edit Profile' to add your phone number"}
+                  </span>
                 </div>
               </div>
               <div className="group rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 p-4 shadow-md transition-all duration-300 hover:shadow-lg">
@@ -319,14 +363,8 @@ export default function PirateProfilePage() {
               </div>
             </CardContent>
           </Card>
-
           {/* Teams Card */}
-          <Card
-            ref={(el: HTMLDivElement | null) => {
-              if (el) cardsRef.current[1] = el;
-            }}
-            className="overflow-hidden border-none bg-white/80 shadow-xl backdrop-blur-sm transition-all duration-300 hover:bg-white/90 hover:shadow-2xl md:col-span-2"
-          >
+          <Card className="overflow-hidden border-none bg-white/80 shadow-xl backdrop-blur-sm transition-all duration-300 hover:bg-white/90 hover:shadow-2xl md:col-span-2">
             <CardHeader className="border-b border-blue-100 bg-gradient-to-br from-blue-500/5 to-blue-600/5">
               <div className="flex items-center justify-between">
                 <div>
@@ -414,12 +452,7 @@ export default function PirateProfilePage() {
           </Card>
 
           {/* Register New Team Card */}
-          <Card
-            ref={(el: HTMLDivElement | null) => {
-              if (el) cardsRef.current[2] = el;
-            }}
-            className="overflow-hidden border-none bg-white/80 shadow-xl backdrop-blur-sm transition-all duration-300 hover:bg-white/90 hover:shadow-2xl md:col-span-4"
-          >
+          <Card className="overflow-hidden border-none bg-white/80 shadow-xl backdrop-blur-sm transition-all duration-300 hover:bg-white/90 hover:shadow-2xl md:col-span-4">
             <CardHeader className="border-b border-blue-100 bg-gradient-to-br from-blue-500/5 to-blue-600/5">
               <div className="flex items-center justify-between">
                 <div>
@@ -434,13 +467,25 @@ export default function PirateProfilePage() {
               </div>
             </CardHeader>
             <CardContent className="mt-6">
-              <Link
-                href="/form/register"
-                className="flex w-full items-center justify-center rounded-md bg-gradient-to-r from-blue-600 to-blue-400 px-4 py-3 text-white transition-all duration-300 hover:from-blue-700 hover:to-blue-500"
-              >
-                <Users className="mr-2 h-5 w-5" />
-                Assemble New Crew
-              </Link>
+              {userStatus && userStatus.isComplete ? (
+                <Link
+                  href="/form/register"
+                  className="flex w-full items-center justify-center rounded-md bg-gradient-to-r from-blue-600 to-blue-400 px-4 py-3 text-white transition-all duration-300 hover:from-blue-700 hover:to-blue-500"
+                >
+                  <Users className="mr-2 h-5 w-5" />
+                  Assemble New Crew
+                </Link>
+              ) : (
+                <Button
+                  onClick={() =>
+                    toast.error("please add college and contact number")
+                  }
+                  className="flex w-full items-center justify-center rounded-md bg-gradient-to-r from-blue-600 to-blue-400 px-4 py-3 text-white transition-all duration-300 hover:from-blue-700 hover:to-blue-500"
+                >
+                  <Users className="mr-2 h-5 w-5" />
+                  Assemble New Crew
+                </Button>
+              )}
             </CardContent>
           </Card>
         </div>

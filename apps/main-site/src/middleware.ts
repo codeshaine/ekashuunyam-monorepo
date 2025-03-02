@@ -7,7 +7,6 @@ export async function middleware(request: NextRequest) {
     secret: process.env.AUTH_SECRET,
     cookieName: "user_session_token",
   });
-  console.log("hasValidToken", hasValidToken);
   if (!hasValidToken) {
     const redirectUrl = new URL("/login", request.url);
     return NextResponse.redirect(redirectUrl);
@@ -17,5 +16,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/profile/:path*"],
+  matcher: ["/profile/:path*", "/form/:path*"],
 };

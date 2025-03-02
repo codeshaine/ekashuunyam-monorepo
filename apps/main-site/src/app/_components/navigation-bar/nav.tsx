@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { Compass, ShipWheel } from "lucide-react";
+import { ShipWheel } from "lucide-react";
 import {
   Popover,
   PopoverContent,

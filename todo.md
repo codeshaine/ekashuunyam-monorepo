@@ -4,6 +4,7 @@
 
 ---
 
+- add separte prisma client
 - [ ] dashboard with limited access
   - make a list of email
   - make a enum

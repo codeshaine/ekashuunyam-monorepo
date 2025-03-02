@@ -1,5 +1,3 @@
-- [ ] make the details filling into a dialogue box
-- [ ] only register if the user is entered collegename and mobile number
 - [ ] auto register feature for registering
 
 ---

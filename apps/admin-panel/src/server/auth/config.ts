@@ -4,6 +4,7 @@ import { prisma } from "../db/prisma-client";
 import Google from "next-auth/providers/google";
 import Resend from "next-auth/providers/resend";
 import { env } from "@/env";
+import { allowedMembers, Role } from "@/lib/members";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -15,22 +16,21 @@ declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
       id: string;
-      isAdmin: boolean;
-      // ...other properties
-      // role: UserRole;
+      role: Role;
     } & DefaultSession["user"];
   }
 
   interface User {
     id?: string;
-    isAdmin?: boolean;
     email?: string | null;
     name?: string | null;
     image?: string | null;
     college?: string;
+    role?: Role;
   }
   interface JWT {
     id: string;
+    role: Role;
   }
 }
 
@@ -57,11 +57,20 @@ export const authConfig: NextAuthConfig = {
     strategy: "jwt",
   },
   cookies: {
-    sessionToken: { name: "user_session_token" },
-    csrfToken: { name: "user_csrf_token" },
-    callbackUrl: { name: "user_callback_url" },
+    sessionToken: { name: "admin_session_token" },
+    csrfToken: { name: "admin_csrf_token" },
+    callbackUrl: { name: "admin_callback_url" },
   },
   callbacks: {
+    signIn: async ({ user, email, profile }) => {
+      if (
+        user.email &&
+        allowedMembers.map((member) => member.email).includes(user.email)
+      ) {
+        return true;
+      }
+      return false;
+    },
     redirect: async ({ url, baseUrl }) => {
       if (!url.includes("error")) return baseUrl;
       return url;
@@ -69,6 +78,9 @@ export const authConfig: NextAuthConfig = {
     jwt: async ({ token, user, account }) => {
       if (account && user) {
         token.id = user.id;
+        token.role =
+          allowedMembers.find((member) => member.email == user.email)?.role ??
+          Role.ERROR;
       }
       return token;
     },
@@ -78,6 +90,7 @@ export const authConfig: NextAuthConfig = {
         user: {
           ...session.user,
           id: token.id as string,
+          role: token.role as Role,
         },
       };
     },

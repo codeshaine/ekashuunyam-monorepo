@@ -63,7 +63,7 @@ export const authConfig: NextAuthConfig = {
   },
   callbacks: {
     redirect: async ({ url, baseUrl }) => {
-      if (!url.includes("error")) return baseUrl;
+      if (!url.includes("error")) return "/profile";
       return url;
     },
     jwt: async ({ token, user, account }) => {

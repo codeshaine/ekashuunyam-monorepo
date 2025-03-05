@@ -1,5 +1,3 @@
-- [ ] auto register feature for registering
-
 ---
 
 - add separte prisma client

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -12,10 +12,16 @@ import { formSchema, EventMembers } from "@/lib/type";
 import { formDefaultValues } from "@/lib/default";
 import { renderEventMembers } from "@/app/_components/form/renderEventMember";
 import { useRouter } from "next/navigation";
+import { getUserSession } from "@/app/action";
+import { Session } from "next-auth";
 
 export default function Page() {
+  const [user, setUser] = useState<Session | null>(null);
   const { data: userStatus } = api.user.isUserInfoComplete.useQuery();
   const router = useRouter();
+  useEffect(() => {
+    getUserSession().then((data) => setUser(data));
+  }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -27,10 +33,10 @@ export default function Page() {
       toast.success("Registration submitted successfully!", {
         duration: 1000,
         onAutoClose: () => {
-          router.push("/profile");
+          router.push(`/group-links?teamLeaderId=${user?.user.id}`);
         },
         onDismiss: () => {
-          router.push("/profile");
+          router.push(`/group-links?teamLeaderId=${user?.user.id}`);
         },
       });
       localStorage.removeItem("eventRegistrationForm");

@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
-import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { publicDecrypt } from "crypto";
 
 export const userRouter = createTRPCRouter({
   userDetails: protectedProcedure.query(async ({ ctx }) => {
@@ -8,6 +9,7 @@ export const userRouter = createTRPCRouter({
     const user = await ctx.db.user.findUnique({
       where: { id: ctx.session.user.id },
       select: {
+        id: true,
         email: true,
         name: true,
         image: true,
@@ -79,7 +81,46 @@ export const userRouter = createTRPCRouter({
       };
     }
   }),
+
+  isUserEligibleForViewingGroupLink: publicProcedure
+    .input(
+      z.object({
+        teamLeaderId: z.string({ message: "Provide leader id" }),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      try {
+        const user = await ctx.db.user.findFirst({
+          where: {
+            id: input.teamLeaderId,
+          },
+          select: {
+            form: true,
+          },
+        });
+
+        if (!user) {
+          return {
+            isEligible: false,
+          };
+        }
+        if (user.form.length === 0) {
+          return {
+            isEligible: false,
+          };
+        }
+        return {
+          isEligible: true,
+        };
+      } catch (err) {
+        console.error("DB Error:", err);
+        return {
+          isEligible: false,
+        };
+      }
+    }),
 });
+
 // hello: publicProcedure
 // .input(z.object({ text: z.string() }))
 // .query(({ input }) => {

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Zap } from "lucide-react";
+import Image from "next/image";
 
 export default function NotFound() {
   return (
@@ -12,11 +13,9 @@ export default function NotFound() {
               4
             </p>
             {/* Have to change this png */}
-            <img
-              src="/images/skull.png"
-              alt="O"
-              className="h-28 w-28 bg-red-100"
-            />
+            <div className="relative h-28 w-28 bg-red-100">
+              <Image src="/images/skull.png" alt="O" fill className="object-cover" />
+            </div>
             <p className="py-4 text-center font-sans text-8xl font-bold sm:text-[10rem]">
               4
             </p>

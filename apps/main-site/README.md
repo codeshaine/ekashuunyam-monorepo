@@ -9,3 +9,9 @@ group dance 4-6 members (name and contact number) - 4 text fields + you can add 
 it manager 1 member (name and contact number) - 1 text fields
 
 \*/
+
+image in sponser
+image in brochure
+button 
+font
+image background

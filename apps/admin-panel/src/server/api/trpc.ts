@@ -12,7 +12,7 @@ import superjson from "superjson";
 import { ZodError } from "zod";
 
 import { auth } from "@/server/auth";
-import { prisma as db } from "../db/prisma-client";
+import { db } from "../db/prisma-client";
 
 /**
  * 1. CONTEXT

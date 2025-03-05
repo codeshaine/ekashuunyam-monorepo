@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -20,7 +20,6 @@ import {
 import Wave from "@/components/svg/wave";
 import { toast, Toaster } from "sonner";
 import {
-  User,
   GraduationCap,
   Mail,
   Users,
@@ -34,7 +33,6 @@ import Image from "next/image";
 import { api } from "@/trpc/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Link from "next/link";
 import {
   Dialog,
   DialogContent,
@@ -45,6 +43,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { colleges, pfp } from "@/lib/data";
+import TeamData from "../_components/profile/team-data";
+import RegisterNewTeam from "../_components/profile/register-new-team";
+import GroupLinkCard from "../_components/profile/group-link-card";
+import { userInfo } from "os";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -198,7 +200,7 @@ export default function PirateProfilePage() {
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           {/* Profile Card */}
-          <Card className="overflow-hidden border-none bg-white/80 shadow-xl backdrop-blur-sm transition-all duration-300 hover:bg-white/90 hover:shadow-2xl md:col-span-2">
+          <Card className="overflow-hidden border-none bg-white/80 shadow-xl transition-all duration-300 hover:bg-white/90 hover:shadow-2xl md:col-span-2">
             <CardHeader className="border-b border-blue-100 bg-gradient-to-br from-blue-500/5 to-blue-600/5">
               <div className="flex items-center space-x-4">
                 <div className="relative h-24 w-24 overflow-hidden rounded-full ring-4 ring-blue-200 transition-all duration-300 hover:ring-blue-300">
@@ -345,7 +347,7 @@ export default function PirateProfilePage() {
                   <span
                     className={`text-gray-700 ${!profile?.contact ? "font-semibold text-red-500" : ""}`}
                   >
-                    {profile?.contact ||
+                    {profile?.contact ??
                       "Click 'Edit Profile' to add your phone number"}
                   </span>
                 </div>
@@ -356,7 +358,7 @@ export default function PirateProfilePage() {
                   <span
                     className={`text-gray-700 ${!profile?.college ? "font-semibold text-red-500" : ""}`}
                   >
-                    {profile?.college ||
+                    {profile?.college ??
                       "Click 'Edit Profile' to choose your college"}
                   </span>
                 </div>
@@ -364,130 +366,27 @@ export default function PirateProfilePage() {
             </CardContent>
           </Card>
           {/* Teams Card */}
-          <Card className="overflow-hidden border-none bg-white/80 shadow-xl backdrop-blur-sm transition-all duration-300 hover:bg-white/90 hover:shadow-2xl md:col-span-2">
-            <CardHeader className="border-b border-blue-100 bg-gradient-to-br from-blue-500/5 to-blue-600/5">
-              <div className="flex items-center justify-between">
-                <div>
-                  <CardTitle className="text-2xl font-bold text-blue-900">
-                    Your Crews
-                  </CardTitle>
-                  <CardDescription className="text-blue-600">
-                    Manage your pirate crews
-                  </CardDescription>
-                </div>
-                <Ship className="h-8 w-8 text-blue-600" />
-              </div>
-            </CardHeader>
-            <CardContent className="mt-6">
-              <div className="space-y-4">
-                <div className="max-h-[400px] overflow-y-auto">
-                  {teamData?.map((team) => (
-                    <div
-                      key={team.id}
-                      className="group flex items-center justify-between rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 p-4 shadow-md transition-all duration-300 hover:shadow-lg"
-                    >
-                      <div className="space-y-1">
-                        <h3 className="font-semibold text-blue-900">
-                          {team.teamNmae}
-                        </h3>
-                        <p className="text-sm text-blue-600">
-                          {team.fullTeam ? "Full Team" : "Individual Events"} •{" "}
-                          {team.totalParticipants} members
-                        </p>
-                        <span
-                          className={`inline-block rounded-full px-2 py-1 text-xs ${
-                            team.fullTeam
-                              ? "bg-green-100 text-green-700"
-                              : "bg-yellow-100 text-yellow-700"
-                          }`}
-                        >
-                          {team.fullTeam ? "Full Team" : "Individual Events"}
-                        </span>
-                      </div>
-                      <div className="flex gap-2">
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <Button
-                              variant="outline"
-                              className="border-red-200 bg-white text-red-700 hover:bg-red-50"
-                            >
-                              <X className="mr-2 h-4 w-4" />
-                              Delete
-                            </Button>
-                          </DialogTrigger>
-                          <DialogContent>
-                            <DialogHeader>
-                              <DialogTitle>Are you sure?</DialogTitle>
-                              <DialogDescription>
-                                This action cannot be undone. This will
-                                permanently delete your crew.
-                              </DialogDescription>
-                            </DialogHeader>
-                            <DialogFooter>
-                              <Button
-                                variant="outline"
-                                onClick={() => handleDeleteForm(team.id)}
-                                className="bg-red-500 text-white hover:bg-red-600"
-                              >
-                                Delete Crew
-                              </Button>
-                            </DialogFooter>
-                          </DialogContent>
-                        </Dialog>
-                        <Link href={`/form/update?id=${team.id}`}>
-                          <Button
-                            variant="outline"
-                            className="border-blue-200 bg-white text-blue-700 hover:bg-blue-50"
-                          >
-                            <Edit className="mr-2 h-4 w-4" />
-                            Edit Crew
-                          </Button>
-                        </Link>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
+          <TeamData teamData={teamData} handleDeleteForm={handleDeleteForm} />
           {/* Register New Team Card */}
-          <Card className="overflow-hidden border-none bg-white/80 shadow-xl backdrop-blur-sm transition-all duration-300 hover:bg-white/90 hover:shadow-2xl md:col-span-4">
-            <CardHeader className="border-b border-blue-100 bg-gradient-to-br from-blue-500/5 to-blue-600/5">
-              <div className="flex items-center justify-between">
-                <div>
-                  <CardTitle className="text-2xl font-bold text-blue-900">
-                    Form New Crew
-                  </CardTitle>
-                  <CardDescription className="text-blue-600">
-                    Set sail for your next adventure
-                  </CardDescription>
-                </div>
-                <Anchor className="h-8 w-8 text-blue-600" />
-              </div>
-            </CardHeader>
-            <CardContent className="mt-6">
-              {userStatus && userStatus.isComplete ? (
-                <Link
-                  href="/form/register"
-                  className="flex w-full items-center justify-center rounded-md bg-gradient-to-r from-blue-600 to-blue-400 px-4 py-3 text-white transition-all duration-300 hover:from-blue-700 hover:to-blue-500"
-                >
-                  <Users className="mr-2 h-5 w-5" />
-                  Assemble New Crew
-                </Link>
-              ) : (
-                <Button
-                  onClick={() =>
-                    toast.error("please add college and contact number")
-                  }
-                  className="flex w-full items-center justify-center rounded-md bg-gradient-to-r from-blue-600 to-blue-400 px-4 py-3 text-white transition-all duration-300 hover:from-blue-700 hover:to-blue-500"
-                >
-                  <Users className="mr-2 h-5 w-5" />
-                  Assemble New Crew
-                </Button>
-              )}
-            </CardContent>
-          </Card>
+          {teamData && teamData.length != 0 && (
+            <GroupLinkCard
+              userId={profile?.id}
+              colStatus={
+                teamData && teamData.length == 0
+                  ? " md:col-span-4"
+                  : " md:col-span-2"
+              }
+            />
+          )}
+
+          <RegisterNewTeam
+            userStatus={userStatus}
+            colStatus={
+              teamData && teamData.length == 0
+                ? " md:col-span-4"
+                : " md:col-span-2"
+            }
+          />
         </div>
       </div>
     </div>

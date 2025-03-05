@@ -1,6 +1,6 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { type DefaultSession, type NextAuthConfig } from "next-auth";
-import { prisma } from "../db/prisma-client";
+import { db } from "../db/prisma-client";
 import Google from "next-auth/providers/google";
 import Resend from "next-auth/providers/resend";
 import { env } from "@/env";
@@ -51,7 +51,7 @@ export const authConfig: NextAuthConfig = {
     }),
   ],
   /*eslint-disable*/
-  adapter: PrismaAdapter(prisma as any),
+  adapter: PrismaAdapter(db as any),
   /*eslint-enable*/
   session: {
     strategy: "jwt",

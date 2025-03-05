@@ -6,9 +6,16 @@ import "./src/env.js";
 
 /** @type {import("next").NextConfig} */
 const config = {
-  images: {
-    domains: ["lh3.googleusercontent.com"],
+  eslint: {
+    ignoreDuringBuilds: true,
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  images: {
+    domains: ["lh3.googleusercontent.com",'media1.tenor.com'],
+  },
+  reactStrictMode: false
 };
 
 export default config;

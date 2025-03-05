@@ -26,6 +26,16 @@ export default {
 				'c-150': '#f5898930',
 				'c-200': '#F5EDE7',
 				'c-250': '#e9dbcf'
+			},
+			keyframes: {
+				shimmer: {
+					'100%': {
+						'background-position': '-200% 0',
+					},
+				},
+			},
+			animation: {
+				shimmer: 'shimmer 2s infinite linear',
 			}
 		}
 	},

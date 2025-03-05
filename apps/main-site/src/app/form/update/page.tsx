@@ -11,6 +11,7 @@ import { api } from "@/trpc/react";
 import { formSchema, EventMembers } from "@/lib/type";
 import { formDefaultValues } from "@/lib/default";
 import { renderEventMembers } from "@/app/_components/form/renderEventMember";
+import { useRouter } from "next/navigation";
 export default function Page({
   searchParams,
 }: {
@@ -19,11 +20,11 @@ export default function Page({
   }>;
 }) {
   const { id } = use(searchParams);
-
+  const router = useRouter();
   //if no id then show the error page
 
   //get the form data from the database
-  const { data, isLoading } = api.form.getForm.useQuery(
+  const { data, isLoading, isError, error } = api.form.getForm.useQuery(
     { formId: id },
     {
       enabled: !!id,
@@ -37,7 +38,14 @@ export default function Page({
 
   const { mutate: updateForm } = api.form.updateForm.useMutation({
     onSuccess: () => {
-      toast.success("Form updated successfully!");
+      toast.success("Form updated successfully!", {
+        onAutoClose: () => {
+          router.push("/profile");
+        },
+        onDismiss: () => {
+          router.push("/profile");
+        },
+      });
     },
     onError: () => {
       toast.error("Error updating form");
@@ -46,13 +54,17 @@ export default function Page({
 
   useEffect(() => {
     if (data && !isLoading) {
-      form.reset(data, {
+      const mergedValues = {
+        ...formDefaultValues,
+        ...data,
+      };
+
+      form.reset(mergedValues, {
         keepErrors: true,
         keepDirty: true,
-        keepDefaultValues: true,
       });
     }
-  }, [data, isLoading, form]);
+  }, [data, isLoading]);
 
   if (!id) {
     return (
@@ -70,52 +82,6 @@ export default function Page({
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
-  //   useEffect(() => {
-  //   if (data) {
-  //     form.reset(data as z.infer<typeof formSchema>);
-  //   }
-  //   }, [data, form]);
-
-  //   useEffect(() => {
-  //     if (data) {
-  //       form.reset(data);
-  //     }
-  //   }, [data, form]);
-
-  //   const formSubmission = api.form.submitForm.useMutation({
-  //     onSuccess: () => {
-  //       toast.success("Registration submitted successfully!");
-  //       localStorage.removeItem("eventRegistrationForm");
-  //     },
-  //     onError: () => {
-  //       toast.error("Error submitting registration");
-  //     },
-  //   });
-
-  //   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-  //     const completeEvents = Object.entries(values).reduce<
-  //       Record<string, EventMembers>
-  //     >((acc, [key, members]) => {
-  //       if (!members) return acc;
-  //       const hasData = members.some((m) => m.name ?? m.contact);
-  //       if (!hasData) return acc;
-  //       const allComplete = members.every((m) => m.name && m.contact);
-  //       if (!allComplete) {
-  //         toast.error(`Please complete all member details for ${key}`);
-  //         return acc;
-  //       }
-  //       acc[key] = members as EventMembers;
-  //       return acc;
-  //     }, {});
-
-  //     if (Object.keys(completeEvents).length === 0) {
-  //       toast.error("Please complete at least one event registration fully");
-  //       return;
-  //     }
-
-  //     await formSubmission.mutateAsync(completeEvents);
-  //   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const completeEvents = Object.entries(values).reduce<

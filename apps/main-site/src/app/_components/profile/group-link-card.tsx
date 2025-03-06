@@ -5,9 +5,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Anchor, Flag, Link2, Ship } from "lucide-react";
+import { Link2, Users } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 export default function GroupLinkCard({
   userId,
@@ -36,13 +35,12 @@ export default function GroupLinkCard({
         </div>
       </CardHeader>
       <CardContent className="mt-6 flex items-center justify-center">
-        <Link href={`/group-links?teamLeaderId=${userId}`} className="w-full">
-          <Button
-            variant="default"
-            className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white hover:from-blue-700 hover:to-blue-600"
-          >
-            Join Now
-          </Button>
+        <Link
+          href={`/group-links?teamLeaderId=${userId}`}
+          className="flex w-full items-center justify-center rounded-md bg-gradient-to-r from-blue-600 to-blue-400 px-4 py-3 text-white transition-all duration-300 hover:from-blue-700 hover:to-blue-500"
+        >
+          <Users className="mr-2 h-5 w-5" />
+          Join Now
         </Link>
       </CardContent>
     </Card>

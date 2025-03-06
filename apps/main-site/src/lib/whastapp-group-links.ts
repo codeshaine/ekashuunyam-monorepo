@@ -2,7 +2,9 @@ export const groupData = [
   {
     name: "Kaizoku eizo",
     subname: "reels making event",
-    whatsappLink: "https://chat.whatsapp.com/F7GC2a0nEiXAXXKR8lZWMH",
+    // whatsappLink: "https://chat.whatsapp.com/F7GC2a0nEiXAXXKR8lZWMH",
+    whatsappLink:
+      "https://chat.whatsapp.com/F7GC2a0nEiXAXXKR8lZWMHa sdfkajdfkjadskfkasd faksdjfka sdjfk jads",
   },
   {
     name: "Hackathon",

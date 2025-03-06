@@ -14,7 +14,12 @@ export default function NotFound() {
             </p>
             {/* Have to change this png */}
             <div className="relative h-28 w-28 bg-red-100">
-              <Image src="/images/skull.png" alt="O" fill className="object-cover" />
+              <Image
+                src="/images/skull.png"
+                alt="O"
+                fill
+                className="object-cover"
+              />
             </div>
             <p className="py-4 text-center font-sans text-8xl font-bold sm:text-[10rem]">
               4

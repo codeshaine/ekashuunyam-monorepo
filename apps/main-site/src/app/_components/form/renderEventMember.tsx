@@ -20,8 +20,7 @@ export const renderEventMembers = (
   form: UseFormReturn<z.infer<typeof formSchema>>,
 ) => {
   const members = form.watch(eventName) ?? [];
-  const isFlexibleEvent =
-    eventName === "miniHackathon" || eventName === "groupDance";
+  const isFlexibleEvent = eventName === "groupDance";
 
   const hasAnyData = members.some((m) => m.name ?? m.contact);
   const allMembersComplete = members.every((m) => m.name && m.contact);
@@ -40,9 +39,7 @@ export const renderEventMembers = (
               variant="outline"
               size="sm"
               onClick={() => addMember(eventName, form)}
-              disabled={
-                members.length >= (eventName === "miniHackathon" ? 3 : 6)
-              }
+              disabled={members.length >= 6}
               className="rounded-2xl border-2 border-blue-200 bg-white px-4 py-2 text-blue-600 transition-all hover:bg-blue-50"
             >
               <Plus className="mr-2 h-4 w-4" />
@@ -71,19 +68,18 @@ export const renderEventMembers = (
                     Member {index + 1}
                   </h3>
                 </div>
-                {isFlexibleEvent &&
-                  members.length > (eventName === "miniHackathon" ? 2 : 4) && (
-                    <Button
-                      type="button"
-                      variant="destructive"
-                      size="sm"
-                      onClick={() => removeMember(eventName, index, form)}
-                      className="rounded-xl bg-red-500 px-3 py-2 text-white transition-all hover:bg-red-600"
-                    >
-                      <Minus className="mr-2 h-4 w-4" />
-                      Remove
-                    </Button>
-                  )}
+                {isFlexibleEvent && members.length > 4 && (
+                  <Button
+                    type="button"
+                    variant="destructive"
+                    size="sm"
+                    onClick={() => removeMember(eventName, index, form)}
+                    className="rounded-xl bg-red-500 px-3 py-2 text-white transition-all hover:bg-red-600"
+                  >
+                    <Minus className="mr-2 h-4 w-4" />
+                    Remove
+                  </Button>
+                )}
               </div>
               <FormField
                 control={form.control}

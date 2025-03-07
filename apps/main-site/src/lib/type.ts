@@ -34,7 +34,7 @@ const createEventSchema = (minMembers: number, maxMembers: number) => {
 export const formSchema = z.object({
   quiz: createEventSchema(2, 2).optional(),
   surpriseEvent: createEventSchema(2, 2).optional(),
-  miniHackathon: createEventSchema(2, 3).optional(),
+  miniHackathon: createEventSchema(2, 2).optional(),
   gamingEvent: createEventSchema(2, 2).optional(),
   codingEvent: createEventSchema(2, 2).optional(),
   groupDance: createEventSchema(4, 6).optional(),

@@ -62,7 +62,7 @@ export const authConfig: NextAuthConfig = {
     callbackUrl: { name: "user_callback_url" },
   },
   callbacks: {
-    redirect: async ({ url, baseUrl }) => {
+    redirect: async ({ url }) => {
       if (!url.includes("error")) return "/profile";
       return url;
     },

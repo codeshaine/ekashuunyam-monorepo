@@ -36,3 +36,19 @@ export const allowedMembers = [
 
   //surprise event
 ];
+
+export type EventRole = Exclude<
+  Role,
+  Role.SUPER_ADMIN | Role.REGISTRATION | Role.ERROR
+>;
+
+export const RoleToEvent: Record<EventRole, string> = {
+  [Role.CODING]: "codingEvent",
+  [Role.DANCE]: "groupDance",
+  [Role.GAMING]: "gamingEvent",
+  [Role.HACKATHON]: "miniHackathon",
+  [Role.IT_MANAGER]: "itManager",
+  [Role.QUIZ]: "quiz",
+  [Role.REEL]: "reels",
+  [Role.SURPIRZE_EVENT]: "surpriseEvent",
+};

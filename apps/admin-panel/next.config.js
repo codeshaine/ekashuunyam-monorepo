@@ -7,7 +7,7 @@ import "./src/env.js";
 /** @type {import("next").NextConfig} */
 const config = {
   output: "standalone",
-  outputFileTracing: process.cwd(),
+
   // Include the Prisma engine binaries
   outputFileTracingIncludes: {
     "*": ["../../packages/database/generated/client/**/*"],

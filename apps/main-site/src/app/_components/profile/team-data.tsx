@@ -21,7 +21,6 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { api } from "@/trpc/react";
 import TeamDataSkeleton from "./team-data-skeleton";
-import { useEffect } from "react";
 
 export default function TeamData() {
   const deleteForm = api.form.deleteForm.useMutation({

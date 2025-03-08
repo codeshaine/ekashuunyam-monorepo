@@ -1,6 +1,6 @@
 "use client";
 import { ReactLenis } from "lenis/react";
-import { FC, useRef } from "react";
+import { type FC, useRef } from "react";
 
 type LenisScrollProviderProps = {
   children: React.ReactNode;

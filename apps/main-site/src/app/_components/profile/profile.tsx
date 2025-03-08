@@ -43,8 +43,8 @@ export default function Profile() {
     api.user.isUserInfoComplete.useQuery();
 
   const updateProfile = api.user.updateUserDetails.useMutation({
-    onSuccess: async () => {
-      toast.success("Profile updated successfully");
+    onSuccess: async (data) => {
+      toast.success(data.message ?? "profile updated successfully");
       setIsSubmitting(false);
       setIsEditDialogOpen(false);
       await userStatusRefetch();

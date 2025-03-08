@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest) {
 
   console.log("Token:", token);
 
-  if (!token || !token.role) {
+  if (!token?.role) {
     console.log("No valid token found, redirecting to /login");
     return NextResponse.redirect(new URL("/login", request.url));
   }

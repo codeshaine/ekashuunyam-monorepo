@@ -1,6 +1,6 @@
 "use client";
 
-import { EventRole, Role, RoleToEvent } from "@/lib/members";
+import { type EventRole, Role, RoleToEvent } from "@/lib/members";
 import { api } from "@/trpc/react";
 import { useParams } from "next/navigation";
 import {
@@ -120,7 +120,7 @@ export default function Page() {
                     <CardTitle className="text-xl">{team.teamNmae}</CardTitle>
                     <CardDescription className="mt-1 flex items-center">
                       <School className="mr-1 h-4 w-4" />
-                      {team.user.college || "No college specified"}
+                      {team.user.college ?? "No college specified"}
                     </CardDescription>
                   </div>
                 </div>
@@ -247,28 +247,40 @@ export default function Page() {
                                 </TableRow>
                               </TableHeader>
                               <TableBody>
-                                {JSON.parse(
-                                  typeof event.participants === "string"
-                                    ? event.participants
-                                    : JSON.stringify(event.participants),
-                                ).map((participant: any, pIdx: number) => (
-                                  <TableRow key={pIdx}>
-                                    <TableCell className="py-1">
-                                      {participant.name}
-                                    </TableCell>
-                                    <TableCell className="py-1">
-                                      {participant.contact}
-                                    </TableCell>
-                                    <TableCell className="py-1">
-                                      <a
-                                        href={`tel:${participant.contact}`}
-                                        className="text-primary hover:text-primary/80 inline-flex"
-                                      >
-                                        <Phone className="h-4 w-4" />
-                                      </a>
-                                    </TableCell>
-                                  </TableRow>
-                                ))}
+                                {
+                                  //eslint-disable-next-line
+                                  JSON.parse(
+                                    typeof event.participants === "string"
+                                      ? event.participants
+                                      : JSON.stringify(event.participants),
+                                    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                                  ).map(
+                                    (
+                                      participant: {
+                                        name: string;
+                                        contact: string;
+                                      },
+                                      pIdx: number,
+                                    ) => (
+                                      <TableRow key={pIdx}>
+                                        <TableCell className="py-1">
+                                          {participant.name}
+                                        </TableCell>
+                                        <TableCell className="py-1">
+                                          {participant.contact}
+                                        </TableCell>
+                                        <TableCell className="py-1">
+                                          <a
+                                            href={`tel:${participant.contact}`}
+                                            className="text-primary hover:text-primary/80 inline-flex"
+                                          >
+                                            <Phone className="h-4 w-4" />
+                                          </a>
+                                        </TableCell>
+                                      </TableRow>
+                                    ),
+                                  )
+                                }
                               </TableBody>
                             </Table>
                           ) : (

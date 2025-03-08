@@ -1,6 +1,6 @@
 "use client";
 
-import { EventsData } from "@/lib/data/events";
+import type { EventsData } from "@/lib/data/events";
 import { memo, useEffect, useRef, useState } from "react";
 import { EventDetailsModal } from "./event-card-modal";
 import gsap from "gsap";
@@ -23,15 +23,15 @@ export const Eventcards = memo(
     useEffect(() => {
       const section = sectionRef.current;
       if (!section) return;
-    
+
       // Hardware acceleration for elements with background images
       gsap.set(section, {
-        willChange: 'transform, scale',
+        willChange: "transform, scale",
         force3D: true,
         translateZ: 0, // Additional GPU acceleration
-        backfaceVisibility: 'hidden'
+        backfaceVisibility: "hidden",
       });
-    
+
       const animation = gsap.fromTo(
         section,
         {
@@ -50,15 +50,15 @@ export const Eventcards = memo(
             invalidateOnRefresh: true, // Helps with responsive designs
             // Optional performance optimizations
             fastScrollEnd: true,
-            preventOverlaps: true
-          }
-        }
+            preventOverlaps: true,
+          },
+        },
       );
-    
+
       return () => {
         animation.kill();
         // Clear any lingering props
-        gsap.set(section, { clearProps: 'all' });
+        gsap.set(section, { clearProps: "all" });
       };
     }, [index]);
 
@@ -85,7 +85,7 @@ export const Eventcards = memo(
             // ...cardStyle,
           }}
         >
-          <p className="absolute left-0 top-0 p-8 text-5xl font-bold text-white ">
+          <p className="absolute left-0 top-0 p-8 text-5xl font-bold text-white">
             {index ? index + 1 : "1"}/8
           </p>
           <div
@@ -98,7 +98,7 @@ export const Eventcards = memo(
               <Image fill src={image} alt="" className="object-cover" />
             </div>
             <div className="relative flex flex-col gap-2 text-white">
-              <p className="text-3xl font-bold ">{themeTitle}</p>
+              <p className="text-3xl font-bold">{themeTitle}</p>
               <p className="text-sm">{description}</p>
               <div className="w-fit bg-white px-3 py-1 text-black">
                 <p>{teamText}</p>
@@ -131,3 +131,5 @@ export const Eventcards = memo(
     );
   },
 );
+
+Eventcards.displayName = "Eventcards";

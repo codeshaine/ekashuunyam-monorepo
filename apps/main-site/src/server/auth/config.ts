@@ -44,7 +44,7 @@ export const authConfig: NextAuthConfig = {
   providers: [
     Google({
       clientId: env.AUTH_GOOGLE_ID,
-      clientSecret: env.AUTH_GOOGLE_SECRET!,
+      clientSecret: env.AUTH_GOOGLE_SECRET,
     }),
     Resend({
       from: "noreply@ekashunyam.tech",

@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { MoveLeft } from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { type MutableRefObject, useEffect, useRef, useState } from "react";
 
 export default function SponsorsPage() {
   const { name } = useParams();
@@ -39,15 +39,16 @@ export default function SponsorsPage() {
     }
   }, [name, filteredSponsors, router]);
 
-  if (!filteredSponsors) {
-    return null;
-  }
+  //what was this piece of code trying to do
+  // if (!filteredSponsors) {
+  //   return null;
+  // }
 
   const wave1Ref = useRef(null);
   const wave2Ref = useRef(null);
   const wave3Ref = useRef(null);
   const wave4Ref = useRef(null);
-  
+
   const wavePaths = {
     wave1: {
       start:
@@ -72,7 +73,6 @@ export default function SponsorsPage() {
   };
 
   useEffect(() => {
-
     // Animate each wave
     const animateWave = (
       ref: MutableRefObject<null>,
@@ -91,7 +91,7 @@ export default function SponsorsPage() {
 
       tl.fromTo(
         ref.current,
-        { 
+        {
           attr: {
             d: paths.start,
           },
@@ -182,26 +182,10 @@ export default function SponsorsPage() {
         preserveAspectRatio="none"
         className="absolute bottom-0 w-full"
       >
-        <path
-          ref={wave4Ref}
-          d={wavePaths.wave4.start}
-          fill="#7FD5F5"
-        />
-        <path
-          ref={wave3Ref}
-          d={wavePaths.wave3.start}
-          fill="#24ABEF"
-        />
-        <path
-          ref={wave2Ref}
-          d={wavePaths.wave2.start}
-          fill="#076EC9"
-        />
-        <path
-          ref={wave1Ref}
-          d={wavePaths.wave1.start}
-          fill="#034697"
-        />
+        <path ref={wave4Ref} d={wavePaths.wave4.start} fill="#7FD5F5" />
+        <path ref={wave3Ref} d={wavePaths.wave3.start} fill="#24ABEF" />
+        <path ref={wave2Ref} d={wavePaths.wave2.start} fill="#076EC9" />
+        <path ref={wave1Ref} d={wavePaths.wave1.start} fill="#034697" />
       </svg>
       {/* Sponsors Grid */}
       <div className="cnt flex-center w-full min-w-96 p-6">

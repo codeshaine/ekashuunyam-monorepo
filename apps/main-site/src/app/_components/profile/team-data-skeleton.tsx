@@ -26,7 +26,7 @@ export default function TeamDataSkeleton() {
       </CardHeader>
       <CardContent className="mt-6">
         <div className="max-h-[400px] space-y-4 overflow-y-auto">
-          {[...Array(2)].map((_, index) => (
+          {[...Array<number>(2)].map((_, index) => (
             <div
               key={index}
               className="group flex flex-col items-center justify-between rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 p-4 shadow-md transition-all duration-300 hover:shadow-lg md:flex-row"

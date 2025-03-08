@@ -1,4 +1,4 @@
-import { EventDetailsModalProps } from "@/lib/data/events";
+import type { EventDetailsModalProps } from "@/lib/data/events";
 import { PhoneCall, X } from "lucide-react";
 import Link from "next/link";
 
@@ -12,7 +12,6 @@ export const EventDetailsModal = ({
   rules,
 }: EventDetailsModalProps) => {
   if (!isOpen) return null;
-  let txt = "";
 
   if (themeTitle === "Coding") {
   }

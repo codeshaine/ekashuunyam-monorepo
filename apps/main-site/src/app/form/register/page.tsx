@@ -1,32 +1,40 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
+import type * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { toast, Toaster } from "sonner";
 import { api } from "@/trpc/react";
-import { formSchema, EventMembers } from "@/lib/type";
+import { formSchema, type EventMembers } from "@/lib/type";
 import { formDefaultValues } from "@/lib/default";
 import { renderEventMembers } from "@/app/_components/form/renderEventMember";
 import { useRouter } from "next/navigation";
 import { getUserSession } from "@/app/action";
-import { Session } from "next-auth";
+import type { Session } from "next-auth";
+import { UpdateFormSkeleton } from "@/app/_components/form/update-skeleton";
 
 export default function Page() {
   const [user, setUser] = useState<Session | null>(null);
   const { data: userStatus } = api.user.isUserInfoComplete.useQuery();
   const router = useRouter();
 
-  const userPromise = useMemo(() => getUserSession(), []);
-  useEffect(() => {
-    userPromise.then((data) => {
-      setUser(data);
-    });
-  }, [userPromise]);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    getUserSession()
+      .then((data) => {
+        setUser(data);
+      })
+      .catch((err) => {
+        console.error("Error updating session:", err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: formDefaultValues,
@@ -34,7 +42,7 @@ export default function Page() {
 
   //prefetch the group-links page
   useEffect(() => {
-    if (user && user.user.id) {
+    if (user?.user.id) {
       router.prefetch(`/group-links?teamLeaderId=${user.user.id}`);
     }
   }, [user?.user.id, router]);
@@ -53,12 +61,9 @@ export default function Page() {
       localStorage.removeItem("eventRegistrationForm");
     }, [user?.user.id, router]),
 
-    onError: useCallback(
-      (err: any) => {
-        toast.error(err.message ?? "Failed to submit registration form");
-      },
-      [user?.user.id, router],
-    ),
+    onError: useCallback((err: { message?: string }) => {
+      toast.error(err.message ?? "Failed to submit registration form");
+    }, []),
   });
 
   //load the form data from local storage
@@ -70,6 +75,7 @@ export default function Page() {
       //   form.setValue(key as keyof z.infer<typeof formSchema>, parsedData[key]);
       // });
       try {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const parsedData: Record<string, any> = JSON.parse(savedData);
         form.reset(parsedData); // Instead of setting each value manually
       } catch {
@@ -115,6 +121,8 @@ export default function Page() {
 
     await formSubmission.mutateAsync(completeEvents);
   };
+
+  if (loading) return <UpdateFormSkeleton />;
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-sky-50">

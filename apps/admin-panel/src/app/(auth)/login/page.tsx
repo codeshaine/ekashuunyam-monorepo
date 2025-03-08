@@ -7,7 +7,7 @@ import Link from "next/link";
 export default async function SignInPage({
   searchParams,
 }: {
-  searchParams: { error?: string };
+  searchParams: Promise<{ error?: string }>;
 }) {
   const errorMessage =
     (await searchParams)?.error === "OAuthAccountNotLinked"

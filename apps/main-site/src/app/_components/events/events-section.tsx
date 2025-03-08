@@ -1,15 +1,14 @@
 "use client";
 
-import { memo, useEffect, useRef, useCallback, useState } from "react";
+import { memo, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { RulesSection } from "../rules/rules-section";
-import { MoveRight, X } from "lucide-react";
-import { useScroll } from "@/lib/scroll-context";
+
 import { EventDate } from "./event-date-section";
 import { EventIntroCard } from "./event-intro-section";
-import { eventsData, EventsData } from "@/lib/data/events";
+import { eventsData, type EventsData } from "@/lib/data/events";
 import { Eventcards } from "./event-card-section";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -31,3 +30,5 @@ export const EventsSection = memo(() => {
     </main>
   );
 });
+
+EventsSection.displayName = "EventsSection";

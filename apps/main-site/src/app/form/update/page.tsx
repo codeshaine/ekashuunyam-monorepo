@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useEffect } from "react";
+import { use, useCallback, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -12,6 +12,7 @@ import { formSchema, EventMembers } from "@/lib/type";
 import { formDefaultValues } from "@/lib/default";
 import { renderEventMembers } from "@/app/_components/form/renderEventMember";
 import { useRouter } from "next/navigation";
+import { UpdateFormSkeleton } from "@/app/_components/form/update-skeleton";
 export default function Page({
   searchParams,
 }: {
@@ -37,8 +38,9 @@ export default function Page({
   });
 
   const { mutate: updateForm } = api.form.updateForm.useMutation({
-    onSuccess: () => {
+    onSuccess: useCallback(() => {
       toast.success("Form updated successfully!", {
+        duration: 1000,
         onAutoClose: () => {
           router.push("/profile");
         },
@@ -46,10 +48,10 @@ export default function Page({
           router.push("/profile");
         },
       });
-    },
-    onError: () => {
+    }, []),
+    onError: useCallback(() => {
       toast.error("Error updating form");
-    },
+    }, []),
   });
 
   useEffect(() => {
@@ -66,13 +68,14 @@ export default function Page({
     }
   }, [data, isLoading]);
 
-  if (!id) {
+  if (!id || isError) {
     return (
       <div className="flex h-screen items-center justify-center bg-sky-50">
         <div className="rounded-2xl border border-blue-100 bg-white/90 p-8 text-center shadow-lg backdrop-blur-xl">
           <h1 className="text-3xl font-bold text-gray-900">Invalid Page</h1>
           <p className="mt-2 text-gray-600">
             The requested page is invalid. Please check the URL and try again.
+            {JSON.stringify(error)}
           </p>
         </div>
       </div>
@@ -80,7 +83,7 @@ export default function Page({
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <UpdateFormSkeleton />;
   }
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   Table,
   TableBody,
@@ -36,7 +36,15 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, User, Users, Briefcase, School } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  User,
+  Users,
+  Briefcase,
+  School,
+  Printer,
+} from "lucide-react";
 import { api } from "@/trpc/react";
 import { useParams } from "next/navigation";
 import { toast, Toaster } from "sonner";
@@ -52,6 +60,7 @@ export default function page() {
   const [newTeamName, setNewTeamName] = useState("");
   const [isVerified, setIsVerified] = useState(false);
   const [showEvents, setShowEvents] = useState(false);
+  const printRef = useRef(null);
 
   useEffect(() => {
     if (team) {
@@ -63,6 +72,7 @@ export default function page() {
   if (isError) {
     return <div>Team not found</div>;
   }
+
   const teamVerificationUpdate = api.team.updateVerifyStatus.useMutation({
     onSuccess: () => {
       toast.success("Verification status updated successfully");
@@ -72,6 +82,7 @@ export default function page() {
       toast.error(error.message);
     },
   });
+
   const teamNameUpdate = api.team.updateTeamName.useMutation({
     onSuccess: () => {
       toast.success("Team name updated successfully");
@@ -93,6 +104,180 @@ export default function page() {
     });
   };
 
+  const handlePrint = () => {
+    const printWindow = window.open("", "_blank");
+
+    if (printWindow) {
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>Team Details - ${team?.teamNmae}</title>
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                padding: 15px;
+                max-width: 210mm; /* A4 width */
+                margin: 0 auto;
+                color: #333;
+                font-size: 11px;
+              }
+              .header {
+                text-align: center;
+                margin-bottom: 8px;
+                padding-bottom: 5px;
+                border-bottom: 1px solid #ddd;
+              }
+              .header h1 {
+                font-size: 18px;
+                margin: 0 0 5px 0;
+              }
+              .header p {
+                margin: 0 0 3px 0;
+                font-size: 12px;
+              }
+              .team-info {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 10px;
+                padding: 5px;
+                background-color: #f9f9f9;
+                border-radius: 3px;
+              }
+              .events-section {
+                margin-bottom: 10px;
+              }
+              .events-title {
+                font-size: 14px;
+                font-weight: bold;
+                margin-bottom: 5px;
+              }
+              .events-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+              }
+              .event {
+                padding: 5px;
+                border: 1px solid #eee;
+                border-radius: 3px;
+              }
+              .event-title {
+                font-weight: bold;
+                margin-bottom: 3px;
+                font-size: 13px;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 3px;
+              }
+              table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 10px;
+              }
+              th, td {
+                padding: 3px;
+                text-align: left;
+                border-bottom: 1px solid #eee;
+              }
+              th {
+                background-color: #f5f5f5;
+                font-weight: bold;
+              }
+              @media print {
+                body {
+                  print-color-adjust: exact;
+                  -webkit-print-color-adjust: exact;
+                }
+                .event {
+                  break-inside: avoid;
+                }
+              }
+            </style>
+          </head>
+          <body>
+            <div class="header">
+              <h1>${team?.teamNmae || "Team Details"}</h1>
+              <p>${team?.user.college || ""} ${team?.verfied ? "✓ Verified" : ""}</p>
+            </div>
+            
+            <div class="team-info">
+              <div><strong>Team Lead:</strong> ${team?.user.name || ""}</div>
+              <div><strong>Contact:</strong> ${team?.user.contact || ""}</div>
+            </div>
+            
+            <div class="events-section">
+              <div class="events-title">Registered Events (${team?.events.length || 0})</div>
+              <div class="events-grid">
+                ${
+                  team?.events
+                    .map((event, index) => {
+                      let participantsHtml = "";
+                      if (event.participants) {
+                        try {
+                          const participants =
+                            typeof event.participants === "string"
+                              ? JSON.parse(event.participants)
+                              : event.participants;
+
+                          participantsHtml = `
+                        <table>
+                          <thead>
+                            <tr>
+                              <th>Name</th>
+                              <th>Contact</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            ${
+                              Array.isArray(participants)
+                                ? participants
+                                    .map(
+                                      (p, idx) => `
+                              <tr>
+                                <td>${p.name || ""}</td>
+                                <td>${p.contact || ""}</td>
+                              </tr>
+                            `,
+                                    )
+                                    .join("")
+                                : ""
+                            }
+                          </tbody>
+                        </table>
+                      `;
+                        } catch (e) {
+                          participantsHtml = "<p>No participants data</p>";
+                        }
+                      } else {
+                        participantsHtml = "<p>No participants</p>";
+                      }
+
+                      return `
+                    <div class="event">
+                      <div class="event-title">${event.name || `Event ${index + 1}`}</div>
+                      ${participantsHtml}
+                    </div>
+                  `;
+                    })
+                    .join("") || "<p>No events registered</p>"
+                }
+              </div>
+            </div>
+          </body>
+        </html>
+      `);
+
+      printWindow.document.close();
+
+      printWindow.onload = function () {
+        printWindow.print();
+      };
+    } else {
+      toast.error(
+        "Unable to open print preview. Please check your popup blocker settings.",
+      );
+    }
+  };
+
   return (
     <div className="mx-auto max-w-4xl p-4">
       <Toaster />
@@ -101,18 +286,27 @@ export default function page() {
           <h1 className="text-3xl font-bold">{team?.teamNmae}</h1>
           <p className="text-gray-600">{team?.user.college}</p>
         </div>
-        {team?.verfied ? (
-          <Badge className="bg-green-500 px-3 py-1 text-base hover:bg-green-600">
-            Verified
-          </Badge>
-        ) : (
-          <Badge
-            variant="outline"
-            className="px-3 py-1 text-base text-gray-500"
+        <div className="flex items-center gap-2">
+          {team?.verfied ? (
+            <Badge className="bg-green-500 px-3 py-1 text-base hover:bg-green-600">
+              Verified
+            </Badge>
+          ) : (
+            <Badge
+              variant="outline"
+              className="px-3 py-1 text-base text-gray-500"
+            >
+              Not Verified
+            </Badge>
+          )}
+          <Button
+            onClick={handlePrint}
+            className="ml-4 flex items-center gap-2"
           >
-            Not Verified
-          </Badge>
-        )}
+            <Printer className="h-4 w-4" />
+            Print
+          </Button>
+        </div>
       </div>
 
       {/* Team Info Card */}
@@ -305,6 +499,9 @@ export default function page() {
           </CardContent>
         )}
       </Card>
+
+      {/* Hidden printable div */}
+      <div id="printableArea" ref={printRef} className="hidden"></div>
     </div>
   );
 }

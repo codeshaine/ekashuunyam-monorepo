@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export function GroupError() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-4">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br p-4">
       <Card className="w-full max-w-md border-none shadow-2xl">
         <CardHeader className="pb-0">
           <div className="mb-4 flex justify-center">
@@ -21,8 +21,9 @@ export function GroupError() {
           <div className="flex justify-center">
             <AlertTriangle className="mr-2 h-8 w-8 text-yellow-500" />
             <p className="max-w-xs text-gray-600">
-              You are not authorized to view this page. Ensure you have the
-              correct permissions or contact your team lead.
+              You or your team leader may not have registered a team, so you
+              don’t have access to view this page. or else link may be broken.
+              Please contact your team leader for page link.
             </p>
           </div>
 

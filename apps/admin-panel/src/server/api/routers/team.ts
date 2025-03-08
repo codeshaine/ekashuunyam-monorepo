@@ -54,7 +54,7 @@ export const teamRouter = createTRPCRouter({
         where: {
           // verfied: true,
           events: {
-            every: {
+            some: {
               name: input.eventName,
             },
           },

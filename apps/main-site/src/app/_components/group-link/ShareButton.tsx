@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Share2, Copy, MessageCircle, Link as LinkIcon } from "lucide-react";
 import { toast, Toaster } from "sonner";
 
-export function ShareButton() {
+export default function ShareButton() {
   const [isShareOpen, setIsShareOpen] = useState(false);
 
   const pageUrl = typeof window !== "undefined" ? window.location.href : "";

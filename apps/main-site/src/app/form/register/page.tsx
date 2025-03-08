@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -19,17 +19,28 @@ export default function Page() {
   const [user, setUser] = useState<Session | null>(null);
   const { data: userStatus } = api.user.isUserInfoComplete.useQuery();
   const router = useRouter();
+
+  const userPromise = useMemo(() => getUserSession(), []);
   useEffect(() => {
-    getUserSession().then((data) => setUser(data));
-  }, []);
+    userPromise.then((data) => {
+      setUser(data);
+    });
+  }, [userPromise]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: formDefaultValues,
   });
 
+  //prefetch the group-links page
+  useEffect(() => {
+    if (user && user.user.id) {
+      router.prefetch(`/group-links?teamLeaderId=${user.user.id}`);
+    }
+  }, [user?.user.id, router]);
+
   const formSubmission = api.form.submitForm.useMutation({
-    onSuccess: () => {
+    onSuccess: useCallback(() => {
       toast.success("Registration submitted successfully!", {
         duration: 1000,
         onAutoClose: () => {
@@ -40,28 +51,40 @@ export default function Page() {
         },
       });
       localStorage.removeItem("eventRegistrationForm");
-    },
-    onError: (err) => {
-      toast.error(err.message ?? "Failed to submit registration form");
-    },
+    }, [user?.user.id, router]),
+
+    onError: useCallback(
+      (err: any) => {
+        toast.error(err.message ?? "Failed to submit registration form");
+      },
+      [user?.user.id, router],
+    ),
   });
 
   //load the form data from local storage
   useEffect(() => {
     const savedData = localStorage.getItem("eventRegistrationForm");
     if (savedData) {
-      const parsedData: any = JSON.parse(savedData);
-      Object.keys(parsedData).forEach((key) => {
-        form.setValue(key as keyof z.infer<typeof formSchema>, parsedData[key]);
-      });
+      // const parsedData: any = JSON.parse(savedData);
+      // Object.keys(parsedData).forEach((key) => {
+      //   form.setValue(key as keyof z.infer<typeof formSchema>, parsedData[key]);
+      // });
+      try {
+        const parsedData: Record<string, any> = JSON.parse(savedData);
+        form.reset(parsedData); // Instead of setting each value manually
+      } catch {
+        console.error("Invalid form data in local storage");
+      }
     }
   }, [form]);
 
-  const saveFormLocally = () => {
-    const formData = form.getValues();
-    localStorage.setItem("eventRegistrationForm", JSON.stringify(formData));
+  const saveFormLocally = useCallback(() => {
+    localStorage.setItem(
+      "eventRegistrationForm",
+      JSON.stringify(form.getValues()),
+    );
     toast.success("Form data saved locally!");
-  };
+  }, [form]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (!userStatus?.isComplete) {
@@ -145,10 +168,14 @@ export default function Page() {
                 Save Progress
               </Button>
               <Button
+                disabled={formSubmission.isPending}
                 type="submit"
                 className="w-full max-w-md rounded-2xl bg-gradient-to-r from-blue-600 to-blue-400 px-6 py-4 text-white shadow-lg transition-all hover:shadow-xl hover:shadow-blue-200"
               >
-                Submit Registration
+                {formSubmission.isPending
+                  ? "Submitting..."
+                  : "Submit Registration"}
+                {/* Submit Registration */}
               </Button>
             </div>
           </form>

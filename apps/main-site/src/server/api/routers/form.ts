@@ -1,8 +1,7 @@
-import { promise, z } from "zod";
+import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { teamNames } from "@/lib/data";
-import { EventMembers, formSchema } from "@/lib/type";
+import { formSchema } from "@/lib/type";
 
 export const formRouter = createTRPCRouter({
   submitForm: protectedProcedure
@@ -119,8 +118,7 @@ export const formRouter = createTRPCRouter({
         Object.values(input).filter((arr) => arr && arr.length > 0).length ===
         8;
 
-      //TODO: change this
-      const teamName = teamNames[Math.floor(Math.random() * teamNames.length)];
+      const teamName = "Team " + crypto.randomUUID().slice(0, 4);
 
       // try {
       const user = await ctx.db.user.findUnique({
@@ -155,7 +153,7 @@ export const formRouter = createTRPCRouter({
         },
       });
 
-      if (existingNotFullTeam >= 1) {
+      if (existingNotFullTeam >= 1 && !isFullTeam) {
         throw new TRPCError({
           code: "BAD_REQUEST",
           message:
@@ -198,10 +196,14 @@ export const formRouter = createTRPCRouter({
       where: {
         userId: ctx.session.user.id,
       },
+      orderBy: {
+        cretedAt: "desc",
+      },
       select: {
         id: true,
         fullTeam: true,
         teamNmae: true,
+        verfied: true,
         events: {
           select: {
             participants: true,
@@ -221,6 +223,7 @@ export const formRouter = createTRPCRouter({
       return {
         id: form.id,
         fullTeam: form.fullTeam,
+        verfied: form.verfied,
         teamNmae: form.teamNmae,
         totalParticipants,
       };

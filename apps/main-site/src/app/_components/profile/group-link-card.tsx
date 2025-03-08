@@ -10,14 +10,12 @@ import Link from "next/link";
 
 export default function GroupLinkCard({
   userId,
-  colStatus,
 }: {
   userId: string | undefined;
-  colStatus: string;
 }) {
   return (
     <Card
-      className={`${colStatus} overflow-hidden border-none bg-white/80 shadow-xl transition-all duration-300 hover:bg-white/90 hover:shadow-2xl`}
+      className={`overflow-hidden border-none bg-white/80 shadow-xl transition-all duration-300 hover:bg-white/90 hover:shadow-2xl md:col-span-2`}
     >
       <CardHeader className="border-b border-blue-100 bg-gradient-to-br from-blue-500/5 to-blue-600/5">
         <div className="flex items-center justify-between">

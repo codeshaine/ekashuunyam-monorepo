@@ -1,3 +1,4 @@
+"use client";
 import {
   Dialog,
   DialogContent,
@@ -17,21 +18,33 @@ import {
 } from "@/components/ui/card";
 import { Edit, Ship, X } from "lucide-react";
 import Link from "next/link";
+import { toast } from "sonner";
+import { api } from "@/trpc/react";
+import TeamDataSkeleton from "./team-data-skeleton";
+import { useEffect } from "react";
 
-export default function TeamData({
-  teamData,
-  handleDeleteForm,
-}: {
-  teamData:
-    | Array<{
-        id: string;
-        fullTeam: boolean;
-        teamNmae: string | null;
-        totalParticipants: number;
-      }>
-    | undefined;
-  handleDeleteForm: (id: string) => void;
-}) {
+export default function TeamData() {
+  const deleteForm = api.form.deleteForm.useMutation({
+    onSuccess: () => {
+      toast.success("Crew deleted successfully");
+      void refetchTeams();
+    },
+    onError: (error) => {
+      toast.error(error.message ?? "Failed to delete crew");
+    },
+  });
+  const {
+    data: teamData,
+    refetch: refetchTeams,
+    isLoading,
+    isFetching,
+  } = api.form.getAllForm.useQuery();
+  const handleDeleteForm = (formId: string) => {
+    deleteForm.mutate({ formId });
+  };
+
+  if (isLoading || isFetching) return <TeamDataSkeleton />;
+
   return (
     <Card className="overflow-hidden border-none bg-white/80 shadow-xl transition-all duration-300 hover:bg-white/90 hover:shadow-2xl md:col-span-2">
       <CardHeader className="border-b border-blue-100 bg-gradient-to-br from-blue-500/5 to-blue-600/5">
@@ -65,18 +78,28 @@ export default function TeamData({
                   </p>
                   <span
                     className={`inline-block rounded-full px-2 py-1 text-xs ${
+                      team.verfied
+                        ? "bg-green-100 text-green-700"
+                        : "bg-red-100 text-red-700"
+                    }`}
+                  >
+                    {team.verfied ? "Verfied" : "Not Verfied"}
+                  </span>
+                  <span
+                    className={`inline-block rounded-full px-2 py-1 text-xs ${
                       team.fullTeam
                         ? "bg-green-100 text-green-700"
                         : "bg-yellow-100 text-yellow-700"
                     }`}
                   >
-                    {team.fullTeam ? "Full Team" : "Individual Events"}
+                    {team.fullTeam ? "Full Team" : "Individual"}
                   </span>
                 </div>
                 <div className="mt-4 flex gap-2 md:mt-0">
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button
+                        disabled={team.verfied}
                         variant="outline"
                         className="border-red-200 bg-white text-red-700 hover:bg-red-50"
                       >
@@ -94,6 +117,7 @@ export default function TeamData({
                       </DialogHeader>
                       <DialogFooter>
                         <Button
+                          disabled={team.verfied}
                           variant="outline"
                           onClick={() => handleDeleteForm(team.id)}
                           className="bg-red-500 text-white hover:bg-red-600"
@@ -103,15 +127,26 @@ export default function TeamData({
                       </DialogFooter>
                     </DialogContent>
                   </Dialog>
-                  <Link href={`/form/update?id=${team.id}`}>
+                  {team.verfied ? (
                     <Button
                       variant="outline"
-                      className="border-blue-200 bg-white text-blue-700 hover:bg-blue-50"
+                      className="cursor-not-allowed border-blue-200 bg-white text-blue-700 opacity-50 hover:bg-blue-50"
+                      disabled
                     >
                       <Edit className="mr-2 h-4 w-4" />
                       Edit Crew
                     </Button>
-                  </Link>
+                  ) : (
+                    <Link href={`/form/update?id=${team.id}`}>
+                      <Button
+                        variant="outline"
+                        className="border-blue-200 bg-white text-blue-700 hover:bg-blue-50"
+                      >
+                        <Edit className="mr-2 h-4 w-4" />
+                        Edit Crew
+                      </Button>
+                    </Link>
+                  )}
                 </div>
               </div>
             ))}

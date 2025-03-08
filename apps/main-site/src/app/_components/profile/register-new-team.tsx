@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,17 +10,13 @@ import {
 import { Anchor, Users } from "lucide-react";
 import { toast } from "sonner";
 import Link from "next/link";
-export default function RegisterNewTeam({
-  userStatus,
-  colStatus,
-}: {
-  userStatus: { isComplete: boolean } | undefined;
-  colStatus: string;
-}) {
-  console.log(userStatus);
+import { api } from "@/trpc/react";
+export default function RegisterNewTeam() {
+  const { data: userStatus } = api.user.isUserInfoComplete.useQuery();
+
   return (
     <Card
-      className={`${colStatus} overflow-hidden border-none bg-white/80 shadow-xl transition-all duration-300 hover:bg-white/90 hover:shadow-2xl`}
+      className={`overflow-hidden border-none bg-white/80 shadow-xl transition-all duration-300 hover:bg-white/90 hover:shadow-2xl md:col-span-2`}
     >
       <CardHeader className="border-b border-blue-100 bg-gradient-to-br from-blue-500/5 to-blue-600/5">
         <div className="flex items-center justify-between">
@@ -41,7 +38,7 @@ export default function RegisterNewTeam({
             className="flex w-full items-center justify-center rounded-md bg-gradient-to-r from-blue-600 to-blue-400 px-4 py-3 text-white transition-all duration-300 hover:from-blue-700 hover:to-blue-500"
           >
             <Users className="mr-2 h-5 w-5" />
-            Assemble New Crew
+            Register New Crew
           </Link>
         ) : (
           <Button
@@ -49,7 +46,7 @@ export default function RegisterNewTeam({
             className="flex w-full items-center justify-center rounded-md bg-gradient-to-r from-blue-600 to-blue-400 px-4 py-3 text-white transition-all duration-300 hover:from-blue-700 hover:to-blue-500"
           >
             <Users className="mr-2 h-5 w-5" />
-            Assemble New Crew
+            Register New Crew
           </Button>
         )}
       </CardContent>

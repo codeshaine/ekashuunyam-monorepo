@@ -41,11 +41,11 @@ export default function Page() {
   });
 
   //prefetch the group-links page
-  useEffect(() => {
-    if (user?.user.id) {
-      router.prefetch(`/group-links?teamLeaderId=${user.user.id}`);
-    }
-  }, [user?.user.id, router]);
+  // useEffect(() => {
+  //   if (user?.user.id) {
+  //     router.prefetch(`/group-links?teamLeaderId=${user.user.id}`);
+  //   }
+  // }, [user?.user.id, router]);
 
   const formSubmission = api.form.submitForm.useMutation({
     onSuccess: useCallback(() => {

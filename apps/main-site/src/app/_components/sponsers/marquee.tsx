@@ -16,17 +16,17 @@ export const SponsersMarquee = ({
         direction={high ? "right" : "left"}
         autoFill
         className="cursor-pointer"
-        // pauseOnHover
+        pauseOnHover
       >
         {/* {Array.from({ length: 10 }).map((_, index) => ( */}
-        <div className="flex-center gap-8 text-white">
+        <div className="flex-center gap-8 text-white ">
           {data.map((brand) => (
             <div
               key={brand.name}
-              className={`group mx-4 flex h-fit flex-col rounded-xl ${high ? "w-64" : "w-44"} `}
+              className={`group mx-4 flex h-fit flex-col rounded-xl ${high ? "w-64" : "w-44"} border-2 border-black`}
             >
               <img
-                src={brand.image}
+                src={'/images/hat.png'}
                 alt={brand.name}
                 className="h-36 w-full rounded-xl object-cover"
               />

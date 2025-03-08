@@ -81,7 +81,7 @@ export const SponsorsViewSection = () => {
             }}
           >
             <TitleSection
-              title="The Grand Fleet"
+              title="THE gRAND FLEET"
               description="These mighty allies are fueling our journey to greatness!"
               className="title-container opacity-0"
             />

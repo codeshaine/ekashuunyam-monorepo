@@ -12,9 +12,9 @@ export const BrochureSection = () => {
         backgroundPosition: "center",
       }}
     >
-      <div className="mb-4 flex w-full flex-col items-end justify-end gap-4 px-8 lg:py-10">
-        <p className="text-center text-4xl font-semibold uppercase lg:text-7xl">
-          Adventure Log
+      <div className="mb-4 flex w-full flex-col items-end justify-end gap-4 px-8 lg:py-10 font-sayyeda tracking-widest">
+        <p className="text-center text-4xl font-semibold  lg:text-7xl">
+          ADvENTURE Log
         </p>
         <p className="text-center text-sm font-light">
           Download the full event guide, schedule, and details here!

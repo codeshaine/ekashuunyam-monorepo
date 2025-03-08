@@ -24,7 +24,7 @@ export const MapSection = () => {
           }
         }
       />
-      <div className="absolute left-0 top-0 h-[25vh] w-full px-16 py-8 xl:h-[40vh] xl:w-[75vw]">
+      <div className="absolute left-0 top-0 h-[25vh] w-full px-16 py-8 xl:h-[40vh] xl:w-[75vw] font-sayyeda tracking-widest">
         <p className="text-4xl font-semibold lg:text-7xl">Land Ahoy!</p>
         <p className="text-sm font-light">
           The Island of <span className="font-semibold">Ekashunyam</span>

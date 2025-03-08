@@ -85,7 +85,7 @@ export const Eventcards = memo(
             // ...cardStyle,
           }}
         >
-          <p className="absolute left-0 top-0 p-8 text-5xl font-bold text-white">
+          <p className="absolute left-0 top-0 p-8 text-5xl font-bold text-white ">
             {index ? index + 1 : "1"}/8
           </p>
           <div
@@ -95,10 +95,10 @@ export const Eventcards = memo(
             }}
           >
             <div className="relative h-44 w-full bg-red-600">
-              <Image fill src={image || ""} alt="" className="object-cover" />
+              <Image fill src={image} alt="" className="object-cover" />
             </div>
             <div className="relative flex flex-col gap-2 text-white">
-              <p className="text-3xl font-bold">{themeTitle}</p>
+              <p className="text-3xl font-bold ">{themeTitle}</p>
               <p className="text-sm">{description}</p>
               <div className="w-fit bg-white px-3 py-1 text-black">
                 <p>{teamText}</p>

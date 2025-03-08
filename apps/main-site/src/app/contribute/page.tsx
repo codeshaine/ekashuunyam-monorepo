@@ -1,19 +1,23 @@
+"use client";
+
 import React from "react";
 import { MoveLeft } from "lucide-react";
 import Link from "next/link";
 import { SponsorHeads } from "@/lib/data/heads";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function ContributePage() {
+  const router = useRouter();
   return (
     <div className="relative min-h-screen w-full bg-gradient-to-b from-stone-900 to-stone-950 px-4 py-20 text-white">
       {/* Back Button */}
-      <Link
-        href="/"
-        className="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20 md:h-12 md:w-12"
+      <button
+        onClick={() => router.back()}
+        className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20 md:h-12 md:w-12"
       >
         <MoveLeft size={20} />
-      </Link>
+      </button>
 
       {/* Header Section */}
       <div className="mx-auto mb-16 flex max-w-3xl flex-col items-center justify-center text-center">
@@ -41,7 +45,7 @@ export default function ContributePage() {
                 key={index}
                 className="group flex flex-col items-center rounded-lg bg-black/20 p-6 backdrop-blur-sm transition-all duration-300 hover:bg-black/40 hover:shadow-lg hover:shadow-red-500/10"
               >
-                <div className="mb-4 h-32 w-32 overflow-hidden rounded-full border-4 border-transparent bg-gradient-to-r from-yellow-500 to-red-500 p-1 transition-transform duration-500 group-hover:scale-105">
+                <div className="relative mb-4 h-32 w-32 overflow-hidden rounded-full border-4 border-transparent bg-gradient-to-r from-yellow-500 to-red-500 p-1 transition-transform duration-500 group-hover:scale-105">
                   <Image
                     src={sponsor.image}
                     alt={sponsor.name}

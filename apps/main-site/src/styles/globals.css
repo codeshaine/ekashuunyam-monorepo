@@ -38,3 +38,9 @@ body {
 .flex-center {
   @apply flex justify-center items-center;
 }
+
+@layer utilities {
+  .slow-spin {
+    animation: spin 3s linear infinite;
+  }
+}

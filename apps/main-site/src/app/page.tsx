@@ -1,11 +1,12 @@
 import dynamic from "next/dynamic";
-import { Loader } from "./_components/loader/loader";
+import Loading from "./loading";
 
-const Landing = dynamic(
-  () => import("./_components/landing/landing").then((mod) => mod.Landing),
-  {
-    loading: () => <Loader />,
-  },
+const LandingVideo = dynamic(
+  () =>
+    import("./_components/landing/landing-video").then(
+      (mod) => mod.LandingVideo,
+    ),
+  { loading: () => <Loading /> },
 );
 
 const EventsSection = dynamic(
@@ -14,7 +15,7 @@ const EventsSection = dynamic(
       (mod) => mod.EventsSection,
     ),
   {
-    loading: () => <Loader />,
+    loading: () => <Loading />,
   },
 );
 
@@ -24,7 +25,7 @@ const SponsersSection = dynamic(
       (mod) => mod.SponsersSection,
     ),
   {
-    loading: () => <Loader />,
+    loading: () => <Loading />,
   },
 );
 
@@ -34,7 +35,7 @@ const MapSection = dynamic(
       (mod) => mod.MapSection,
     ),
   {
-    loading: () => <Loader />,
+    loading: () => <Loading />,
   },
 );
 
@@ -44,14 +45,14 @@ const BrochureSection = dynamic(
       (mod) => mod.BrochureSection,
     ),
   {
-    loading: () => <Loader />,
+    loading: () => <Loading />,
   },
 );
 
 export default async function Home() {
   return (
     <main className="">
-      <Landing />
+      <LandingVideo />
       <EventsSection />
       <SponsersSection />
       <MapSection />

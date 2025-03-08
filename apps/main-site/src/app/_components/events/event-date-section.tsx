@@ -4,8 +4,8 @@ import gsap from "gsap";
 import { useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
-gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(MotionPathPlugin);
+
+gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
 export const EventDate = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -32,14 +32,16 @@ export const EventDate = () => {
         .to(
           "#rect",
           {
-            motionPath: "M0,250 Q250,50 500,250 T950,250 T1000,200",
-            alignOrigin: [0.5, 0.5],
-            autoRotate: true,
+            motionPath: {
+              path: "M0,250 Q250,50 500,250 T950,250 T1000,200",
+              alignOrigin: [0.5, 0.5],
+              autoRotate: true,
+              start: 0,
+              end: 0.9,
+            },
             xPercent: -50,
             yPercent: -50,
             transformOrigin: "50% 50%",
-            start: 0.4,
-            end: 0.9,
           },
           0,
         )
@@ -54,7 +56,6 @@ export const EventDate = () => {
         );
 
       return () => {
-
         tl.kill();
 
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -68,12 +69,12 @@ export const EventDate = () => {
   return (
     <div
       ref={containerRef}
-      className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden bg-[#A3DBFF]"
+      className="b-[#A3DBFF] sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden"
     >
       <div className="cnt flex-center relative h-full w-full">
         <div className="flex-center z-10 p-8">
-          <p className="txt font-sayyeda text-6xl text-black/70 md:text-9xl">
-            Set Sail On
+          <p className="txt font-sayyeda text-6xl text-black/70 text-white md:text-9xl">
+            MAR 26
           </p>
         </div>
         <svg
@@ -98,9 +99,10 @@ export const EventDate = () => {
             <text
               x="150"
               y="100"
-              className="font-sayyeda text-9xl font-light text-white md:text-4xl"
+              fill="#BE9724"
+              className="font-sayyeda text-9xl font-light md:text-4xl"
             >
-              MAR 28
+              SET SAIL ON
             </text>
           </g>
         </svg>

@@ -12,12 +12,12 @@ export const JoinAsSponsor = () => {
           backgroundPosition: "center",
         }}
       >
-        <div className="container mx-auto flex min-h-screen flex-col items-center justify-center space-y-6 sm:space-y-8">
-          <h1 className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-wider">
-            JOIN OUR PIRATE ALLIANCE
+        <div className="container  mx-auto flex min-h-screen flex-col items-center justify-center space-y-6 sm:space-y-8">
+          <h1 className="text-center font-sayyeda tracking-widest text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold">
+            JoIN oUR PIRATE ALLIANCE
           </h1>
           
-          <p className="text-center text-xs sm:text-sm md:text-base text-gray-800">
+          <p className="text-center font-sayyeda tracking-widest text-xs sm:text-sm md:text-base text-gray-800">
             Set Your Flag <span className="mx-2">🏴‍☠️</span> Alongside Ours on the Grand Line of Innovation
           </p>
           

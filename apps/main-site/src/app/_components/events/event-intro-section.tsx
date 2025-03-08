@@ -8,8 +8,8 @@ export const EventIntroCard = memo(() => {
     const { scrollToSection } = useScroll();
     return (
       <div className="flex-center sticky top-0 flex h-screen flex-col items-center justify-center gap-3 bg-stone-900">
-        <p className="text-center font-sayyeda text-5xl font-bold tracking-widest text-stone-700 sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
-          Be ready for the <span className="text-white/70">exiting events</span>
+        <p className="text-center font-sayyeda text-4xl font-bold tracking-widest text-stone-700 sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
+          Be ready for the <span className="text-white/70 font-sayyeda">Exiting Events</span>
         </p>
         <div
           onClick={() => scrollToSection("rules")}

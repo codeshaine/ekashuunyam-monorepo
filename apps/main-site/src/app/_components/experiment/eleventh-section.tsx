@@ -1,13 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 export const EleventhSection = () => {
   const luffyRef = useRef(null);
-
-  useEffect(() => {
-  
-  }, []);
 
   return (
     <div className="h-screen w-full bg-black">

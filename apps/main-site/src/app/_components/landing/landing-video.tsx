@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
 export const LandingVideo = () => {
@@ -12,7 +12,6 @@ export const LandingVideo = () => {
   const letters = titleText.split("");
 
   useEffect(() => {
-
     const initialAnimation = () => {
       const tl = gsap.timeline();
 

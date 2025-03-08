@@ -45,7 +45,7 @@ export default function TeamsPage() {
     router.push(`/team/${teamId}`);
   };
   useEffect(() => {
-    refetch();
+    void refetch();
   }, []);
   if (isLoading) {
     return (
@@ -139,12 +139,12 @@ export default function TeamsPage() {
                   )}
                 </div>
                 <CardDescription>
-                  {team.user?.college || "College information not available"}
+                  {team.user?.college ?? "College information not available"}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-gray-600">
-                  Team Lead: {team.user?.name || "Unknown"}
+                  Team Lead: {team.user?.name ?? "Unknown"}
                 </p>
                 <p className="mt-2 text-sm text-gray-600">
                   {team.fullTeam ? "Full team" : "Looking for members"}

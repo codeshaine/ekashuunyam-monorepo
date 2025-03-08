@@ -3,12 +3,12 @@
 import { use, useCallback, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
+import type * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { toast, Toaster } from "sonner";
 import { api } from "@/trpc/react";
-import { formSchema, EventMembers } from "@/lib/type";
+import { formSchema, type EventMembers } from "@/lib/type";
 import { formDefaultValues } from "@/lib/default";
 import { renderEventMembers } from "@/app/_components/form/renderEventMember";
 import { useRouter } from "next/navigation";
@@ -48,7 +48,7 @@ export default function Page({
           router.push("/profile");
         },
       });
-    }, []),
+    }, [router]),
     onError: useCallback(() => {
       toast.error("Error updating form");
     }, []),
@@ -66,7 +66,7 @@ export default function Page({
         keepDirty: true,
       });
     }
-  }, [data, isLoading]);
+  }, [data, form, isLoading]);
 
   if (!id || isError) {
     return (

@@ -49,7 +49,7 @@ import { api } from "@/trpc/react";
 import { useParams } from "next/navigation";
 import { toast, Toaster } from "sonner";
 
-export default function page() {
+export default function Page() {
   const params = useParams<{ teamid: string }>();
   const {
     data: team,
@@ -64,7 +64,7 @@ export default function page() {
 
   useEffect(() => {
     if (team) {
-      setNewTeamName(team.teamNmae || "");
+      setNewTeamName(team.teamNmae ?? "");
       setIsVerified(team.verfied || false);
     }
   }, [team]);
@@ -100,7 +100,7 @@ export default function page() {
   const handleUpdateVerificationStatus = () => {
     teamVerificationUpdate.mutate({
       teamId: params?.teamid,
-      verifyStatus: isVerified!,
+      verifyStatus: isVerified,
     });
   };
 
@@ -195,17 +195,17 @@ export default function page() {
           </head>
           <body>
             <div class="header">
-              <h1>${team?.teamNmae || "Team Details"}</h1>
-              <p>${team?.user.college || ""} ${team?.verfied ? "✓ Verified" : ""}</p>
+              <h1>${team?.teamNmae ?? "Team Details"}</h1>
+              <p>${team?.user.college ?? ""} ${team?.verfied ? "✓ Verified" : ""}</p>
             </div>
             
             <div class="team-info">
-              <div><strong>Team Lead:</strong> ${team?.user.name || ""}</div>
-              <div><strong>Contact:</strong> ${team?.user.contact || ""}</div>
+              <div><strong>Team Lead:</strong> ${team?.user.name ?? ""}</div>
+              <div><strong>Contact:</strong> ${team?.user.contact ?? ""}</div>
             </div>
             
             <div class="events-section">
-              <div class="events-title">Registered Events (${team?.events.length || 0})</div>
+              <div class="events-title">Registered Events (${team?.events.length ?? 0})</div>
               <div class="events-grid">
                 ${
                   team?.events
@@ -213,6 +213,7 @@ export default function page() {
                       let participantsHtml = "";
                       if (event.participants) {
                         try {
+                          //eslint-disable-next-line
                           const participants =
                             typeof event.participants === "string"
                               ? JSON.parse(event.participants)
@@ -227,14 +228,18 @@ export default function page() {
                             </tr>
                           </thead>
                           <tbody>
+                          
                             ${
                               Array.isArray(participants)
                                 ? participants
                                     .map(
-                                      (p, idx) => `
-                              <tr>
-                                <td>${p.name || ""}</td>
-                                <td>${p.contact || ""}</td>
+                                      (p: {
+                                        name: string;
+                                        contact: string;
+                                      }) => `
+                                  <tr>
+                                  <td>${p.name ?? ""}</td>
+                                <td>${p.contact ?? ""}</td>
                               </tr>
                             `,
                                     )
@@ -245,6 +250,7 @@ export default function page() {
                         </table>
                       `;
                         } catch (e) {
+                          console.log(e);
                           participantsHtml = "<p>No participants data</p>";
                         }
                       } else {
@@ -258,7 +264,7 @@ export default function page() {
                     </div>
                   `;
                     })
-                    .join("") || "<p>No events registered</p>"
+                    .join("") ?? "<p>No events registered</p>"
                 }
               </div>
             </div>
@@ -461,28 +467,41 @@ export default function page() {
                               </TableRow>
                             </TableHeader>
                             <TableBody>
-                              {JSON.parse(
-                                typeof event.participants === "string"
-                                  ? event.participants
-                                  : JSON.stringify(event.participants),
-                              ).map((participant: any, pIdx: number) => (
-                                <TableRow key={pIdx}>
-                                  <TableCell className="py-1">
-                                    {participant.name}
-                                  </TableCell>
-                                  <TableCell className="py-1">
-                                    {participant.contact}
-                                  </TableCell>
-                                  <TableCell className="py-1">
-                                    <a
-                                      href={`tel:${participant.contact}`}
-                                      className="text-primary hover:text-primary/80 inline-flex"
-                                    >
-                                      <Phone className="h-4 w-4" />
-                                    </a>
-                                  </TableCell>
-                                </TableRow>
-                              ))}
+                              {
+                                //eslint-disable-next-line
+                                JSON.parse(
+                                  typeof event.participants === "string"
+                                    ? event.participants
+                                    : JSON.stringify(event.participants),
+
+                                  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                                ).map(
+                                  (
+                                    participant: {
+                                      name: string;
+                                      contact: string;
+                                    },
+                                    pIdx: number,
+                                  ) => (
+                                    <TableRow key={pIdx}>
+                                      <TableCell className="py-1">
+                                        {participant.name}
+                                      </TableCell>
+                                      <TableCell className="py-1">
+                                        {participant.contact}
+                                      </TableCell>
+                                      <TableCell className="py-1">
+                                        <a
+                                          href={`tel:${participant.contact}`}
+                                          className="text-primary hover:text-primary/80 inline-flex"
+                                        >
+                                          <Phone className="h-4 w-4" />
+                                        </a>
+                                      </TableCell>
+                                    </TableRow>
+                                  ),
+                                )
+                              }
                             </TableBody>
                           </Table>
                         ) : (

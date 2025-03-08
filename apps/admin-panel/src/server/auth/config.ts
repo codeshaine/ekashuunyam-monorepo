@@ -44,7 +44,7 @@ export const authConfig: NextAuthConfig = {
   providers: [
     Google({
       clientId: env.AUTH_GOOGLE_ID,
-      clientSecret: env.AUTH_GOOGLE_SECRET!,
+      clientSecret: env.AUTH_GOOGLE_SECRET,
     }),
     Resend({
       from: "noreply@ekashunyam.tech",
@@ -62,7 +62,7 @@ export const authConfig: NextAuthConfig = {
     callbackUrl: { name: "admin_callback_url" },
   },
   callbacks: {
-    signIn: async ({ user, email, profile }) => {
+    signIn: async ({ user }) => {
       if (
         user.email &&
         allowedMembers.map((member) => member.email).includes(user.email)

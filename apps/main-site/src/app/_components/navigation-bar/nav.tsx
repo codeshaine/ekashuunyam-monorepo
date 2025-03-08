@@ -45,7 +45,9 @@ export const NavigationBar = () => {
 
     // Cleanup animations on unmount
     return () => {
-      animationsRef.current.forEach((tween) => tween.kill());
+      animationsRef.current.forEach((tween) => {
+        tween.kill();
+      });
     };
   }, []);
 
@@ -173,7 +175,7 @@ export const NavigationBar = () => {
               return (
                 <div
                   key={item.id}
-                  // @ts-ignore
+                  // @ts-expect-error - Ref is not a valid prop
                   ref={(el) => el && itemsRef.current.set(item.id, el)}
                   className="absolute h-32 w-32 -translate-x-1/2 -translate-y-1/2 transform cursor-pointer rounded-lg bg-gradient-to-br from-gray-700 to-gray-900 bg-cover"
                   style={{

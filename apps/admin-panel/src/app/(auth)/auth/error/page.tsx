@@ -1,7 +1,6 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { AlertCircle } from "lucide-react";
 import Link from "next/link";
 
 enum Error {

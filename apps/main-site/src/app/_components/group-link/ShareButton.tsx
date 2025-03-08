@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Share2, Copy, MessageCircle, Link as LinkIcon } from "lucide-react";
+import { Share2, MessageCircle, Link as LinkIcon } from "lucide-react";
 import { toast, Toaster } from "sonner";
 
 export default function ShareButton() {

@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
-import { publicDecrypt } from "crypto";
+import { colleges } from "@/lib/data";
 
 export const userRouter = createTRPCRouter({
   userDetails: protectedProcedure.query(async ({ ctx }) => {
@@ -45,11 +45,39 @@ export const userRouter = createTRPCRouter({
         .partial(),
     )
     .mutation(async ({ ctx, input }) => {
-      const user = await ctx.db.user.update({
-        where: { id: ctx.session.user.id },
-        data: input,
+      const user = await ctx.db.user.findFirst({
+        where: {
+          id: ctx.session.user.id,
+        },
+        select: {
+          _count: {
+            select: {
+              form: true,
+            },
+          },
+          college: true,
+        },
       });
-      return user;
+      let failure = false;
+      let formattedInput = { ...input };
+
+      if (user && user.college !== input.college && user._count.form > 0) {
+        failure = true;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { college, ...rest } = input;
+        formattedInput = { ...rest };
+      }
+
+      await ctx.db.user.update({
+        where: { id: ctx.session.user.id },
+        data: formattedInput,
+      });
+      if (failure)
+        return {
+          message:
+            "You have already registered a team and cannot update your college!!",
+        };
+      return { message: "profile updated successfully" };
     }),
 
   isUserInfoComplete: protectedProcedure.query(async ({ ctx }) => {

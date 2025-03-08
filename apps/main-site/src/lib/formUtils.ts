@@ -1,6 +1,6 @@
-import { UseFormReturn } from "react-hook-form";
-import { z } from "zod";
-import { formSchema } from "@/lib/type";
+import { type UseFormReturn } from "react-hook-form";
+import type { z } from "zod";
+import { type formSchema } from "@/lib/type";
 
 export const addMember = (
   eventName: keyof z.infer<typeof formSchema>,

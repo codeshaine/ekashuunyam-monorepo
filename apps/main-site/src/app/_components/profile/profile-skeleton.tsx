@@ -13,7 +13,7 @@ export default function ProfileSkeleton() {
         </div>
       </CardHeader>
       <CardContent className="mt-6 space-y-4">
-        {[...Array(3)].map((_, index) => (
+        {[...Array<number[]>(3)].map((_, index) => (
           <div
             key={index}
             className="h-12 w-full rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 shadow-md"

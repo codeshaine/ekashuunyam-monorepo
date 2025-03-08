@@ -3,12 +3,12 @@ import { signIn } from "@/server/auth";
 import { AuthError } from "next-auth";
 import { Mail } from "lucide-react";
 import Link from "next/link";
-import '@/styles/login.css'
+import "@/styles/login.css";
 
 export default async function SignInPage({
   searchParams,
 }: {
-  searchParams: { error?: string };
+  searchParams: Promise<{ error?: string }>;
 }) {
   const errorMessage =
     (await searchParams)?.error === "OAuthAccountNotLinked"

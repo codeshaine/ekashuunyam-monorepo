@@ -1,6 +1,6 @@
-import { UseFormReturn } from "react-hook-form";
-import { z } from "zod";
-import { formSchema } from "@/lib/type";
+import type { UseFormReturn } from "react-hook-form";
+import type { z } from "zod";
+import type { formSchema } from "@/lib/type";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

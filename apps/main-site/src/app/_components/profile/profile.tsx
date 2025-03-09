@@ -265,7 +265,7 @@ export default function Profile() {
           </div>
         </div>
       </CardHeader>
-      <CardContent className="mt-6 space-y-4">
+      <CardContent className="mt-4 space-y-4 text-sm">
         <div className="group rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 p-4 shadow-md transition-all duration-300 hover:shadow-lg">
           <div className="flex items-center space-x-3">
             <Mail className="h-5 w-5 text-blue-600 transition-transform duration-300 group-hover:scale-110" />

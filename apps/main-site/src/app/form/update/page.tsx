@@ -125,7 +125,7 @@ export default function Page({
         </svg>
       </div>
 
-      <div className="container relative mx-auto px-4 py-12">
+      <div className="flex-center container relative w-screen flex-col px-4 py-12">
         <div className="mb-12 text-center">
           <h1 className="mb-4 text-5xl font-bold tracking-tight text-gray-900">
             Update Your Registration

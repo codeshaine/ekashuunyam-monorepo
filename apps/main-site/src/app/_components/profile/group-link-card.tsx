@@ -32,7 +32,7 @@ export default function GroupLinkCard({
           <Link2 className="h-8 w-8 text-blue-600" />
         </div>
       </CardHeader>
-      <CardContent className="mt-6 flex items-center justify-center">
+      <CardContent className="mt-3 flex items-center justify-center">
         <Link
           href={`/group-links?teamLeaderId=${userId}`}
           className="flex w-full items-center justify-center rounded-md bg-gradient-to-r from-blue-600 to-blue-400 px-4 py-3 text-white transition-all duration-300 hover:from-blue-700 hover:to-blue-500"

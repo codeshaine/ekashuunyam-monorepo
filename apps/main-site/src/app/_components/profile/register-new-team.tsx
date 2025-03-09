@@ -31,7 +31,7 @@ export default function RegisterNewTeam() {
           <Anchor className="h-8 w-8 text-blue-600" />
         </div>
       </CardHeader>
-      <CardContent className="mt-6">
+      <CardContent className="mt-3">
         {userStatus?.isComplete ? (
           <Link
             href="/form/register"

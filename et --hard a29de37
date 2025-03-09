@@ -1,0 +1,53 @@
+[33m5796301[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mbranch1[m[33m, [m[1;31morigin/branch1[m[33m)[m HEAD@{0}: reset: moving to origin/branch1
+[33ma29de37[m HEAD@{1}: checkout: moving from main to branch1
+[33m006430b[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{2}: checkout: moving from branch1 to main
+[33ma29de37[m HEAD@{3}: commit: UI Update + Resolve Conflicts
+[33m006430b[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{4}: reset: moving to HEAD
+[33m006430b[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{5}: rebase (finish): returning to refs/heads/branch1
+[33m006430b[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{6}: rebase (start): checkout main
+[33m1708c7f[m HEAD@{7}: checkout: moving from main to branch1
+[33m006430b[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{8}: checkout: moving from branch1 to main
+[33m1708c7f[m HEAD@{9}: reset: moving to HEAD
+[33m1708c7f[m HEAD@{10}: reset: moving to HEAD
+[33m1708c7f[m HEAD@{11}: reset: moving to HEAD~1
+[33mf3baaaf[m HEAD@{12}: reset: moving to f3baaaff957eb7952f0445b7b4b7dca740f43104
+[33mf3baaaf[m HEAD@{13}: checkout: moving from main to branch1
+[33m006430b[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{14}: checkout: moving from branch1 to main
+[33mf3baaaf[m HEAD@{15}: reset: moving to HEAD~1
+[33mde58be7[m HEAD@{16}: checkout: moving from main to branch1
+[33m006430b[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{17}: checkout: moving from branch1 to main
+[33mde58be7[m HEAD@{18}: checkout: moving from main to branch1
+[33m006430b[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{19}: checkout: moving from main to main
+[33m006430b[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{20}: checkout: moving from branch1 to main
+[33mde58be7[m HEAD@{21}: checkout: moving from main to branch1
+[33m006430b[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{22}: pull origin main: Fast-forward
+[33m02b60f0[m HEAD@{23}: checkout: moving from branch1 to main
+[33mde58be7[m HEAD@{24}: commit: Minor UI Update
+[33mf3baaaf[m HEAD@{25}: commit: Minor UI Update
+[33m1708c7f[m HEAD@{26}: merge main: Merge made by the 'ort' strategy.
+[33m5796301[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mbranch1[m[33m, [m[1;31morigin/branch1[m[33m)[m HEAD@{27}: checkout: moving from main to branch1
+[33m02b60f0[m HEAD@{28}: pull --rebase origin main (finish): returning to refs/heads/main
+[33m02b60f0[m HEAD@{29}: pull --rebase origin main (start): checkout 02b60f0aec6ec6a1840fc846d2136b737ae3fb1a
+[33m5796301[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mbranch1[m[33m, [m[1;31morigin/branch1[m[33m)[m HEAD@{30}: checkout: moving from branch1 to main
+[33m5796301[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mbranch1[m[33m, [m[1;31morigin/branch1[m[33m)[m HEAD@{31}: checkout: moving from main to branch1
+[33m5796301[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mbranch1[m[33m, [m[1;31morigin/branch1[m[33m)[m HEAD@{32}: commit: UI Update
+[33m55efdb9[m HEAD@{33}: pull --rebase origin main (finish): returning to refs/heads/main
+[33m55efdb9[m HEAD@{34}: pull --rebase origin main (start): checkout 55efdb9c0964d49a65cf777cbd69026e209a8a42
+[33m31b8163[m HEAD@{35}: pull --rebase origin main: Fast-forward
+[33m8d4649b[m HEAD@{36}: commit: UI Update
+[33mbfac3ef[m HEAD@{37}: reset: moving to HEAD
+[33mbfac3ef[m HEAD@{38}: commit: feat : UI Update
+[33m1d2ade9[m HEAD@{39}: commit: feat : UI Update
+[33mb0d57e4[m HEAD@{40}: commit: feat : Lock File Change
+[33mdb51746[m HEAD@{41}: commit: feat : UI Update
+[33m09734d0[m HEAD@{42}: checkout: moving from feat/navbar to main
+[33m73a1b47[m[33m ([m[1;32mfeat/navbar[m[33m)[m HEAD@{43}: commit: Feat: Update UI
+[33me09b0e9[m[33m ([m[1;31morigin/feat/navbar[m[33m)[m HEAD@{44}: checkout: moving from main to feat/navbar
+[33m09734d0[m HEAD@{45}: checkout: moving from feat/navbar to main
+[33me09b0e9[m[33m ([m[1;31morigin/feat/navbar[m[33m)[m HEAD@{46}: checkout: moving from main to feat/navbar
+[33m09734d0[m HEAD@{47}: pull: Fast-forward
+[33ma7a7c37[m HEAD@{48}: checkout: moving from main to main
+[33ma7a7c37[m HEAD@{49}: checkout: moving from feat/navbar to main
+[33me09b0e9[m[33m ([m[1;31morigin/feat/navbar[m[33m)[m HEAD@{50}: commit: feat:navbar
+[33ma7a7c37[m HEAD@{51}: checkout: moving from main to feat/navbar
+[33ma7a7c37[m HEAD@{52}: clone: from github.com:SwasthK/ekashuunyam-monorepo.git

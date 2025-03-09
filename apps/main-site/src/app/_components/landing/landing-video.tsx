@@ -16,14 +16,15 @@ const animationUtils = {
     letters: string[],
   ) => {
     const tl = gsap.timeline();
+    const ltr = letterRefs.current;
 
-    gsap.set(letterRefs.current, {
+    gsap.set(ltr, {
       opacity: 1,
       y: 40,
     });
 
     // Animate each letter with proper timing
-    letterRefs.current.forEach((letter, index) => {
+    ltr.forEach((letter, index) => {
       const delay = index * 0.05;
       const char = letters[index];
 
@@ -65,7 +66,7 @@ const animationUtils = {
         );
       } else if (char === " ") {
         tl.to(letter, { opacity: 1, duration: 0.3 }, delay);
-      } else if ("aeiou".includes(char?.toLowerCase() || "")) {
+      } else if ("aeiou".includes(char?.toLowerCase() ?? "")) {
         tl.to(
           letter,
           {
@@ -110,8 +111,9 @@ const animationUtils = {
     letterRefs: React.MutableRefObject<HTMLSpanElement[]>,
     letters: string[],
   ) => {
+    const ltr = letterRefs.current;
     const oIndex = letters.length - 1;
-    const targetElement = letterRefs.current[oIndex];
+    const targetElement = ltr[oIndex];
 
     if (targetElement) {
       gsap.to(targetElement, {
@@ -138,8 +140,9 @@ const TitleAnimation = memo(({ titleText }: { titleText: string }) => {
   const context = useRef<gsap.Context | null>(null);
 
   useLayoutEffect(() => {
+    const ltr = letterRefs.current;
     context.current = gsap.context(() => {
-      gsap.set(letterRefs.current, {
+      gsap.set(ltr, {
         opacity: 1,
         y: 40,
       });
@@ -151,13 +154,14 @@ const TitleAnimation = memo(({ titleText }: { titleText: string }) => {
   // Handle animations with useEffect (runs after browser paints)
   useEffect(() => {
     if (!titleRef.current) return;
+    const ltr = letterRefs.current;
 
     const setupInteractions = () => {
-      const handleMouseEnter = (e: MouseEvent) => {
+      const handleMouseEnter = () => {
         if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
 
         rafIdRef.current = requestAnimationFrame(() => {
-          letterRefs.current.forEach((letter) => {
+          ltr.forEach((letter) => {
             if (!letter) return;
             gsap.to(letter, {
               y: "random(-10, 10)",
@@ -175,7 +179,7 @@ const TitleAnimation = memo(({ titleText }: { titleText: string }) => {
       const handleMouseLeave = () => {
         if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
 
-        letterRefs.current.forEach((letter) => {
+        ltr.forEach((letter) => {
           if (!letter) return;
           gsap.to(letter, {
             y: 0,
@@ -219,7 +223,7 @@ const TitleAnimation = memo(({ titleText }: { titleText: string }) => {
 
     // Clean up all animations and event listeners
     return () => {
-      gsap.killTweensOf(letterRefs.current);
+      gsap.killTweensOf(ltr);
       gsap.getById("persistentO")?.kill();
       context.current?.revert();
     };
@@ -258,30 +262,32 @@ export const LandingVideo = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const titleText: string = "Ekashunyam 2.O";
+  const titleText = "Ekashunyam 2.O";
 
   useEffect(() => {
     if (!videoRef.current || !containerRef.current) return;
-
+  
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
         if (entry?.isIntersecting) {
-          videoRef.current?.play();
+          videoRef.current?.play().catch((error) => {
+            console.error("Video play failed:", error);
+          });
         } else {
           videoRef.current?.pause();
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.1 }
     );
-
+  
     observer.observe(containerRef.current);
-
+  
     return () => {
       observer.disconnect();
     };
   }, [videoLoaded]);
-
+  
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 50);
 
@@ -327,7 +333,7 @@ export const LandingVideo = () => {
                 gsap.to(el, {
                   opacity: 1,
                   duration: 0.8,
-                 
+
                   delay: 1.2,
                   ease: "power2.out",
                 });

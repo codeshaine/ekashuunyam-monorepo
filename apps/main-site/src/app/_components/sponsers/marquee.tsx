@@ -1,5 +1,6 @@
 import { type Sponsers, SponsersPriority } from "@/lib/data/sponsers";
 import { LocateFixed, SquareArrowOutUpRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import Marquee from "react-fast-marquee";
 
@@ -25,11 +26,20 @@ export const SponsersMarquee = ({
             key={brand.name}
             className={`group mx-4 flex h-fit flex-col rounded-xl ${high ? "w-64" : "w-44"} border-2 border-black`}
           >
-            <img
+            <div className="h-36 relative w-full rounded-xl overflow-hidden">
+              <Image
+                src={"/images/hat.png"}
+                alt={brand.name}
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
+
+            {/* <img
               src={"/images/hat.png"}
               alt={brand.name}
               className="h-36 w-full rounded-xl object-cover"
-            />
+            /> */}
             <div className="rounded-b-xl px-1 text-black transition-all duration-300 ease-in group-hover:bg-white">
               <p
                 className={`mt-2 font-bold ${high ? "text-xl" : "text-sm md:text-base"}`}

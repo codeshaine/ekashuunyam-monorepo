@@ -1,7 +1,6 @@
 import { WhySponsor } from "@/lib/data/sponsers";
 import { CheckCircle } from "lucide-react";
 import Link from "next/link";
-import { ButtonComponent } from "../button/button";
 
 export const JoinAsSponsor = () => {
     return (
@@ -26,7 +25,7 @@ export const JoinAsSponsor = () => {
             <p className="mb-6 text-sm sm:text-base md:text-lg">
               Are you ready to sail with us on this legendary voyage? By sponsoring{" "}
               <span className="font-bold text-red-600">Ekashunyam 2.0</span>, 
-              you'll be supporting one of the most prestigious intercollegiate 
+              you&apos;ll be supporting one of the most prestigious intercollegiate 
               fests while gaining maximum visibility among students, tech 
               enthusiasts, and industry leaders.
             </p>

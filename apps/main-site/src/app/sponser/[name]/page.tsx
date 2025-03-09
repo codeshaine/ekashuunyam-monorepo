@@ -127,7 +127,7 @@ export default function SponsorsPage() {
         }
       });
     };
-  }, []);
+  });
 
   useEffect(() => {
     const anim = gsap.to(".cnt", {

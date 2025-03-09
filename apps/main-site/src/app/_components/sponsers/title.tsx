@@ -12,12 +12,12 @@ export const TitleSection = ({
   return (
     <div
       className={cn(
-        "flex-center w-full flex-col gap-5 px-4 py-16 text-black font-sayyeda tracking-widest",
+        "flex-center w-full flex-col gap-5 px-4 py-16 text-black ",
         className,
       )}
     >
       <div className="flex-center w-[40rem] flex-col flex-wrap gap-5 px-1">
-        <p className="text-4xl font-bold lg:text-7xl xl:text-6xl">
+        <p className="text-4xl font-bold lg:text-7xl xl:text-6xl font-sayyeda tracking-widest">
           {title}
         </p>
         <p className="text-xs sm:text-sm md:text-base">{description}</p>

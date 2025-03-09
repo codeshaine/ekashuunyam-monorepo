@@ -12,8 +12,8 @@ export const BrochureSection = () => {
         backgroundPosition: "center",
       }}
     >
-      <div className="mb-4 flex w-full flex-col items-end justify-end gap-4 px-8 lg:py-10 font-sayyeda tracking-widest">
-        <p className="text-center text-4xl font-semibold  lg:text-7xl">
+      <div className="mb-4 flex w-full flex-col items-end justify-end gap-4 px-8  tracking-widest lg:py-10">
+        <p className="text-center text-4xl font-semibold lg:text-7xl font-sayyeda">
           ADvENTURE Log
         </p>
         <p className="text-center text-sm font-light">
@@ -28,14 +28,14 @@ export const BrochureSection = () => {
           <div className="flex-center w-full lg:w-96">
             <Link
               href="/form/register"
-              className="bg-yellow-500 px-6 py-3 font-semibold"
+              className="inline-block rounded-xl border border-black bg-[#ffc107] px-6 py-2 text-base font-bold shadow-lg transition-transform hover:scale-105 sm:px-8 sm:py-3 sm:text-lg md:px-12 md:py-4 md:text-xl"
             >
               Register your crew !
             </Link>
           </div>
         </div>
         <div className="flex-center h-full flex-1 px-3">
-            <div className="relative h-[25rem] w-[20rem] rotate-3 bg-yellow-500 md:w-[25rem] lg:h-[32rem]">
+          <div className="relative h-[25rem] w-[20rem] rotate-3 bg-yellow-500 md:w-[25rem] lg:h-[32rem]">
             <Image
               width={112}
               height={112}
@@ -43,7 +43,8 @@ export const BrochureSection = () => {
               alt=""
               className="absolute -left-[2rem] -top-[2rem] h-28 w-28 object-cover"
             />
-            </div>
+            <p  className="px-16">Image yet to be added</p>
+          </div>
         </div>
       </div>
       <div className="flex-center w-full flex-col gap-2 py-8">

@@ -13,7 +13,23 @@ const config = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ["lh3.googleusercontent.com",'media1.tenor.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'media1.tenor.com',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '**',
+      },
+    ],
   },
   reactStrictMode: false
 };

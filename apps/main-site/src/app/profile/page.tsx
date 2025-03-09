@@ -25,7 +25,7 @@ export default async function PirateProfilePage() {
 
       <Toaster />
       <div className="container relative mx-auto max-w-7xl px-4">
-        <h1 className="mb-12 pt-10 text-center text-5xl font-bold tracking-tight">
+        <h1 className="mb-12 pt-10 text-center text-4xl font-bold tracking-tight">
           <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
             Profile
           </span>

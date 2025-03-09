@@ -28,7 +28,10 @@ export default function RootLayout({
           {/* Disable Navbar for now */}
           {/* <NavigationBar /> */}
           <ScrollProvider>
-            <LenisScrollProvider>{children}</LenisScrollProvider>
+            <LenisScrollProvider>
+              {children}
+
+            </LenisScrollProvider>
           </ScrollProvider>
         </TRPCReactProvider>
       </body>

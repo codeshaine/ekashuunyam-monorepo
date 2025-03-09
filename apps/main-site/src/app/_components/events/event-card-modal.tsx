@@ -18,7 +18,7 @@ export const EventDetailsModal = ({
   return (
     <div className="fixed inset-0 top-0 z-[100] flex items-center justify-center">
       <div
-        className="relative w-[20rem] max-w-lg rounded-xl p-8 shadow-2xl sm:w-[25rem] md:w-[30rem] lg:w-[35rem]"
+        className="relative w-[20rem] p-10 sm:w-[25rem] md:w-[30rem] lg:w-[35rem]"
         style={{ backgroundColor: `#${color}` }}
       >
         <button
@@ -31,7 +31,7 @@ export const EventDetailsModal = ({
         <h2 className="mb-4 text-4xl font-bold text-white">{themeTitle}</h2>
 
         <div className="space-y-4 text-white">
-          <h3 className="text-2xl font-semibold">Event: {title}</h3>
+          <h3 className="text-2xl font-semibold">{title}</h3>
 
           <div className="rounded bg-stone-950 p-4">
             <h4 className="mb-2 text-xl font-bold">Event Rules</h4>
@@ -46,13 +46,12 @@ export const EventDetailsModal = ({
             <div className="grid grid-cols-2 gap-2">
               {heads?.map((h, i) => (
                 <div key={i}>
-                  <p className="font-semibold">Coordinator</p>
-                  <p>{h.name}r</p>
+                  <p className="font-semibold">{h.name}r</p>
                   <div className="flex w-full flex-col items-start justify-start gap-4 py-2">
                     <Link
                       target="_blank"
                       href={`tel:${h.contact}`}
-                      className={`flex items-center justify-between gap-2 rounded-xl px-2 py-1`}
+                      className={`flex items-center justify-between gap-2 rounded-xl px-3 py-1`}
                       style={{ backgroundColor: `#${color}` }}
                     >
                       <PhoneCall height={18} width={18} />
@@ -62,7 +61,7 @@ export const EventDetailsModal = ({
                     <Link
                       target="_blank"
                       href={`https://wa.me/${h.contact}`}
-                      className={`flex items-center justify-between gap-2 rounded-xl px-2 py-1`}
+                      className={`flex items-center justify-between gap-2 rounded-xl px-3 py-1`}
                       style={{ backgroundColor: `#${color}` }}
                     >
                       <svg

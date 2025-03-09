@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { getUserSession } from "@/app/action";
 import type { Session } from "next-auth";
 import { UpdateFormSkeleton } from "@/app/_components/form/update-skeleton";
+import "./register.css";
 
 export default function Page() {
   const [user, setUser] = useState<Session | null>(null);
@@ -133,14 +134,11 @@ export default function Page() {
           viewBox="0 0 1920 1080"
           preserveAspectRatio="none"
         >
-          <path
-            d="M0 737L45.7 735.8C91.3 734.7 182.7 732.3 274.2 715.3C365.7 698.3 457.3 666.7 548.8 652.5C640.3 638.3 731.7 641.7 823 652.5C914.3 663.3 1005.7 681.7 1097 688.3C1188.3 695 1279.7 690 1371.2 692.7C1462.7 695.3 1554.3 705.7 1645.8 703C1737.3 700.3 1828.7 684.7 1874.3 676.8L1920 669L1920 1081L1874.3 1081C1828.7 1081 1737.3 1081 1645.8 1081C1554.3 1081 1462.7 1081 1371.2 1081C1279.7 1081 1188.3 1081 1097 1081C1005.7 1081 914.3 1081 823 1081C731.7 1081 640.3 1081 548.8 1081C457.3 1081 365.7 1081 274.2 1081C182.7 1081 91.3 1081 45.7 1081L0 1081Z"
-            fill="#60bff5"
-          />
+          <path className="wave" fill="#60bff5" />
         </svg>
       </div>
 
-      <div className="container relative mx-auto px-4 py-12">
+      <div className="flex-center container relative w-screen flex-col px-4 py-12">
         <div className="mb-12 text-center">
           <h1 className="mb-4 text-5xl font-bold tracking-tight text-gray-900">
             Join Our Events

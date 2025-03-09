@@ -5,7 +5,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { RulesSection } from "../rules/rules-section";
-
 import { EventDate } from "./event-date-section";
 import { EventIntroCard } from "./event-intro-section";
 import { eventsData, type EventsData } from "@/lib/data/events";

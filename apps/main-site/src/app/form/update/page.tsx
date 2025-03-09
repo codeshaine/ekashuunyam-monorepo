@@ -125,7 +125,7 @@ export default function Page({
         </svg>
       </div>
 
-      <div className="flex-center container relative w-screen flex-col px-4 py-12">
+      <div className="px-4 sm:px-8 lg:px-32 relative w-screen flex-col py-12">
         <div className="mb-12 text-center">
           <h1 className="mb-4 text-5xl font-bold tracking-tight text-gray-900">
             Update Your Registration
@@ -136,7 +136,7 @@ export default function Page({
         </div>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">
             {/* <div className="rounded-2xl border border-blue-100 bg-white/90 p-4 text-sm text-gray-600 shadow-lg backdrop-blur-xl">
               * Please update the details of the event you want to update.
             </div> */}

@@ -1,7 +1,9 @@
+import Image from "next/image";
+
 export const MapSection = () => {
   return (
     <div
-    id="map"
+      id="map"
       className="relative h-screen w-full bg-red-500"
       style={{
         backgroundImage: `url('/images/map.jpg')`,
@@ -9,23 +11,18 @@ export const MapSection = () => {
         backgroundPosition: "center",
       }}
     >
-      <img
-        src="/images/top-left-split.png"
-        alt=""
-        className="absolute left-0 top-0 h-[35vh] w-full xl:h-[40vh] xl:w-[75vw]"
-        style={
-          {
-            //   maskImage: 'url(/images/top-left-split.png)',
-            //   WebkitMaskImage: 'url(/images/top-left-split.png)',
-            //   maskSize: 'contain',
-            //   WebkitMaskSize: 'contain',
-            //   maskRepeat: 'no-repeat',
-            //   WebkitMaskRepeat: 'no-repeat',
-          }
-        }
-      />
-      <div className="absolute left-0 top-0 h-[25vh] w-full px-16 py-8 xl:h-[40vh] xl:w-[75vw] ">
-        <p className="text-4xl font-semibold lg:text-7xl font-sayyeda tracking-widest">Land Ahoy!</p>
+      <div className="absolute left-0 top-0 h-[35vh] w-full xl:h-[40vh] xl:w-[75vw]">
+        <Image
+          src="/images/top-left-split.png"
+          alt="Top Left Split"
+          layout="fill"
+          objectFit="cover" // Change to "contain" if needed
+        />
+      </div>
+      <div className="absolute left-0 top-0 h-[25vh] w-full px-16 py-8 xl:h-[40vh] xl:w-[75vw]">
+        <p className="font-sayyeda text-4xl font-semibold tracking-widest lg:text-7xl">
+          Land Ahoy!
+        </p>
         <p className="text-sm font-light">
           The Island of <span className="font-semibold">Ekashunyam</span>
         </p>
@@ -44,21 +41,14 @@ export const MapSection = () => {
           ></iframe>
         </div>
       </div>
-      <img
-        src="/images/bottom-right-split.png"
-        alt=""
-        className="absolute bottom-0 right-0 h-[25vh] w-full xl:h-[25vh] xl:w-[95vw]"
-        style={
-          {
-            //   maskImage: 'url(/images/top-left-split.png)',
-            //   WebkitMaskImage: 'url(/images/top-left-split.png)',
-            //   maskSize: 'contain',
-            //   WebkitMaskSize: 'contain',
-            //   maskRepeat: 'no-repeat',
-            //   WebkitMaskRepeat: 'no-repeat',
-          }
-        }
-      />
+      <div className="absolute bottom-0 right-0 h-[25vh] w-full xl:h-[25vh] xl:w-[95vw]">
+        <Image
+          src={"/images/bottom-right-split.png"}
+          alt="Bottom Right Split"
+          layout="fill"
+          objectFit="cover"
+        />
+      </div>
     </div>
   );
 };

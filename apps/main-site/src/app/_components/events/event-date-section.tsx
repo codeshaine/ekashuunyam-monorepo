@@ -2,7 +2,8 @@
 
 import gsap from "gsap";
 import Image from "next/image";
-import { useLayoutEffect, useRef, memo, RefObject } from "react";
+import { useLayoutEffect, useRef, memo } from "react";
+import type { RefObject } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 
@@ -62,16 +63,19 @@ export const EventDate = () => {
   const bgRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const isSetupComplete = useRef(false);
-
   useLayoutEffect(() => {
     if (!containerRef.current || isSetupComplete.current) return;
-
+    
+    // Store ref values to avoid stale references in cleanup
+    const container = containerRef.current;
+    const bg = bgRef.current;
+    
     const ctx = gsap.context(() => {
       gsap.set([".svg-path", "#rect", ".cnt"], {
         willChange: "transform",
       });
 
-      gsap.set(bgRef.current, {
+      gsap.set(bg, {
         willChange: "filter",
       });
 
@@ -94,7 +98,7 @@ export const EventDate = () => {
         },
         onComplete: () => {
           // Release transform hints when animation completes
-          gsap.set([".svg-path", "#rect", ".cnt", bgRef.current], {
+          gsap.set([".svg-path", "#rect", ".cnt", bg], {
             willChange: "auto",
           });
         },
@@ -138,7 +142,7 @@ export const EventDate = () => {
           0,
         )
         .to(
-          bgRef.current,
+          bg,
           {
             borderRadius: "10%",
             scale:.8,
@@ -153,20 +157,15 @@ export const EventDate = () => {
     // More explicit cleanup function
     return () => {
       // Kill timeline first
-      if (timelineRef.current) {
-        timelineRef.current.kill();
-        timelineRef.current = null;
-      }
-
       // Kill all scroll triggers associated with this component
       ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.vars.trigger === containerRef.current) {
+        if (trigger.vars.trigger === container) {
           trigger.kill();
         }
       });
 
       // Reset will-change
-      gsap.set([".svg-path", "#rect", ".cnt", bgRef.current], {
+      gsap.set([".svg-path", "#rect", ".cnt", bg], {
         clearProps: "all",
         willChange: "auto",
       });
@@ -206,9 +205,9 @@ export const EventDate = () => {
             objectPosition: "center",
             transform: "translateZ(0)", // Force GPU acceleration
           }}
-          onLoadingComplete={(image) => {
+          onLoad={(event) => {
             // Add a loaded class to help with animations
-            image.classList.add("image-loaded");
+            event.currentTarget.classList.add("image-loaded");
           }}
         />
       </div>

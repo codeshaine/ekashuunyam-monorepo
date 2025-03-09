@@ -1,6 +1,5 @@
 "use client";
 
-import { useScroll } from "@/lib/scroll-context";
 import { MoveRight } from "lucide-react";
 import { memo, useEffect, useRef } from "react";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -9,7 +8,7 @@ import gsap from "gsap";
 gsap.registerPlugin(ScrollTrigger);
 
 export const EventIntroCard = memo(() => {
-  const { scrollToSection } = useScroll();
+  // const { scrollToSection } = useScroll();
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -64,12 +63,12 @@ export const EventIntroCard = memo(() => {
         <span className="font-sayyeda text-white/70">Exiting Events</span>
       </p>
       <div
-        onClick={() => scrollToSection("rules")}
+        // onClick={() => scrollToSection("rules")}
         className="flex cursor-pointer items-center justify-center rounded-full bg-white/10 px-4 py-2 text-white backdrop-blur-sm transition-all hover:bg-white/20"
       >
         Skip
         <MoveRight
-          onClick={() => scrollToSection("rules")}
+          // onClick={() => scrollToSection("rules")}
           className="ml-2 inline-block"
           size={20}
         />
@@ -77,3 +76,5 @@ export const EventIntroCard = memo(() => {
     </div>
   );
 });
+
+EventIntroCard.displayName = "EventIntroCard";

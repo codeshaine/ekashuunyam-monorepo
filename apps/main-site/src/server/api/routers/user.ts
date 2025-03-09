@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
-import { colleges } from "@/lib/data";
 
 export const userRouter = createTRPCRouter({
   userDetails: protectedProcedure.query(async ({ ctx }) => {

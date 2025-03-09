@@ -36,10 +36,14 @@ export const Eventcards = memo(
         section,
         {
           scale: 0.6,
+          filter:"blur(5px) grayscale(50%) saturate(0)",
+          border: "60px solid black",
           rotate: index ? (index % 2 === 0 ? -15 : 15) : -15,
         },
         {
           scale: 0.87,
+          filter:"blur(0px) grayscale(0%) saturate(1)",
+          border: "0px solid black",
           rotate: index ? index * 0.2 : 0,
           ease: "power1.inOut", // Smoother easing than 'none'
           scrollTrigger: {
@@ -66,7 +70,7 @@ export const Eventcards = memo(
       participants === 1 ? "Individual Event" : `${participants} make a team`;
 
     const cardStyle = {
-      backgroundImage: `url('/images/zoom.jpg')`,
+      backgroundImage: `url('https://res.cloudinary.com/dvpaztqr9/image/upload/f_auto,q_auto/v1/Ekashunyam2.0/an5s9redmsmhjl8pzbcu')`,
       backgroundColor: `#${color}`,
       backgroundBlendMode: "multiply" as const,
       backgroundSize: "cover",
@@ -82,7 +86,7 @@ export const Eventcards = memo(
           className="sticky top-0 flex h-screen items-center justify-center bg-stone-900 will-change-transform"
           style={{
             transform: "translateZ(0)",
-            // ...cardStyle,
+            ...cardStyle,
           }}
         >
           <p className="absolute left-0 top-0 p-8 text-5xl font-bold text-white">
@@ -98,12 +102,12 @@ export const Eventcards = memo(
               <Image fill src={image} alt="" className="object-cover" />
             </div>
             <div className="relative flex flex-col gap-2 text-white">
-              <p className="text-3xl font-bold">{themeTitle}</p>
-              <p className="text-sm">{description}</p>
+              <p className="text-3xl font-bold ">{themeTitle}</p>
+              <p className="text-sm font-mono">{description}</p>
               <div className="w-fit bg-white px-3 py-1 text-black">
                 <p>{teamText}</p>
               </div>
-              <div className="absolute -top-8 right-0 -rotate-6 bg-white px-2 py-1 text-sm font-semibold text-black">
+              <div className="absolute font-mono -top-8 right-0 -rotate-6 bg-white px-2 py-1 text-sm font-semibold text-black">
                 {title}
               </div>
             </div>

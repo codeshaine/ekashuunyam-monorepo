@@ -33,10 +33,12 @@ export const SponsorsViewSection = () => {
     tl.fromTo(
       ".box",
       {
+        borderRadius:"5%",
         width: "20vw",
         height: "20vh",
       },
       {
+        borderRadius:"0%",
         width: "100vw",
         height: "100vh",
         ease: "power2.inOut",

@@ -29,7 +29,7 @@ export function UpdateFormSkeleton() {
         </svg>
       </div>
 
-      <div className="container relative mx-auto px-4 py-12">
+      <div className="flex-center container relative w-screen flex-col mx-auto px-4 py-12">
         <div className="mb-12 text-center">
           <Skeleton className="mx-auto mb-4 h-12 w-3/4 max-w-2xl rounded-lg" />
           <Skeleton className="mx-auto h-6 w-2/4 rounded-lg" />

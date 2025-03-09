@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-export const ButtonComponent = () => {
+export const ButtonComponent = ({ label }: { label: string }) => {
   return (
-    <section className="flex h-screen items-center justify-center bg-red-950 text-white">
-      <button 
-        className="group relative w-fit overflow-hidden rounded-xl text-2xl font-medium text-yellow-100 transition-all duration-300 px-8 py-3 hover:scale-105"
+    <>
+      <button
+        className="group relative w-fit overflow-hidden rounded-xl px-8 py-3 text-sm  font-medium text-yellow-100 transition-all duration-300 hover:scale-105"
         style={{
           backgroundImage: `url('/svg/button.svg')`,
-          backgroundSize: '100% 100%',
+          backgroundSize: "100% 100%",
           WebkitMaskImage: `url('/svg/button.svg')`,
-          WebkitMaskSize: '100% 100%',
+          WebkitMaskSize: "100% 100%",
           maskImage: `url('/svg/button.svg')`,
-          maskSize: '100% 100%',
+          maskSize: "100% 100%",
         }}
       >
         <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-orange-500/30 to-transparent" />
-        <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <div className="absolute top-0 left-0 w-full h-full bg-transparent animate-stars" />
+        <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          <div className="animate-stars absolute left-0 top-0 h-full w-full bg-transparent" />
         </div>
         Register Your
       </button>
@@ -27,7 +27,8 @@ export const ButtonComponent = () => {
           }
         }
         @keyframes sparkle {
-          0%, 100% {
+          0%,
+          100% {
             opacity: 0;
             transform: scale(0.8) rotate(0deg);
           }
@@ -38,7 +39,7 @@ export const ButtonComponent = () => {
         }
         .animate-stars::before,
         .animate-stars::after {
-          content: '★';
+          content: "★";
           position: absolute;
           color: #f5b942;
           font-size: 30px;
@@ -54,6 +55,6 @@ export const ButtonComponent = () => {
           animation-delay: 0.7s;
         }
       `}</style>
-    </section>
+    </>
   );
 };

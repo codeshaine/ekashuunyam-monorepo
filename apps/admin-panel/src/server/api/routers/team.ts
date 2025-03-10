@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
+import { eventNames } from "process";
 
 export const teamRouter = createTRPCRouter({
   getSingleTeam: protectedProcedure
@@ -71,6 +72,9 @@ export const teamRouter = createTRPCRouter({
             },
           },
           events: {
+            where: {
+              name: input.eventName,
+            },
             select: {
               formId: true,
               name: true,
@@ -79,6 +83,7 @@ export const teamRouter = createTRPCRouter({
           },
         },
       });
+      console.log(teams);
       return teams;
     }),
 

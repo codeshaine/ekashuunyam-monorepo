@@ -41,11 +41,11 @@ const RULES_DATA: Record<string, Rule[]> = {
 
 // Memoized rule list component to prevent unnecessary re-renders
 const RulesList = memo(({ rules }: { rules: Rule[] }) => (
-  <ul className="space-y-4 font-mono text-blue-900">
+  <ul className="space-y-2 font-mono text-blue-900">
     {rules.map((rule) => (
       <li key={rule.id} className="flex items-start">
-        <span className="mr-3 text-2xl text-blue-600">{rule.icon}</span>
-        <span>{rule.text}</span>
+        <span className="mr-3 text-blue-600">{rule.icon}</span>
+        <span className="text-xs sm:text-sm">{rule.text}</span>
       </li>
     ))}
   </ul>
@@ -86,20 +86,27 @@ const WaveAnimation = memo(() => {
 
   return (
     <div className="relative flex h-[100vh] flex-col">
-      <svg
+      {/* <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1440 320"
         className="z-10"
         aria-hidden="true"
       >
+        <defs>
+          <linearGradient id="waveGradient" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stopColor="#0099ff" stopOpacity="0" />
+            <stop offset="80%" stopColor="#0099ff" stopOpacity="1" />
+          </linearGradient>
+        </defs>
         <path
-          ref={pathRef}
-          fill="#0099ff"
-          fillOpacity="1"
-          d="M0,32L48,42.7C96,53,192,75,288,74.7C384,75,480,53,576,42.7C672,32,768,32,864,58.7C960,85,1056,139,1152,154.7C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          
+          fill="url(#waveGradient)"
+          d="M0,32L48,42.7C96,53,192,75,288,74.7C384,75,480,53,576,42.7C672,32,768,32,864,58.7C960,85,1056,139,1152,154.7C1248,171,1344,149,1392,138.7L1440,128L1440,320L0,320Z"
         ></path>
-      </svg>
-      <div className="-mt-2 flex-grow bg-[#0099FF]"></div>
+      </svg> */}
+
+      {/* Smooth transition using a gradient in the div itself */}
+      <div className="-mt-[2px] flex-grow bg-gradient-to-b from-transparent via-[#0099ff4c] to-[#000000]"></div>
     </div>
   );
 });
@@ -118,33 +125,33 @@ export const RulesSection: React.FC = () => {
       aria-labelledby="rules-heading"
     >
       {/* Oceanic Wave Background */}
-      <div className="flex-center sticky top-0 h-screen w-full">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="bg-wave-1 animate-wave-1 absolute -bottom-10 left-0 right-0 h-96 opacity-30"></div>
-          <div className="bg-wave-2 animate-wave-2 absolute -bottom-10 left-0 right-0 h-96 opacity-50"></div>
-        </div>
+      <div className="flex-center w-full">
+        {/* <div className="pointer-events-none absolute inset-0">
+          <div className="bg-wave-1 animate-wave-1 absolute -bottom-10 left-0 right-0 h-1 opacity-30"></div>
+          <div className="bg-wave-2 animate-wave-2 absolute -bottom-10 left-0 right-0 h-1 opacity-50"></div>
+        </div> */}
 
         {/* Rules Content */}
-        <div className="relative z-10 flex items-center justify-center">
-          <div className="w-full max-w-4xl rounded-3xl border-4 border-blue-700/20 bg-white/70 p-12 shadow-2xl backdrop-blur-sm">
-            <header className="mb-10 text-center">
+        <div className="relative z-10 mx-auto flex items-center justify-center px-2">
+          <div className="w-full max-w-lg rounded-xl bg-white/10 md:p-16 p-3 shadow-lg backdrop-blur-sm">
+            <header className="mb-3 text-center">
               <h1
                 id="rules-heading"
-                className="font-sayyeda text-4xl font-bold tracking-widest text-blue-900 drop-shadow-lg xl:text-6xl"
+                className="text-xl font-medium tracking-wide text-white drop-shadow sm:text-2xl"
               >
-                PIRATE CoDE
+                PIRATE CODE
               </h1>
-              <h2 className="font-sans text-xl font-semibold text-blue-700">
+              <h2 className="text-sm font-medium text-white/70">
                 General Rules
               </h2>
             </header>
 
-            <div className="grid gap-6 md:grid-cols-2">
-              <div className="rounded-xl border-2 border-blue-300 bg-blue-100/50 p-6">
+            <div className="flex flex-col gap-3 overflow-hidden">
+              <div className="rounded-lg border border-blue-300 bg-blue-100 p-2 rounded-xl">
                 <RulesList rules={generalRules} />
               </div>
 
-              <div className="rounded-xl border-2 border-blue-300 bg-blue-100/50 p-6">
+              <div className="rounded-lg border border-blue-300 bg-blue-100 p-2 rounded-xl">
                 <RulesList rules={additionalRules} />
               </div>
             </div>
@@ -153,7 +160,7 @@ export const RulesSection: React.FC = () => {
       </div>
 
       {/* Animated Wave */}
-      <WaveAnimation />
+      {/* <WaveAnimation /> */}
     </section>
   );
 };

@@ -71,8 +71,11 @@ export const SponsorsViewSection = () => {
     <div
       ref={containerRef}
       className="relative h-[300vh] text-[3.5vw] text-white"
+      style={{
+        background: 'radial-gradient(circle at center, #0099ffe9 0%, #030712 70%)'
+      }}
     >
-      <div className="sticky top-0 h-screen bg-[#0099FF]">
+     <div className="sticky top-0 h-screen">
         <div className="flex-center h-full w-full">
           <div
             className="box overflow-hidden bg-blue-950 text-sm"

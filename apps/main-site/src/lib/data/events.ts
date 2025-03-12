@@ -7,8 +7,9 @@ export type EventsData = {
     image: string;
     participants: number;
     color: string;
-    heads?: EventHeads[];
-    rules?: string[];
+    heads: EventHeads[];
+    rules: string[];
+    wanted?: string;
 };
 
 export type EventHeads = {
@@ -27,7 +28,7 @@ export type EventDetailsModalProps = {
     description: string;
 };
 
-export const eventsData: EventsData[] = [
+export const eventsData = [
     {
         id: "robin",
         title: "IT Quiz",
@@ -52,31 +53,35 @@ export const eventsData: EventsData[] = [
             "Each round will have a different set of questions.",
             "The team with the highest score wins.",
         ],
+        wanted: 'https://res.cloudinary.com/dvpaztqr9/image/upload/f_auto,q_auto/v1/Ekashunyam2.0/Event-Cards/xapbibvsvpuwugsvarvw'
     },
     {
         id: "chopper",
         title: "Surprise Event",
-        themeTitle: "Surprise",
-        description: "Expect the unexpected!",
+        themeTitle: "Raftle Rush",
+        description: "Whats Inside? Even Oda Wont Tell! 🤐🎁",
         image:
             "https://media1.tenor.com/m/MVFAsfv3wk0AAAAC/one-piece-one-piece-movie.gif",
-        participants: 1,
+        participants: 2,
         color: "F066BB",
         heads: [
             {
-                name: "not added",
-                contact: "93949494",
+                name: "Bhavya N U",
+                contact: "9481191651",
             },
             {
-                name: "not added",
-                contact: "93949494",
+                name: "Poojitha N S",
+                contact: "8088990570",
             },
         ],
         rules: [
-            "The event will be revealed on the spot.",
-            "Prepare for a fun and exciting challenge.",
-            "Expect the unexpected!",
+            "Each team has 2 members.",
+            "Teams complete a surprise challenge within a time limit.",
+            "Tasks may require problem-solving, creativity, or other skills.",
+            "The fastest and most accurate team wins.",
+            "A tiebreaker will decide in case of a tie.",
         ],
+        wanted: 'https://res.cloudinary.com/dvpaztqr9/image/upload/f_auto,q_auto/v1/Ekashunyam2.0/Event-Cards/dchwrxvua7wsjiay5dvh'
     },
     {
         id: "zoro",
@@ -101,30 +106,34 @@ export const eventsData: EventsData[] = [
             "Teams can consist of 2 members.",
             "The team with the most innovative solution wins.",
         ],
+        wanted: 'https://res.cloudinary.com/dvpaztqr9/image/upload/f_auto,q_auto/v1/Ekashunyam2.0/Event-Cards/xapbibvsvpuwugsvarvw'
     },
     {
         id: "franky",
         title: "Coding",
-        themeTitle: "Coding",
-        description: "Solve challenging problems and showcase your coding skills.",
+        themeTitle: "Rogue Code",
+        description: "No Devil Fruits, Just Pure Coding Skills!",
         image: "https://media1.tenor.com/m/0Y_xLi0iSTwAAAAC/one-piece-franky.gif",
-        participants: 1,
+        participants: 2,
         color: "1AD1F9",
         heads: [
             {
-                name: "not added",
-                contact: "93949494",
+                name: "Theerthananda",
+                contact: "9353012405",
             },
             {
-                name: "not added",
-                contact: "93949494",
+                name: "Krishnendhu E Nair",
+                contact: "8921245658",
             },
         ],
         rules: [
-            "The coding challenge will be 1 hour long.",
-            "Participants can choose any programming language.",
-            "The participant with the most optimized solution wins.",
+            "Open to all with basic C knowledge.",
+            "Only Turbo C or Dev C++ allowed.",
+            "Plagiarism and code sharing lead to disqualification.",
+            "Digital gadgets are strictly prohibited.",
+            "Judges decision is final and binding."
         ],
+        wanted: 'https://res.cloudinary.com/dvpaztqr9/image/upload/f_auto,q_auto/v1/Ekashunyam2.0/Event-Cards/urksqhvj64hb2hjtzule'
     },
     {
         id: "sanji",
@@ -149,31 +158,35 @@ export const eventsData: EventsData[] = [
             "Each round will have a different set of challenges.",
             "The participant with the highest score wins.",
         ],
+        wanted: 'https://res.cloudinary.com/dvpaztqr9/image/upload/f_auto,q_auto/v1/Ekashunyam2.0/Event-Cards/xapbibvsvpuwugsvarvw'
     },
     {
         id: "usopp",
-        title: "Gaming",
-        themeTitle: "Gaming",
-        description: "Battle it out in the ultimate gaming showdown.",
+        title: "Gaming [BGMI]",
+        themeTitle: "Warlords Conquest ",
+        description: "Skypiea Battle Royale",
         image:
             "https://media1.tenor.com/m/QOoJjVrHhYsAAAAC/one-piece-one-piece-film-gold.gif",
-        participants: 1,
+        participants: 2,
         color: "E0A911",
         heads: [
             {
-                name: "not added",
-                contact: "93949494",
+                name: "Sagar",
+                contact: "7624910281",
             },
             {
-                name: "not added",
-                contact: "93949494",
+                name: "Rakesh",
+                contact: "8088482527",
             },
         ],
         rules: [
-            "The gaming event will be 1 hour long.",
-            "Participants can choose any game of their choice.",
-            "The participant with the highest score wins.",
+            "Participant's levels should be above 20.",
+            "No gadgets will be provided for the event.",
+            "Hacking or foul plays will lead to disqualification.",
+            "Maps needed: Erangel,Miramar, Sanhok, Livik.",
+            "Both android and ios devices are allowed."
         ],
+        wanted: 'https://res.cloudinary.com/dvpaztqr9/image/upload/f_auto,q_auto/v1/Ekashunyam2.0/Event-Cards/xapbibvsvpuwugsvarvw'
     },
     {
         id: "nami",
@@ -199,6 +212,7 @@ export const eventsData: EventsData[] = [
             "Teams can consist of 6 members.",
             "The team with the most synchronized performance wins.",
         ],
+        wanted: 'https://res.cloudinary.com/dvpaztqr9/image/upload/f_auto,q_auto/v1/Ekashunyam2.0/Event-Cards/xapbibvsvpuwugsvarvw'
     },
     {
         id: "brook",
@@ -223,5 +237,6 @@ export const eventsData: EventsData[] = [
             "Participants can use any editing software.",
             "The participant with the most creative reel wins.",
         ],
+        wanted: 'https://res.cloudinary.com/dvpaztqr9/image/upload/f_auto,q_auto/v1/Ekashunyam2.0/Event-Cards/xapbibvsvpuwugsvarvw'
     },
 ];

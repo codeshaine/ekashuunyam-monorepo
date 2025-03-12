@@ -53,7 +53,7 @@ export default async function Home() {
   return (
     <main className="">
       <LandingVideo />
-      <EventsSection />
+      <EventsSection />     
       <SponsersSection />
       <MapSection />
       <BrochureSection />

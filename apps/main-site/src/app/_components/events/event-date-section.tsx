@@ -138,6 +138,7 @@ export const EventDate = () => {
             scale: 1.5,
             ease: "sine.out",
             force3D: true,
+            opacity:0
           },
           0,
         )

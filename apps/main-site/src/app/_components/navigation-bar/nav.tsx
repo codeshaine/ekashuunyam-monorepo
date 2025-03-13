@@ -1,209 +1,113 @@
-// "use client";
+"use client";
 
-// import React, { useRef, useState, useEffect } from "react";
-// import { ShipWheel } from "lucide-react";
-// import {
-//   Popover,
-//   PopoverContent,
-//   PopoverTrigger,
-// } from "@/components/ui/popover";
-// import gsap from "gsap";
-// import Link from "next/link";
+import * as React from "react";
+import {
+  CircleDollarSign,
+  Contact,
+  FolderCode,
+  House,
+  Instagram,
+  Menu,
+  NotebookPen,
+  User,
+} from "lucide-react";
 
-// const menuItems = [
-//   { id: "events", label: "Events", color: "#412a1e", path: "events" },
-//   { id: "contact", label: "Contact", color: "#58acf4", path: "contact" },
-//   { id: "brochure", label: "Brochure", color: "#c8472c", path: "brochure" },
-//   { id: "home", label: "Home", color: "#c8472c", path: "" },
-// ];
+import { Button } from "@/components/ui/button";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-// export const NavigationBar = () => {
-//   const [isOpen, setIsOpen] = useState(false);
-//   const [activeItem, setActiveItem] = useState<string | null>(null);
-//   const wheelRef = useRef<SVGSVGElement>(null);
-//   const itemsRef = useRef<Map<string, HTMLDivElement>>(new Map());
-//   const rotationRef = useRef<gsap.core.Tween | null>(null);
-//   const animationsRef = useRef<Map<string, gsap.core.Tween>>(new Map());
+export function NavigationBar() {
+  return (
+    <div className="fixed right-2 top-2 z-[5000]">
+      <Drawer>
+        <DrawerTrigger asChild>
+          <Button variant="outline" className="rounded-xl">
+            Menu <Menu className="ml-2 inline-block" />
+          </Button>
+        </DrawerTrigger>
+        <DrawerContent
+          className="mx-4 border-none bg-transparent p-0 pb-5"
+          //   style={{
+          //     background:
+          //       "radial-gradient(circle at 50% 110%, #0055aa 0%, #003366 40%, #000000 80%, #000000 100%)",
+          //   }}
+        >
+          <div className="mx-auto w-full max-w-sm p-0">
+            <DrawerHeader className="flex-center flex-col gap-2">
+              <DrawerTitle className="font-sans text-white">
+                Ekashunyam 2.0
+              </DrawerTitle>
+              <DrawerDescription>Set Sail for Glory</DrawerDescription>
+            </DrawerHeader>
 
-//   useEffect(() => {
-//     gsap.defaults({
-//       force3D: true,
-//       ease: "power3.out",
-//     });
+            <div className="flex flex-col gap-2">
+              <NavItem icon={<House />} label="Home" url="/" />
+              <NavItem icon={<User />} label="Profile" url="/profile" />
+              {/* <NavItem icon={<Map />} label="Events" url="/" /> */}
+              <NavItem
+                icon={<NotebookPen />}
+                label="Register"
+                url="/form/register"
+              />
+              {/* <NavItem icon={<BookOpenText />} label="Brochure" url="/" />
+              <NavItem icon={<LocateFixed />} label="Map" url="/" /> */}
+              <NavItem
+                icon={<CircleDollarSign />}
+                label="Contribute"
+                url="/contribute"
+              />
+              <NavItem icon={<Contact />} label="Contact" url="/support" />
+              <NavItem
+                icon={<FolderCode />}
+                label="Developers"
+                url="/developers"
+              />
+              <NavItem
+                icon={<Instagram />}
+                label="Socials"
+                url="https://www.instagram.com/ekashunyam_2k25?igsh=MTBjeTFxbDdtdzM0bQ=="
+                target="_blank"
+              />
+            </div>
+          </div>
+        </DrawerContent>
+      </Drawer>
+    </div>
+  );
+}
 
-//     // Initial setup for all menu items
-//     menuItems.forEach((item) => {
-//       const element = itemsRef.current.get(item.id);
-//       if (element) {
-//         gsap.set(element, {
-//           transformOrigin: "center center",
-//           translateZ: 0,
-//           scale: 1,
-//         });
-//       }
-//     });
-
-//     // Cleanup animations on unmount
-//     return () => {
-//       animationsRef.current.forEach((tween) => {
-//         tween.kill();
-//       });
-//     };
-//   }, []);
-
-//   const startRotation = () => {
-//     if (!wheelRef.current) return;
-//     rotationRef.current?.kill();
-//     rotationRef.current = gsap.to(wheelRef.current, {
-//       rotation: "+=360",
-//       duration: 2,
-//       ease: "linear",
-//       repeat: -1,
-//     });
-//   };
-
-//   const stopRotation = () => {
-//     if (!wheelRef.current || !rotationRef.current) return;
-//     const currentRotation = gsap.getProperty(
-//       wheelRef.current,
-//       "rotation",
-//     ) as number;
-//     rotationRef.current.kill();
-//     rotationRef.current = gsap.to(wheelRef.current, {
-//       rotation: currentRotation + 100,
-//       duration: 3,
-//       ease: "power2.out",
-//     });
-//   };
-
-//   const handleMenuItemHover = (id: string) => {
-//     setActiveItem(id);
-
-//     menuItems.forEach((item) => {
-//       const element = itemsRef.current.get(item.id);
-//       if (!element) return;
-
-//       // Kill any existing animation for this item
-//       animationsRef.current.get(item.id)?.kill();
-
-//       if (item.id === id) {
-//         // Active item animation
-//         const tween = gsap.to(element, {
-//           opacity: 1,
-//           scale: 1.1,
-//           duration: 1.5,
-//           ease: "elastic.out(1, 0.5)", // Adjusted for smoother elastic effect
-//           transformOrigin: "center center",
-//           force3D: true,
-//         });
-//         animationsRef.current.set(item.id, tween);
-//       } else {
-//         // Inactive items animation
-//         const tween = gsap.to(element, {
-//           opacity: 0.3,
-//           scale: 0.9,
-//           duration: 0.4,
-//           ease: "power2.out",
-//           transformOrigin: "center center",
-//           force3D: true,
-//         });
-//         animationsRef.current.set(item.id, tween);
-//       }
-//     });
-//   };
-
-//   const handleMenuItemLeave = () => {
-//     setActiveItem(null);
-
-//     menuItems.forEach((item) => {
-//       const element = itemsRef.current.get(item.id);
-//       if (!element) return;
-
-//       // Kill any existing animation for this item
-//       animationsRef.current.get(item.id)?.kill();
-
-//       // Create new reset animation
-//       const tween = gsap.to(element, {
-//         opacity: 1,
-//         scale: 1,
-//         duration: 1.5, // Increased duration for smoother return
-//         ease: "elastic.out(0.5, 0.3)", // Smoother elastic return
-//         transformOrigin: "center center",
-//         force3D: true,
-//       });
-//       animationsRef.current.set(item.id, tween);
-//     });
-//   };
-
-//   useEffect(() => {
-//     if (activeItem) {
-//       console.log(`Active item is ${activeItem}`);
-//     }
-//   }, [activeItem]);
-
-//   // Rest of your return statement remains the same
-//   return (
-//     <nav
-//       className={`${isOpen ? "bg-black/90 animate-in fade-in-0" : "bg-transparent animate-out fade-out-0"} fixed top-0 z-10 flex h-[4rem] w-full items-center justify-end border-none px-10 pt-3`}
-//     >
-//       <Popover open={isOpen} onOpenChange={setIsOpen}>
-//         <PopoverTrigger asChild className="">
-//           <div className="flex w-full items-center justify-end">
-//             <ShipWheel
-//               ref={wheelRef}
-//               onMouseEnter={startRotation}
-//               onMouseLeave={stopRotation}
-//               className="h-10 w-10 cursor-pointer text-[#DAA520] drop-shadow-xl"
-//             />
-//           </div>
-//         </PopoverTrigger>
-//         <PopoverContent className="h-screen w-screen border-none bg-black/90 p-0 shadow-2xl">
-//           <div className="relative h-full w-full">
-//             <div className="absolute left-1/2 top-1/2 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 transform items-center justify-center rounded-full bg-transparent">
-//               {/* <Compass className="h-full w-full text-white" /> */}
-//               <div>
-//                 <img src="/images/compass.png" alt="Decorative SVG" />
-//               </div>
-//             </div>
-
-//             {menuItems.map((item, index) => {
-//               const angle = index * 90 - 45;
-//               const radius = 130;
-//               const x = Math.cos((angle * Math.PI) / 180) * radius;
-//               const y = Math.sin((angle * Math.PI) / 180) * radius;
-
-//               return (
-//                 <div
-//                   key={item.id}
-//                   // @ts-expect-error - Ref is not a valid prop
-//                   ref={(el) => el && itemsRef.current.set(item.id, el)}
-//                   className="absolute h-32 w-32 -translate-x-1/2 -translate-y-1/2 transform cursor-pointer rounded-lg bg-gradient-to-br from-gray-700 to-gray-900 bg-cover"
-//                   style={{
-//                     left: `calc(50% + ${x}px)`,
-//                     top: `calc(50% + ${y}px)`,
-//                     willChange: "transform, opacity",
-//                     borderRadius: "2rem",
-//                   }}
-//                   onMouseEnter={() => handleMenuItemHover(item.id)}
-//                   onMouseLeave={handleMenuItemLeave}
-//                 >
-//                   <Link
-//                     href={`/${item.path}`}
-//                     className="ext-xl flex h-full w-full items-center justify-center font-mono font-bold text-white"
-//                     style={{
-//                       // backgroundColor: item.color,
-//                       backfaceVisibility: "hidden",
-//                       borderRadius: "2rem",
-//                     }}
-//                   >
-//                     {item.label}
-//                   </Link>
-//                 </div>
-//               );
-//             })}
-//           </div>
-//         </PopoverContent>
-//       </Popover>
-//     </nav>
-//   );
-// };
+const NavItem = ({
+  icon,
+  label,
+  url,
+  target,
+  className,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  url: string;
+  target?: string;
+  className?: string;
+}) => (
+  <Link
+    href={url}
+    target={target || "_self"}
+    className={cn(
+      `flex w-full items-center justify-start gap-2 rounded-xl bg-[#111827c5] px-3 py-2 text-sm font-medium text-white transition-colors duration-100 ease-in hover:bg-[#03071256] hover:text-blue-200`,
+      className,
+    )}
+  >
+    {icon}
+    {label}
+  </Link>
+);

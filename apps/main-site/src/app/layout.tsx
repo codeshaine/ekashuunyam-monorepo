@@ -7,6 +7,7 @@ import { type Metadata } from "next";
 import { TRPCReactProvider } from "@/trpc/react";
 import LenisScrollProvider from "@/lib/lenis-provider";
 import { ScrollProvider } from "@/lib/scroll-context";
+import { NavigationBar } from "./_components/navigation-bar/nav";
 
 export const metadata: Metadata = {
   title: "Ekashunyam 2.0",
@@ -26,11 +27,10 @@ export default function RootLayout({
       <body>
         <TRPCReactProvider>
           {/* Disable Navbar for now */}
-          {/* <NavigationBar /> */}
+          <NavigationBar />
           <ScrollProvider>
             <LenisScrollProvider>
               {children}
-
             </LenisScrollProvider>
           </ScrollProvider>
         </TRPCReactProvider>

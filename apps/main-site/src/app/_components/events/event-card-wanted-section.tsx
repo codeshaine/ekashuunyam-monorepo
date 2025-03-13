@@ -65,7 +65,7 @@ const EventSectionWantedCards = ({ data }: { data: EventsData }) => {
   return (
     <div
       ref={containerRef}
-      className="top-0 z-[2000] flex flex-wrap items-center justify-center gap-8 px-10 py-16"
+      className="top-0 sticky h-screen z-[2000] flex flex-wrap items-center justify-center gap-8 px-10 py-16"
     >
       {/* //Using Next Image component */}
       {/* //    <div className="relative h-fit w-fit ">

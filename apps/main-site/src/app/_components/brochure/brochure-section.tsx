@@ -1,4 +1,4 @@
-import { Instagram } from "lucide-react";
+import { ExternalLink, Instagram } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -65,6 +65,18 @@ export const BrochureSection = () => {
             className="ml-2 font-semibold text-stone-950"
           >
             @ekashunyam2.0/support
+          </Link>
+        </div>
+        <div className="flex-center flex-col text-center text-sm font-light md:flex-row mt-8">
+          <p>Designed and Developed by - </p>
+          <Link
+            href={`/developers`}
+            className="ml-2 font-semibold text-stone-950 flex items-center justify-center gap-1"
+          >
+            <p className="underline">
+              Have a look 
+              </p>
+              <ExternalLink size={15} className="inline-block mr-2" />
           </Link>
         </div>
       </div>

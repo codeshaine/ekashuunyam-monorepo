@@ -15,7 +15,7 @@ export const MapSection = () => {
         <Image
           src="/images/top-left-split.png"
           alt="Top Left Split"
-          layout="fill"
+          fill
           objectFit="cover" // Change to "contain" if needed
         />
       </div>
@@ -45,7 +45,7 @@ export const MapSection = () => {
         <Image
           src={"/images/bottom-right-split.png"}
           alt="Bottom Right Split"
-          layout="fill"
+          fill
           objectFit="cover"
         />
       </div>

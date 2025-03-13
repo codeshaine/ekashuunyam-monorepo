@@ -59,14 +59,14 @@ export default function ContributePage() {
             .map((sponsor, index) => (
               <div
                 key={index}
-                className="group flex flex-col items-center rounded-lg bg-white/70 p-6 backdrop-blur-sm transition-all duration-300 hover:bg-white/90 hover:shadow-lg hover:shadow-orange-300/40 border-2 border-orange-400 overflow-hidden"
+                className="group flex flex-col items-center bg-sky-500 rounded-xl  p-6  overflow-hidden"
               >
-                <div className="relative mb-4 h-32 w-32 overflow-hidden rounded-full border-4 border-red-500 bg-gradient-to-r from-orange-400 to-red-500 p-1 transition-transform duration-500 group-hover:scale-105">
+                {/* <div className="relative mb-4 h-32 w-32 overflow-hidden rounded-full border-4 border-red-500 bg-gradient-to-r from-orange-400 to-red-500 p-1 transition-transform duration-500 group-hover:scale-105">
                   <div className="h-full w-full rounded-full bg-sky-100 flex items-center justify-center">
                     <span className="text-4xl font-bold text-red-600">{sponsor.name.charAt(0)}</span>
                   </div>
-                </div>
-                <h3 className="mb-2 text-xl font-bold font-serif text-slate-800">{sponsor.name}</h3>
+                </div> */}
+                <h3 className="mb-2 text-base font-bold font-sans text-slate-800">{sponsor.name}</h3>
                 <p className="mb-4 text-sm text-slate-600">Sponsor Head</p>
                 <Link
                   href={`https://wa.me/${sponsor.phone}`}

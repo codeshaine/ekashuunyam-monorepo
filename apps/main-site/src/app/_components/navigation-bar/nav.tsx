@@ -10,6 +10,7 @@ import {
   Menu,
   NotebookPen,
   User,
+  X,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -18,7 +19,6 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -42,6 +42,9 @@ export function NavigationBar() {
           //       "radial-gradient(circle at 50% 110%, #0055aa 0%, #003366 40%, #000000 80%, #000000 100%)",
           //   }}
         >
+          <DrawerClose className="absolute right-0 top-0 text-white">
+            <X size={18} />
+          </DrawerClose>
           <div className="mx-auto w-full max-w-sm p-0">
             <DrawerHeader className="flex-center flex-col gap-2">
               <DrawerTitle className="font-sans text-white">

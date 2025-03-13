@@ -121,7 +121,7 @@ export const RulesSection: React.FC = () => {
   return (
     <section
       id="rules"
-      className="bg-transparent"
+      className="bg-[#030712] px-2"
       aria-labelledby="rules-heading"
     >
       {/* Oceanic Wave Background */}

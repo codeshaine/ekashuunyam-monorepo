@@ -35,32 +35,32 @@ const EventSectionWantedCards = ({ data }: { data: EventsData }) => {
     participants,
   } = data;
 
-  useEffect(() => {
-    if (!containerRef.current) return;
+  // useEffect(() => {
+  //   if (!containerRef.current) return;
 
-    const animation = gsap.fromTo(
-      ".cntujj",
-      {
-        opacity: 0,
-        backgroundColor: "red",
-      },
-      {
-        opacity: 1,
-        backgroundColor: "rgb(6, 136, 31)",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top bottom",
-          end: "bottom bottom", // end when the center of container reaches center of viewport
-          scrub: true,
-          // markers: true, // uncomment for debugging
-        },
-      },
-    );
+  //   const animation = gsap.fromTo(
+  //     ".cntujj",
+  //     {
+  //       opacity: 0,
+  //       backgroundColor: "red",
+  //     },
+  //     {
+  //       opacity: 1,
+  //       backgroundColor: "rgb(6, 136, 31)",
+  //       scrollTrigger: {
+  //         trigger: containerRef.current,
+  //         start: "top bottom",
+  //         end: "bottom bottom", // end when the center of container reaches center of viewport
+  //         scrub: true,
+  //         // markers: true, // uncomment for debugging
+  //       },
+  //     },
+  //   );
 
-    return () => {
-      animation.kill();
-    };
-  }, []);
+  //   return () => {
+  //     animation.kill();
+  //   };
+  // }, []);
 
   return (
     <div

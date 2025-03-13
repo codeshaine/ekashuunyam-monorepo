@@ -138,8 +138,8 @@ export const eventsData = [
     {
         id: "sanji",
         title: "IT Manager",
-        themeTitle: "IT Manager",
-        description: "Prove your leadership and problem-solving skills.",
+        themeTitle: "Byte Boss",
+        description: "Be the Luffy of leadership!",
         image: "https://media1.tenor.com/m/0I8FD6kd8y4AAAAC/sanji-sanji-dip.gif",
         participants: 1,
         color: "276DF1",
@@ -154,16 +154,16 @@ export const eventsData = [
             },
         ],
         rules: [
-            "The event will consist of 3 rounds.",
-            "Each round will have a different set of challenges.",
-            "The participant with the highest score wins.",
+            "There Will be 3 rounds.",
+            "The details of each round will be disclosed on the spot.",
+            "Participants should have a  copy of their  updated resume"
         ],
-        wanted: 'https://res.cloudinary.com/dvpaztqr9/image/upload/f_auto,q_auto/v1/Ekashunyam2.0/Event-Cards/xapbibvsvpuwugsvarvw'
+        wanted: 'https://res.cloudinary.com/dvpaztqr9/image/upload/f_auto,q_auto/v1/Ekashunyam2.0/Event-Cards/hh0lk3uh1iejswixkwn8'
     },
     {
         id: "usopp",
         title: "Gaming [BGMI]",
-        themeTitle: "Warlords Conquest ",
+        themeTitle: "Warlords Conquest",
         description: "Skypiea Battle Royale",
         image:
             "https://media1.tenor.com/m/QOoJjVrHhYsAAAAC/one-piece-one-piece-film-gold.gif",

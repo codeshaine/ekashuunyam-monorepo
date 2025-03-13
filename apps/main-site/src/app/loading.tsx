@@ -15,6 +15,7 @@ export default function Loading() {
                 alt="O"
                 fill
                 className="object-cover"
+                priority
               />
             </div>
             <p className="animate-pulse py-4 text-center font-sans text-8xl font-bold sm:text-[10rem]">

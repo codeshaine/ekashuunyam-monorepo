@@ -327,7 +327,7 @@ export const LandingVideo = () => {
         <div className="flex flex-col items-center justify-center gap-0 md:gap-3">
           <TitleAnimation titleText={titleText} />
           <p
-            className="txt font-sans text-sm font-light opacity-0"
+            className="txt font-sans text-sm sm:text-base font-normal opacity-0"
             ref={(el) => {
               if (el) {
                 gsap.to(el, {

@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import Loading from "./loading";
+import { RulesSection } from "./_components/rules/rules-section";
 
 const LandingVideo = dynamic(
   () =>
@@ -53,7 +54,8 @@ export default async function Home() {
   return (
     <main className="">
       <LandingVideo />
-      <EventsSection />     
+      <EventsSection /> 
+      <RulesSection />     
       <SponsersSection />
       <MapSection />
       <BrochureSection />

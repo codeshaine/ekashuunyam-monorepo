@@ -23,8 +23,8 @@ export const EventsSection = memo(() => {
       <EventCardWantedSection />
       {/* <EventIntroCard />
       {eventsData.map(renderEventCards)} */}
-      <RulesSection />
-      <div className="w-screen h-[150vh]"></div>
+      {/* */}
+      {/* <div className="w-screen h-[150vh]"></div> */}
     </main>
   );
 });

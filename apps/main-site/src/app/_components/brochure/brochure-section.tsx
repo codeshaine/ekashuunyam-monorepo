@@ -51,16 +51,17 @@ export const BrochureSection = () => {
         <div className="flex-center flex-col text-center text-sm font-light md:flex-row">
           <p>Stay Updated with us </p>
           <Link
-            href={`https://www.instagram.com/ekashunyam2.0/`}
+            target="_blank"
+            href={`https://www.instagram.com/ekashunyam_2k25?igsh=MTBjeTFxbDdtdzM0bQ==`}
             className="ml-2 font-semibold text-stone-950"
           >
             @ekashunyam2.0 <Instagram size={20} className="ml-2 inline-block" />
           </Link>
         </div>
-        <div className="flex-center flex-col text-center text-sm font-light md:flex-row">
+        <div className="flex-center flex-col text-center text-base font-light md:flex-row">
           <p>For any Queries or Help Please visit </p>
           <Link
-            href={`https://www.instagram.com/ekashunyam2.0/`}
+            href={`/support`}
             className="ml-2 font-semibold text-stone-950"
           >
             @ekashunyam2.0/support

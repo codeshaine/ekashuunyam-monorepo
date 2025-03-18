@@ -47,7 +47,7 @@ export const authConfig: NextAuthConfig = {
       clientSecret: env.AUTH_GOOGLE_SECRET,
     }),
     Resend({
-      from: "noreply@ekashunyam.tech",
+      from: "noreply@ekashunyam.xyz",
     }),
   ],
   /*eslint-disable*/

@@ -4,7 +4,6 @@ import { memo } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { RulesSection } from "../rules/rules-section";
 import { EventDate } from "./event-date-section";
 import { EventCardWantedSection } from "./event-card-wanted-section";
 gsap.registerPlugin(ScrollTrigger);

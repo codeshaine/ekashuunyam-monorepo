@@ -2,7 +2,7 @@
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Fragment, useEffect, useRef } from "react";
+import { Fragment, useRef } from "react";
 import { OnePieceEventModal } from "./event-card-modal";
 import { type EventsData, eventsData } from "@/lib/data/events";
 

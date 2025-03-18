@@ -149,7 +149,7 @@ const TitleAnimation = memo(({ titleText }: { titleText: string }) => {
     });
 
     return () => context.current?.revert();
-  }, []);
+  });
 
   // Handle animations with useEffect (runs after browser paints)
   useEffect(() => {
@@ -157,39 +157,39 @@ const TitleAnimation = memo(({ titleText }: { titleText: string }) => {
     const ltr = letterRefs.current;
 
     const setupInteractions = () => {
-      const handleMouseEnter = () => {
-        if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
+      // const handleMouseEnter = () => {
+      //   if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
 
-        rafIdRef.current = requestAnimationFrame(() => {
-          ltr.forEach((letter) => {
-            if (!letter) return;
-            gsap.to(letter, {
-              y: "random(-10, 10)",
-              rotation: "random(-15, 15)",
-              duration: 0.3,
-              ease: "power1.inOut",
-              cursor: "n-resize",
-              overwrite: true,
-            });
-          });
-          rafIdRef.current = null;
-        });
-      };
+      //   rafIdRef.current = requestAnimationFrame(() => {
+      //     ltr.forEach((letter) => {
+      //       if (!letter) return;
+      //       gsap.to(letter, {
+      //         y: "random(-10, 10)",
+      //         rotation: "random(-15, 15)",
+      //         duration: 0.3,
+      //         ease: "power1.inOut",
+      //         cursor: "n-resize",
+      //         overwrite: true,
+      //       });
+      //     });
+      //     rafIdRef.current = null;
+      //   });
+      // };
 
-      const handleMouseLeave = () => {
-        if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
+      // const handleMouseLeave = () => {
+      //   if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
 
-        ltr.forEach((letter) => {
-          if (!letter) return;
-          gsap.to(letter, {
-            y: 0,
-            rotation: 0,
-            duration: 0.5,
-            ease: "elastic.out(1, 0.3)",
-            overwrite: true,
-          });
-        });
-      };
+      //   ltr.forEach((letter) => {
+      //     if (!letter) return;
+      //     gsap.to(letter, {
+      //       y: 0,
+      //       rotation: 0,
+      //       duration: 0.5,
+      //       ease: "elastic.out(1, 0.3)",
+      //       overwrite: true,
+      //     });
+      //   });
+      // };
 
       // if (titleRef.current) {
       //   titleRef.current.addEventListener("mouseenter", handleMouseEnter);
@@ -275,7 +275,7 @@ const Loading = () => {
     }, 20);
 
     return () => clearInterval(timer);
-  }, []);
+  });
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#191919]">
@@ -330,7 +330,7 @@ export const LandingVideo = () => {
       preloadVideo.remove();
       clearTimeout(fallbackTimer);
     };
-  }, []);
+  });
 
   // Intersection observer to play/pause video based on visibility
   useEffect(() => {

@@ -1,24 +1,23 @@
 "use client";
 
 import React from "react";
-import { MoveLeft, Anchor } from "lucide-react";
+import { Anchor } from "lucide-react";
 import Link from "next/link";
 import { SponsorHeads } from "@/lib/data/heads";
-import { useRouter } from "next/navigation";
-import '@/styles/login.css'
+
+import "@/styles/login.css";
 
 export default function ContributePage() {
-  const router = useRouter();
+
   return (
     <div className="relative min-h-screen w-full bg-gradient-to-b from-sky-100 to-sky-300 px-4 py-20 text-slate-800">
-      
       <div className="absolute inset-0">
         <svg
           className="h-full w-full"
           viewBox="0 0 1920 1080"
           preserveAspectRatio="none"
         >
-           <path className="wave1" fill="#60bff5" />
+          <path className="wave1" fill="#60bff5" />
           <path className="wave2" fill="#50a7e2" />
           <path className="wave3" fill="#4390ce" />
           <path className="wave4" fill="#3879b9" />
@@ -27,43 +26,47 @@ export default function ContributePage() {
       </div>
 
       {/* Header Section */}
-      <div className="mx-auto mb-16 flex max-w-3xl flex-col items-center justify-center text-center relative z-10">
-        <div className="mb-6 w-20 h-20 flex items-center justify-center">
+      <div className="relative z-10 mx-auto mb-16 flex max-w-3xl flex-col items-center justify-center text-center">
+        <div className="mb-6 flex h-20 w-20 items-center justify-center">
           <Anchor size={64} className="text-red-600" />
         </div>
-        <h1 className="mb-4 font-sans tracking-wider text-3xl font-bold  md:text-4xl lg:text-5xl">
+        <h1 className="mb-4 font-sans text-3xl font-bold tracking-wider md:text-4xl lg:text-5xl">
           <span className="bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
             Contribute
           </span>
         </h1>
         <div className="mb-6 h-1 w-16 rounded-full bg-gradient-to-r from-red-600 to-blue-600"></div>
-        <p className="max-w-2xl text-sm text-slate-700 md:text-base font-medium">
+        <p className="max-w-2xl text-sm font-medium text-slate-700 md:text-base">
           Thank you for your interest in sponsoring{" "}
-          <span className="text-red-600 font-bold">Ekshunyam 2.0.</span> Set sail with us by contacting any of our sponsor heads below for assistance with sponsorship opportunities and queries.
+          <span className="font-bold text-red-600">Ekshunyam 2.0.</span> Set
+          sail with us by contacting any of our sponsor heads below for
+          assistance with sponsorship opportunities and queries.
         </p>
       </div>
 
       {/* Sponsor Heads Grid */}
-      <div className="mx-auto max-w-6xl relative z-10">
+      <div className="relative z-10 mx-auto max-w-6xl">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {[...SponsorHeads]
             .sort(() => Math.random() - 0.5)
             .map((sponsor, index) => (
               <div
                 key={index}
-                className="group flex flex-col items-center bg-[#06010118] rounded-xl  p-6  overflow-hidden"
+                className="group flex flex-col items-center overflow-hidden rounded-xl bg-[#06010118] p-6"
               >
                 {/* <div className="relative mb-4 h-32 w-32 overflow-hidden rounded-full border-4 border-red-500 bg-gradient-to-r from-orange-400 to-red-500 p-1 transition-transform duration-500 group-hover:scale-105">
                   <div className="h-full w-full rounded-full bg-sky-100 flex items-center justify-center">
                     <span className="text-4xl font-bold text-red-600">{sponsor.name.charAt(0)}</span>
                   </div>
                 </div> */}
-                <h3 className="mb-2 text-base font-bold font-sans text-slate-800">{sponsor.name}</h3>
+                <h3 className="mb-2 font-sans text-base font-bold text-slate-800">
+                  {sponsor.name}
+                </h3>
                 <p className="mb-4 text-sm text-slate-600">Sponsor Head</p>
                 <Link
                   href={`https://wa.me/${sponsor.phone}`}
                   target="_blank"
-                  className="flex justify-center items-center bg-black text-sm text-white px-2.5 py-1.5 rounded-full"
+                  className="flex items-center justify-center rounded-full bg-black px-2.5 py-1.5 text-sm text-white"
                 >
                   Contact
                 </Link>

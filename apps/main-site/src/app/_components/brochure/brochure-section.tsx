@@ -3,6 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const BrochureSection = () => {
+  const BROCHURE_LINK = `
+  
+  `;
   return (
     <div
       className="relative min-h-screen w-full overflow-hidden py-8"
@@ -36,7 +39,7 @@ export const BrochureSection = () => {
         </div>
         <div className="flex-center h-full flex-1 px-3">
           <div className="relative h-[25rem] w-[20rem] rotate-3 md:w-[25rem] lg:h-[32rem]">
-            <Link href={`/brochure`}>
+            <Link href={BROCHURE_LINK} target="_blank">
               <Image
                 fill
                 src="https://res.cloudinary.com/dvpaztqr9/image/upload/v1742315821/brochure_1_vkx5la.png"

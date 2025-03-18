@@ -127,7 +127,7 @@ const NavItem = ({
   <Link
     onClick={() => setOpen(false)}
     href={url}
-    target={target || "_self"}
+    target={target ?? "_self"}
     className={cn(
       `flex w-full items-center justify-start gap-2 rounded-xl bg-[#111827c5] px-3 py-2 text-sm font-medium text-white transition-colors duration-100 ease-in hover:bg-[#03071256] hover:text-blue-200`,
       className,

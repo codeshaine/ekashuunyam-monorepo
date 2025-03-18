@@ -119,7 +119,7 @@ export default function Hack  ()  {
           <ul className="list-disc pl-6 space-y-2">
             <li className="text-gray-300">Timestamped screenshots of progress (every 30 minutes).</li>
             <li className="text-gray-300">Cloud-based IDEs (e.g., Replit, CodeSandbox) with auto-save history.</li>
-            <li className="text-gray-300">Time-stamped folders (e.g., "1hr_Progress", "2hr_Progress").</li>
+            <li className="text-gray-300">Time-stamped folders (e.g., &quot;1hr_Progress&quot;, &quot;2hr_Progress&quot;).</li>
             <li className="text-gray-300">Hourly Google Form submissions with progress updates.</li>
           </ul>
         </section>
@@ -136,9 +136,9 @@ export default function Hack  ()  {
         </section>
         
         <section className="mb-5">
-          <h2 className="text-xl font-semibold mb-4 text-gray-200">Judges' Notes:</h2>
+          <h2 className="text-xl font-semibold mb-4 text-gray-200">Judges&apos; Notes:</h2>
           <ul className="list-disc pl-6 space-y-2">
-            <li className="text-gray-300"><span className="font-medium">Creativity > Polish:</span> Novelty trumps polish.</li>
+            <li className="text-gray-300"><span className="font-medium">Creativity {'>'} Polish:</span> Novelty trumps polish.</li>
             <li className="text-gray-300"><span className="font-medium">AI Use:</span> Teams will be rewarded for augmenting (not replacing) their skills with AI.</li>
             <li className="text-gray-300"><span className="font-medium">Fairness:</span> No penalties for Git alternatives; focus on output quality.</li>
           </ul>

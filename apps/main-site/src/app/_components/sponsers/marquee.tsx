@@ -1,56 +1,36 @@
 import { type Sponsers, SponsersPriority } from "@/lib/data/sponsers";
-import { LocateFixed, SquareArrowOutUpRight } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { LocateFixed } from "lucide-react";
 import Marquee from "react-fast-marquee";
 
 export const SponsersMarquee = ({
   priority,
   data,
+  dir,
 }: {
   priority: SponsersPriority;
   data: Sponsers[];
+  dir: "left" | "right";
 }) => {
   const high = priority === SponsersPriority.High;
   return (
-    <Marquee
-      direction={high ? "right" : "left"}
-      autoFill
-      className="cursor-pointer"
-      pauseOnHover
-    >
-      {/* {Array.from({ length: 10 }).map((_, index) => ( */}
+    <Marquee direction={dir} autoFill className="cursor-pointer my-8" pauseOnHover>
       <div className="flex-center gap-8 text-white">
         {data.map((brand) => (
           <div
-            key={brand.name}
-            className={`group mx-4 flex h-fit flex-col rounded-xl ${high ? "w-64" : "w-44"} border-2 border-black`}
+            key={brand.brandName}
+            className={`group mx-4 px-4 py-3 flex h-fit flex-col rounded-xl ${high ? "min-w-64" : "min-w-44"} overflow-hidden border-2 border-black`}
           >
-            <div className="h-36 relative w-full rounded-xl overflow-hidden">
-              <Image
-                src={"/images/hat.png"}
-                alt={brand.name}
-                layout="fill"
-                objectFit="cover"
-              />
-            </div>
-
-            {/* <img
-              src={"/images/hat.png"}
-              alt={brand.name}
-              className="h-36 w-full rounded-xl object-cover"
-            /> */}
             <div className="rounded-b-xl px-1 text-black transition-all duration-300 ease-in group-hover:bg-white">
               <p
-                className={`mt-2 font-bold ${high ? "text-xl" : "text-sm md:text-base"}`}
+                className={`mt-2 font-bold ${high ? "text-2xl" : "text-sm md:text-base"}`}
               >
-                {brand.name}
+                {brand.brandName}
               </p>
-              {high && <p>{brand.category}</p>}
+              {brand.name && <p>{brand.name}</p>}
               <div
-                className={`mt-2 flex ${high ? "items-center justify-between" : "items-end justify-end"} px-2 py-2 text-base font-semibold`}
+                className={`mt-2 flex justify-start py-2 text-base font-semibold`}
               >
-                {high && (
+                {high && brand.location && (
                   <p
                     className={`${high ? "text-sm" : "text-sm"} rounded-xl bg-black px-2 text-white`}
                   >
@@ -58,18 +38,19 @@ export const SponsersMarquee = ({
                     {brand.location}
                   </p>
                 )}
-                <Link
-                  href={`/sponser/${brand.name.trim().toLowerCase().replace(/\s+/g, "-")}`}
-                  className="flex-center"
-                >
-                  <SquareArrowOutUpRight />
-                </Link>
+                {!high && brand.location && (
+                  <p
+                    className={`${high ? "bg-black text-sm" : "bg-[#0000009f] text-sm"} rounded-xl px-2 text-white`}
+                  >
+                    <LocateFixed className="mr-2 inline-block" />{" "}
+                    {brand.location}
+                  </p>
+                )}
               </div>
             </div>
           </div>
         ))}
       </div>
-      {/* ))} */}
     </Marquee>
   );
 };

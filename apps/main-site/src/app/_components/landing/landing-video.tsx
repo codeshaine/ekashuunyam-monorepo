@@ -8,7 +8,7 @@ import React, {
   memo,
 } from "react";
 import { gsap } from "gsap";
-import Loading from "@/app/loading";
+import Image from "next/image";
 
 const animationUtils = {
   createInitialAnimation: (
@@ -191,16 +191,16 @@ const TitleAnimation = memo(({ titleText }: { titleText: string }) => {
         });
       };
 
-      if (titleRef.current) {
-        titleRef.current.addEventListener("mouseenter", handleMouseEnter);
-        titleRef.current.addEventListener("mouseleave", handleMouseLeave);
-      }
+      // if (titleRef.current) {
+      //   titleRef.current.addEventListener("mouseenter", handleMouseEnter);
+      //   titleRef.current.addEventListener("mouseleave", handleMouseLeave);
+      // }
 
       return () => {
-        if (titleRef.current) {
-          titleRef.current.removeEventListener("mouseenter", handleMouseEnter);
-          titleRef.current.removeEventListener("mouseleave", handleMouseLeave);
-        }
+        // if (titleRef.current) {
+        //   titleRef.current.removeEventListener("mouseenter", handleMouseEnter);
+        //   titleRef.current.removeEventListener("mouseleave", handleMouseLeave);
+        // }
         if (rafIdRef.current) {
           cancelAnimationFrame(rafIdRef.current);
         }
@@ -257,6 +257,43 @@ const TitleAnimation = memo(({ titleText }: { titleText: string }) => {
 
 TitleAnimation.displayName = "TitleAnimation";
 
+const Loading = () => {
+  const loadingRef = useRef(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    // Ensure loading animation completes once started
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        const newProgress = prev + 2;
+        if (newProgress >= 100) {
+          clearInterval(timer);
+          return 100;
+        }
+        return newProgress;
+      });
+    }, 20);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#191919]">
+      <div className="mb-4 font-mono text-xl font-bold text-white">
+        Ekashunyam 2.O
+      </div>
+      <div className="h-1 w-64 overflow-hidden rounded-full bg-gray-800">
+        <div
+          className="h-full bg-white font-mono transition-all duration-300 ease-out"
+          style={{ width: `${progress}%` }}
+          ref={loadingRef}
+        />
+      </div>
+      <div className="mt-2 text-sm text-gray-400">{progress}%</div>
+    </div>
+  );
+};
+
 export const LandingVideo = () => {
   const [loading, setLoading] = useState(true);
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -264,9 +301,41 @@ export const LandingVideo = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleText = "Ekashunyam 2.O";
 
+  // Video URL constants to avoid repetition
+  const VIDEO_URL =
+    "https://res.cloudinary.com/dvpaztqr9/video/upload/f_auto:video,q_auto/v1/Ekashunyam2.0/nwozqolb289jvnlwtvps";
+
+  // Preload video and track loading state
   useEffect(() => {
-    if (!videoRef.current || !containerRef.current) return;
-  
+    // Create a new video element for preloading
+    const preloadVideo = document.createElement("video");
+    preloadVideo.src = VIDEO_URL;
+    preloadVideo.muted = true;
+    preloadVideo.preload = "auto";
+
+    // Listen for loadeddata event to know when video is ready
+    preloadVideo.addEventListener("loadeddata", () => {
+      setVideoLoaded(true);
+      setLoading(false);
+    });
+
+    // Add a fallback in case video takes too long to load
+    const fallbackTimer = setTimeout(() => {
+      if (!videoLoaded) {
+        setLoading(false);
+      }
+    }, 5000);
+
+    return () => {
+      preloadVideo.remove();
+      clearTimeout(fallbackTimer);
+    };
+  }, []);
+
+  // Intersection observer to play/pause video based on visibility
+  useEffect(() => {
+    if (!videoRef.current || !containerRef.current || !videoLoaded) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
@@ -278,62 +347,57 @@ export const LandingVideo = () => {
           videoRef.current?.pause();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
-  
+
     observer.observe(containerRef.current);
-  
+
     return () => {
       observer.disconnect();
     };
   }, [videoLoaded]);
-  
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 50);
 
-    // Preload the video
-    const videoElement = new Image();
-    videoElement.src =
-      "https://res.cloudinary.com/dvpaztqr9/video/upload/f_auto:video,q_auto/v1/Ekashunyam2.0/nwozqolb289jvnlwtvps";
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
-
-  if (loading) {
+  // Only render main content if video is loaded
+  if (loading || !videoLoaded) {
     return <Loading />;
   }
 
   return (
-    <div ref={containerRef} className="relative h-screen w-screen">
+    <div
+      ref={containerRef}
+      className="relative h-screen w-screen overflow-hidden"
+    >
+      <Image
+        alt="SDM"
+        className="absolute left-2 top-2 z-10 object-cover"
+        src={
+          "https://res.cloudinary.com/dvpaztqr9/image/upload/v1742314135/sdm_logo_lxdjo1.png"
+        }
+        width={50}
+        height={50}
+      />
       <video
         ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
-        preload="auto"
         className="absolute left-0 top-0 z-0 h-full w-full object-cover"
-        // style={{ opacity: videoLoaded ? 1 : 0, transition: "opacity 0.5s ease" }}
         onLoadedData={() => setVideoLoaded(true)}
       >
-        <source
-          src="https://res.cloudinary.com/dvpaztqr9/video/upload/f_auto:video,q_auto/v1/Ekashunyam2.0/nwozqolb289jvnlwtvps"
-          type="video/mp4"
-        />
+        <source src={VIDEO_URL} type="video/mp4" />
       </video>
+
       <div className="absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center">
         <div className="flex flex-col items-center justify-center gap-0 md:gap-3">
           <TitleAnimation titleText={titleText} />
           <p
-            className="txt font-sans text-sm sm:text-base font-normal opacity-0"
+            className="txt font-sans text-sm font-normal text-black opacity-0 sm:text-base"
             ref={(el) => {
               if (el) {
                 gsap.to(el, {
                   opacity: 1,
                   duration: 0.8,
-
                   delay: 1.2,
                   ease: "power2.out",
                 });
@@ -344,6 +408,7 @@ export const LandingVideo = () => {
           </p>
         </div>
       </div>
+
       <div className="absolute bottom-0 left-0 flex w-full flex-col items-center justify-center py-1 text-center">
         <p className="font-sans text-[0.7rem] font-light capitalize text-white">
           organised by IT Club department of computer science <br /> SDM college

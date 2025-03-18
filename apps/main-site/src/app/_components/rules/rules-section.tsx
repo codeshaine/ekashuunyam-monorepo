@@ -14,28 +14,33 @@ const RULES_DATA: Record<string, Rule[]> = {
   general: [
     {
       id: "g1",
-      text: "Open to BCA, BSC [Computer Science] and BVOC [Software] students",
+      text: "Only for BCA, BSC [Computer Science] and BVOC [Software] students.",
       icon: "⚓",
     },
-    { id: "g2", text: "Maximum of 16 students per team", icon: "⚓" },
-    { id: "g3", text: "Two teams allowed per college", icon: "⚓" },
-    { id: "g4", text: "Registration fees: 500 per team", icon: "⚓" },
-    { id: "g5", text: "Confirm participation through website", icon: "⚓" },
-    { id: "g6", text: "All participants must arrive by 9:00 am", icon: "⚓" },
+    { id: "g2", text: "Maximum of 18 Students per team.", icon: "⚓" },
+    { id: "g3", text: "Maximum 2 full teams per college.", icon: "⚓" },
+    { id: "g4", text: "Individuals can join for any event.", icon: "⚓" },
+    { id: "g4", text: "There will be no registration fees.", icon: "⚓" },
   ],
   additional: [
     {
       id: "a1",
-      text: "Carry college ID card and permission letter",
+      text: "Teams must register through our website.",
       icon: "🏴‍☠️",
     },
     {
       id: "a2",
-      text: "Participate in all events for overall championship",
+      text: "Participants must present before 9.00 AM.",
       icon: "🏴‍☠️",
     },
-    { id: "a3", text: "Breakfast and lunch provided", icon: "🏴‍☠️" },
-    { id: "a4", text: "Embrace the spirit of adventure!", icon: "🏴‍☠️" },
+    {
+      id: "a3",
+      text: "Teams must confirm their registration on the day of the event with the registration committee.",
+      icon: "🏴‍☠️",
+    },
+    { id: "a4", text: "Participants are advised to carry their college ID card and permission letter on the day of the event.", icon: "🏴‍☠️" },
+    { id: "a5", text: "For the overall championship, a team must participate in all events.", icon: "🏴‍☠️" },
+    { id: "a6", text: "Breakfast and lunch will be provided.", icon: "🏴‍☠️" },
   ],
 };
 
@@ -147,11 +152,11 @@ export const RulesSection: React.FC = () => {
             </header>
 
             <div className="flex flex-col gap-3 overflow-hidden">
-              <div className="rounded-lg border border-blue-300 bg-blue-100 p-2 rounded-xl">
+              <div className="border border-blue-300 bg-blue-100 p-2 py-3 rounded-xl">
                 <RulesList rules={generalRules} />
               </div>
 
-              <div className="rounded-lg border border-blue-300 bg-blue-100 p-2 rounded-xl">
+              <div className="border border-blue-300 bg-blue-100 p-2 py-3 rounded-xl">
                 <RulesList rules={additionalRules} />
               </div>
             </div>

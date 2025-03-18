@@ -12,8 +12,8 @@ export const BrochureSection = () => {
         backgroundPosition: "center",
       }}
     >
-      <div className="mb-4 flex w-full flex-col items-end justify-end gap-4 px-8  tracking-widest lg:py-10">
-        <p className="text-center text-4xl font-semibold lg:text-7xl font-sayyeda">
+      <div className="mb-4 flex w-full flex-col items-end justify-end gap-4 px-8 tracking-widest lg:py-10">
+        <p className="text-center font-sayyeda text-4xl font-semibold lg:text-7xl">
           ADvENTURE Log
         </p>
         <p className="text-center text-sm font-light">
@@ -35,15 +35,15 @@ export const BrochureSection = () => {
           </div>
         </div>
         <div className="flex-center h-full flex-1 px-3">
-          <div className="relative h-[25rem] w-[20rem] rotate-3 bg-yellow-500 md:w-[25rem] lg:h-[32rem]">
-            <Image
-              width={112}
-              height={112}
-              src="/images/pin.png"
-              alt=""
-              className="absolute -left-[2rem] -top-[2rem] h-28 w-28 object-cover"
-            />
-            <p  className="px-16">Image yet to be added</p>
+          <div className="relative h-[25rem] w-[20rem] rotate-3 md:w-[25rem] lg:h-[32rem]">
+            <Link href={`/brochure`}>
+              <Image
+                fill
+                src="https://res.cloudinary.com/dvpaztqr9/image/upload/v1742315821/brochure_1_vkx5la.png"
+                alt="Brochure"
+                className="object-contain"
+              />
+            </Link>
           </div>
         </div>
       </div>
@@ -60,23 +60,18 @@ export const BrochureSection = () => {
         </div>
         <div className="flex-center flex-col text-center text-base font-light md:flex-row">
           <p>For any Queries or Help Please visit </p>
-          <Link
-            href={`/support`}
-            className="ml-2 font-semibold text-stone-950"
-          >
+          <Link href={`/support`} className="ml-2 font-semibold text-stone-950">
             @ekashunyam2.0/support
           </Link>
         </div>
-        <div className="flex-center flex-col text-center text-sm font-light md:flex-row mt-8">
+        <div className="flex-center mt-8 flex-col text-center text-sm font-light md:flex-row">
           <p>Designed and Developed by - </p>
           <Link
             href={`/developers`}
-            className="ml-2 font-semibold text-stone-950 flex items-center justify-center gap-1"
+            className="ml-2 flex items-center justify-center gap-1 font-semibold text-stone-950"
           >
-            <p className="underline">
-              Have a look 
-              </p>
-              <ExternalLink size={15} className="inline-block mr-2" />
+            <p className="underline">Have a look</p>
+            <ExternalLink size={15} className="mr-2 inline-block" />
           </Link>
         </div>
       </div>

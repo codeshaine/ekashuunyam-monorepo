@@ -7,17 +7,17 @@ export default function Developers() {
     {
       name: "Shainil P S",
       image: "/pfp/luffy.jpeg",
-      github: "https://github.com/codeshaine",
-      twitter: "https://x.com/code_shaine",
-      portfolio: "https://shainilps.netlify.app/",
+      github: "github.com/codeshaine",
+      twitter: "x.com/code_shaine",
+      portfolio: "shainilps.netlify.app/",
       phone: "9632348984",
     },
     {
       name: "Swasthik K",
       image: "/pfp/luffy.jpeg",
-      github: "https://github.com/SwasthK",
-      twitter: "https://x.com/swasthik319",
-      portfolio: "https://swasthk.netlify.app/",
+      github: "github.com/SwasthK",
+      twitter: "x.com/swasthik319",
+      portfolio: "swasthk.netlify.app/",
       phone: "8123837856",
     },
   ];

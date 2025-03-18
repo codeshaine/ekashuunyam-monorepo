@@ -98,7 +98,7 @@ export const OnePieceEventModal = ({
     themeTitle: string;
     description: string;
     image: string;
-    participants: number;
+    participants: number | string;
     color: string;
     heads: { name: string; contact: string }[];
     rules: string[];
@@ -115,6 +115,28 @@ export const OnePieceEventModal = ({
     heads,
     rules,
   } = eventData;
+
+  let flag = false;
+
+  switch (id) {
+    case "robin":
+      flag = true;
+      break;
+    case "zoro":
+      flag = true;
+      break;
+    case "sanji":
+      flag = true;
+      break;
+    case "chopper":
+      flag = true;
+      break;
+    case "brook":
+      flag = true;
+      break;
+    default:
+      break;
+  }
 
   return (
     <Dialog key={id}>
@@ -136,7 +158,7 @@ export const OnePieceEventModal = ({
           {/* Event Title Overlay */}
           <div className="absolute bottom-0 left-0 w-full p-4">
             <div className="flex flex-col gap-1">
-              <span className="text-sm font-bold text-amber-300">
+              <span className="text-sm font-bold capitalize text-amber-300">
                 {themeTitle}
               </span>
               <h2 className="text-2xl font-bold text-white">{title}</h2>
@@ -149,13 +171,13 @@ export const OnePieceEventModal = ({
         </div>
 
         {/* Content */}
-        <ScrollArea className="max-h-[400px] px-6 py-3">
+        <ScrollArea className="max-h-[400px] px-6 py-2">
           {/* Description */}
-          <div className="mb-2 border-b border-amber-600/40 pb-4">
+          <div className="mb-2 border-b border-amber-600/40 pb-3">
             <p className="text-gray-200">{description}</p>
           </div>
 
-          <p className="flex w-fit items-end justify-end gap-1 bg-blue-900/50 px-2 py-1">
+          <p className="mb-2 flex w-fit items-end justify-end gap-1 bg-blue-900/50 px-2 py-1">
             <span className="font-bold">{participants}</span> make a team
           </p>
 
@@ -171,8 +193,12 @@ export const OnePieceEventModal = ({
                   key={index}
                   className="rounded border border-amber-600/40 bg-blue-900/50 p-2"
                 >
-                  <div className="mb-1 text-sm font-medium">{head.name}</div>
-                  <div className="flex items-start justify-start gap-2 text-sm text-black">
+                  <div className="mb-1 text-sm font-medium capitalize">
+                    {head.name}
+                  </div>
+                  <div
+                    className={`flex items-start justify-start gap-2 text-sm ${flag === true ? "text-white" : "text-black"}`}
+                  >
                     <Link
                       target="_blank"
                       href={`tel:${head.contact}`}
@@ -212,12 +238,20 @@ export const OnePieceEventModal = ({
               Rules of Engagement
             </h3>
             <ul className="list-inside space-y-2">
+              {id === "zoro" && (
+                <p className="capitalize">
+                  Topics and general guidelines are present here:{" "}
+                  <Link className="underline text-yellow-300" href={"/hack"}>
+                    RULESET
+                  </Link>
+                </p>
+              )}
               {rules.map((rule, index) => (
                 <li key={index} className="flex items-start text-sm">
-                  <span className="mr-2  flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-amber-600 text-white">
+                  <span className="mr-2 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-amber-600 text-white">
                     {index + 1}
                   </span>
-                  <span className="text-gray-200">{rule}</span>
+                  <span className="uppercase text-gray-200">{rule}</span>
                 </li>
               ))}
             </ul>

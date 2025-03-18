@@ -27,11 +27,12 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export function NavigationBar() {
+  const [open, setOpen] = React.useState(false);
   return (
     <div className="fixed right-2 top-2 z-[5000]">
-      <Drawer>
+      <Drawer open={open} onOpenChange={setOpen}>
         <DrawerTrigger asChild>
-          <Button variant="outline" className="rounded-xl">
+          <Button className="rounded-xl bg-[#ffffffa1] text-black hover:bg-[#ffffffda]">
             Menu <Menu className="ml-2 inline-block" />
           </Button>
         </DrawerTrigger>
@@ -54,10 +55,21 @@ export function NavigationBar() {
             </DrawerHeader>
 
             <div className="flex flex-col gap-2">
-              <NavItem icon={<House />} label="Home" url="/" />
-              <NavItem icon={<User />} label="Profile" url="/profile" />
+              <NavItem
+                setOpen={setOpen}
+                icon={<House />}
+                label="Home"
+                url="/"
+              />
+              <NavItem
+                setOpen={setOpen}
+                icon={<User />}
+                label="Profile"
+                url="/profile"
+              />
               {/* <NavItem icon={<Map />} label="Events" url="/" /> */}
               <NavItem
+                setOpen={setOpen}
                 icon={<NotebookPen />}
                 label="Register"
                 url="/form/register"
@@ -65,17 +77,25 @@ export function NavigationBar() {
               {/* <NavItem icon={<BookOpenText />} label="Brochure" url="/" />
               <NavItem icon={<LocateFixed />} label="Map" url="/" /> */}
               <NavItem
+                setOpen={setOpen}
                 icon={<CircleDollarSign />}
                 label="Contribute"
                 url="/contribute"
               />
-              <NavItem icon={<Contact />} label="Contact" url="/support" />
               <NavItem
+                setOpen={setOpen}
+                icon={<Contact />}
+                label="Contact"
+                url="/support"
+              />
+              <NavItem
+                setOpen={setOpen}
                 icon={<FolderCode />}
                 label="Developers"
                 url="/developers"
               />
               <NavItem
+                setOpen={setOpen}
                 icon={<Instagram />}
                 label="Socials"
                 url="https://www.instagram.com/ekashunyam_2k25?igsh=MTBjeTFxbDdtdzM0bQ=="
@@ -95,14 +115,17 @@ const NavItem = ({
   url,
   target,
   className,
+  setOpen,
 }: {
   icon: React.ReactNode;
   label: string;
   url: string;
   target?: string;
   className?: string;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => (
   <Link
+    onClick={() => setOpen(false)}
     href={url}
     target={target || "_self"}
     className={cn(

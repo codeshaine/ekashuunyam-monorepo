@@ -101,8 +101,8 @@ const EventSectionWantedCards = ({ data }: { data: EventsData }) => {
       <div className="relative flex flex-col gap-4">
         <img
           src={wanted ?? "/api/placeholder/500/300"}
-          alt="Responsive Image"
-          className="z-[1000] max-h-[600px] w-full max-w-[500px] object-contain"
+          alt={themeTitle}
+          className="z-[1000] max-h-[500px] w-full max-w-[500px] object-contain"
         />
         <OnePieceEventModal
           eventData={{

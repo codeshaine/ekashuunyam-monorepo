@@ -25,14 +25,6 @@ export default function ContributePage() {
           <path className="wave5" fill="#2e63a4" />
         </svg>
       </div>
-      
-      {/* Back Button */}
-      <button
-        onClick={() => router.back()}
-        className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white transition-all hover:bg-red-600 md:h-12 md:w-12 z-10"
-      >
-        <MoveLeft size={20} />
-      </button>
 
       {/* Header Section */}
       <div className="mx-auto mb-16 flex max-w-3xl flex-col items-center justify-center text-center relative z-10">
@@ -59,7 +51,7 @@ export default function ContributePage() {
             .map((sponsor, index) => (
               <div
                 key={index}
-                className="group flex flex-col items-center bg-sky-500 rounded-xl  p-6  overflow-hidden"
+                className="group flex flex-col items-center bg-[#06010118] rounded-xl  p-6  overflow-hidden"
               >
                 {/* <div className="relative mb-4 h-32 w-32 overflow-hidden rounded-full border-4 border-red-500 bg-gradient-to-r from-orange-400 to-red-500 p-1 transition-transform duration-500 group-hover:scale-105">
                   <div className="h-full w-full rounded-full bg-sky-100 flex items-center justify-center">
@@ -71,9 +63,9 @@ export default function ContributePage() {
                 <Link
                   href={`https://wa.me/${sponsor.phone}`}
                   target="_blank"
-                  className="flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 px-6 py-2 text-sm font-medium text-white transition-all duration-300 hover:opacity-90 hover:shadow-md border-2 border-yellow-400"
+                  className="flex justify-center items-center bg-black text-sm text-white px-2.5 py-1.5 rounded-full"
                 >
-                  Contact on WhatsApp
+                  Contact
                 </Link>
               </div>
             ))}

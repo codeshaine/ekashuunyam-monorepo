@@ -3,9 +3,7 @@
 import React from "react";
 import {
   MoveLeft,
-  Anchor,
   Phone,
-  Mail,
   Cpu,
   FileText,
   MessageCircle,
@@ -19,39 +17,39 @@ export default function Support() {
 
   const supportTeam = [
     {
-      name: "Suhas",
+      name: "D M Suhas",
       role: "General Support",
-      phone: "+91 98765 43210",
+      phone: "9108847815",
       icon: <Phone size={24} />,
     },
     {
-      name: "Amshitha",
+      name: "Amshitha Kotian",
       role: "General Support",
-      phone: "+91 98765 43211",
+      phone: "7892008682",
       icon: <Phone size={24} />,
     },
     {
-      name: "Karunya",
+      name: "Karunya Acharya",
       role: "Registration",
-      phone: "+91 98765 43212",
+      phone: "8618416126",
       icon: <FileText size={24} />,
     },
+    // {
+    //   name: "Prajna",
+    //   role: "Registration",
+    //   phone: "+91 98765 43213",
+    //   icon: <FileText size={24} />,
+    // },
     {
-      name: "Prajna",
-      role: "Registration",
-      phone: "+91 98765 43213",
-      icon: <FileText size={24} />,
-    },
-    {
-      name: "Shainil",
+      name: "Shainil PS",
       role: "Technical Support",
-      phone: "+91 98765 43214",
+      phone: "9632348984",
       icon: <Cpu size={24} />,
     },
     {
       name: "Swasthik",
       role: "Technical Support",
-      phone: "+91 98765 43215",
+      phone: "8123837856",
       icon: <Cpu size={24} />,
     },
   ];
@@ -76,7 +74,7 @@ export default function Support() {
       {/* Back Button */}
       <button
         onClick={() => router.back()}
-        className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white transition-all hover:bg-red-600 md:h-12 md:w-12"
+        className="absolute left-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white transition-all hover:bg-red-600 md:h-12 md:w-12"
       >
         <MoveLeft size={20} />
       </button>

@@ -33,12 +33,12 @@ export const SponsorsViewSection = () => {
     tl.fromTo(
       ".box",
       {
-        borderRadius:"5%",
+        borderRadius: "5%",
         width: "20vw",
         height: "20vh",
       },
       {
-        borderRadius:"0%",
+        borderRadius: "0%",
         width: "100vw",
         height: "100vh",
         ease: "power2.inOut",
@@ -72,11 +72,12 @@ export const SponsorsViewSection = () => {
       ref={containerRef}
       className="relative h-[300vh] text-[3.5vw] text-white"
       style={{
-        background: 'radial-gradient(circle at center, #0099ffe9 0%, #030712 70%)'
+        background:
+          "radial-gradient(circle at center, #0099ffe9 0%, #030712 70%)",
       }}
     >
-     <div className="sticky top-0 h-screen">
-        <div className="flex-center h-full w-full">
+      <div className="sticky top-0 h-screen">
+        <div className="flex-center h-full w-full ">
           <div
             className="box overflow-hidden bg-blue-950 text-sm"
             style={{
@@ -94,10 +95,12 @@ export const SponsorsViewSection = () => {
               <SponsersMarquee
                 priority={SponsersPriority.High}
                 data={highPriorityData}
+                dir="right"
               />
               <SponsersMarquee
                 priority={SponsersPriority.Low}
                 data={lowPrioritySponsers}
+                dir="left"
               />
             </div>
           </div>

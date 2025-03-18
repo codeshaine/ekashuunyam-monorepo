@@ -1,19 +1,9 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-  // Further reading:
-  // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-  // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
   url      = env("DATABASE_URL")
 }
 
@@ -26,26 +16,26 @@ model User {
   college       String?
   contact       String?
   accounts      Account[]
-  sessions      Session[]
   form          Form[]
+  Score         Score[]
+  sessions      Session[]
 }
 
-// Necessary for Next auth
 model Account {
   id                       String  @id @default(cuid())
   userId                   String
   type                     String
   provider                 String
   providerAccountId        String
-  refresh_token            String? // @db.Text
-  access_token             String? // @db.Text
+  refresh_token            String?
+  access_token             String?
   expires_at               Int?
   token_type               String?
   scope                    String?
-  id_token                 String? // @db.Text
+  id_token                 String?
   session_state            String?
-  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   refresh_token_expires_in Int?
+  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -68,15 +58,15 @@ model VerificationToken {
 
 model Form {
   id        String   @id @default(cuid())
-  teamNmae  String?
   userId    String
-  verfied   Boolean  @default(false)
-  events    Event[]
   fullTeam  Boolean  @default(false)
+  teamNmae  String?
   cretedAt  DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  verfied   Boolean  @default(false)
+  events    Event[]
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Score     Score[]
 }
 
 model Event {
@@ -86,8 +76,22 @@ model Event {
   participants Json
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-
-  form Form @relation(fields: [formId], references: [id], onDelete: Cascade)
+  form         Form     @relation(fields: [formId], references: [id], onDelete: Cascade)
+  Score        Score[]
 
   @@unique([formId, name])
+}
+
+model Score {
+  id         String @id
+  eventId    String
+  formId     String
+  assignedBy String
+  round      Int
+  score      Int
+  User       User   @relation(fields: [assignedBy], references: [id], onDelete: Cascade)
+  Event      Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  Form       Form   @relation(fields: [formId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, formId, round])
 }

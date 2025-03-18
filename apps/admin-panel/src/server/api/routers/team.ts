@@ -1,7 +1,6 @@
 import { z } from "zod";
 
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
-import { eventNames } from "process";
 
 export const teamRouter = createTRPCRouter({
   getSingleTeam: protectedProcedure

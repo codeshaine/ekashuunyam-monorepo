@@ -28,6 +28,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   form          Form[]
+  score         Score[]
 }
 
 // Necessary for Next auth
@@ -76,7 +77,8 @@ model Form {
   cretedAt  DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user  User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Score Score[]
 }
 
 model Event {
@@ -87,7 +89,23 @@ model Event {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  form Form @relation(fields: [formId], references: [id], onDelete: Cascade)
+  form  Form    @relation(fields: [formId], references: [id], onDelete: Cascade)
+  Score Score[]
 
   @@unique([formId, name])
+}
+
+model Score {
+  id         String @id @default(cuid())
+  eventId    String
+  formId     String //repetative field
+  assignedBy String
+  round      Int
+  score      Int
+
+  Event      Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  Form       Form  @relation(fields: [formId], references: [id], onDelete: Cascade)
+  AssignedBy User  @relation(fields: [assignedBy], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, formId, round])
 }

@@ -211,7 +211,7 @@ export const OnePieceEventModal = ({
 
                     <Link
                       target="_blank"
-                      href={`https://wa.me/${head.contact}`}
+                      href={`https://wa.me/91${head.contact}`}
                       className={`flex items-center justify-between gap-2 rounded-xl px-3 py-1`}
                       style={{ backgroundColor: `#${color}` }}
                     >

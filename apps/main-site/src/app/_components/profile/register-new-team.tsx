@@ -22,7 +22,7 @@ export default function RegisterNewTeam() {
         <div className="flex items-center justify-between">
           <div>
             <CardTitle className="text-2xl font-bold text-blue-900">
-              Form New Crew
+              Register New Crew
             </CardTitle>
             <CardDescription className="text-blue-600">
               Set sail for your next adventure

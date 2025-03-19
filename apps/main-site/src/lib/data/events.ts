@@ -141,7 +141,7 @@ export const eventsData = [
     {
         id: "chopper",
         title: "Surprise Event",
-        themeTitle: "Raftle Rush",
+        themeTitle: "Raftel Rush",
         description: "Whats Inside? Even Oda Wont Tell! 🤐🎁",
         image:
             "https://media1.tenor.com/m/MVFAsfv3wk0AAAAC/one-piece-one-piece-movie.gif",

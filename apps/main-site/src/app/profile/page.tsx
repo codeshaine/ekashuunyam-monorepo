@@ -41,13 +41,11 @@ export default async function PirateProfilePage() {
             <TeamData />
           </Suspense>
           {/* Register New Team Card */}
-
+          <RegisterNewTeam />
           <GroupLinkCard
             // userId={profile?.id}
             userId={session?.user.id ?? "def"}
-          />
-
-          <RegisterNewTeam />
+          />          
         </div>
       </div>
     </div>

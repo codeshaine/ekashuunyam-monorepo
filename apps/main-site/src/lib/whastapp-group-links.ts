@@ -1,44 +1,44 @@
 export const groupData = [
   {
     name: "Kaizoku eizo",
-    subname: "reels making event",
+    subname: "Reel Making",
     // whatsappLink: "https://chat.whatsapp.com/F7GC2a0nEiXAXXKR8lZWMH",
     whatsappLink:
-      "https://chat.whatsapp.com/F7GC2a0nEiXAXXKR8lZWMHa sdfkajdfkjadskfkasd faksdjfka sdjfk jads",
+      "https://chat.whatsapp.com/Gp9OZKrg8JK0CxI38grNuP",
   },
   {
-    name: "Hackathon",
-    subname: "no name",
-    whatsappLink: "https://chat.whatsapp.com/EnC8ZEAq1wcE7pMn10SyBu",
+    name: "Mini Hackathon",
+    subname: "Seraphim",
+    whatsappLink: "https://chat.whatsapp.com/G8YEEm6h2FI8w35KdwCPRy",
   },
   {
-    name: "Warlords conquest",
-    subname: "gaming event",
+    name: "Warlord's War",
+    subname: "Gaming",
     whatsappLink: "https://chat.whatsapp.com/BhxUdtmCIyvI3CvzCI3cXS",
   },
   {
-    name: "haven't given",
-    subname: "Coding and debugging",
+    name: "Rougue Code",
+    subname: "Coding and Debugging",
     whatsappLink: "https://chat.whatsapp.com/CsbhjZdhFhqFZAsGmNs9a2",
   },
   {
-    name: "Grand line rhythm",
-    subname: "Group Dance Event",
-    whatsappLink: "https://chat.whatsapp.com/DIvLI2S5miA0FjJ6sBUQYV",
+    name: "Pirate Grooves",
+    subname: "Group Dance",
+    whatsappLink: "https://chat.whatsapp.com/BOLXoi4aaMiDsPmw7flTH2",
   },
   {
-    name: "Pirate king of IT",
+    name: "Agent CP9",
     subname: "IT Manager",
-    whatsappLink: "https://chat.whatsapp.com/EX5TEmCoNI9CTGPtAedQ3L",
+    whatsappLink: "https://chat.whatsapp.com/I91dJXjXel38l9ImJ115xD",
   },
   {
     name: "Raftel Rush",
     subname: "Surprise Event",
-    whatsappLink: "https://chat.whatsapp.com/Fx7bYSKlVFJHzRc7l3wJzM",
+    whatsappLink: "https://chat.whatsapp.com/ITjk9U5pEUk5xBW2QE6ar0",
   },
   {
-    name: "haven't given",
-    subname: "Quix Event",
-    whatsappLink: "https://chat.whatsapp.com/writers",
+    name: "Yonko Rumble",
+    subname: "IT Quiz",
+    whatsappLink: "https://chat.whatsapp.com/D27JwSUlbvF49ttYz6ib1e",
   },
 ];

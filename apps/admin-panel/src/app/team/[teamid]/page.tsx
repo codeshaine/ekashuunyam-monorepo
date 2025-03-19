@@ -48,6 +48,10 @@ import {
 import { api } from "@/trpc/react";
 import { useParams } from "next/navigation";
 import { toast, Toaster } from "sonner";
+import { useRouter } from "next/navigation";
+import { getUserSession } from "@/app/action";
+import type { Session } from "next-auth";
+import { Role } from "@/lib/members";
 
 export default function Page() {
   const params = useParams<{ teamid: string }>();
@@ -60,8 +64,21 @@ export default function Page() {
   const [newTeamName, setNewTeamName] = useState("");
   const [isVerified, setIsVerified] = useState(false);
   const [showEvents, setShowEvents] = useState(false);
-  const printRef = useRef(null);
+  const [userSession, setUserSession] = useState<Session | null>(null);
 
+  useEffect(() => {
+    void (async () => {
+      try {
+        const user = await getUserSession();
+        setUserSession(user);
+      } catch (error) {
+        console.error("Failed to fetch user session:", error);
+      }
+    })();
+  }, []);
+
+  const printRef = useRef(null);
+  const router = useRouter();
   useEffect(() => {
     if (team) {
       setNewTeamName(team.teamNmae ?? "");
@@ -93,6 +110,15 @@ export default function Page() {
     },
   });
 
+  const teamDelete = api.team.deleteTeam.useMutation({
+    onSuccess: () => {
+      toast.success("Team deleted successfully");
+      router.push("/");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
   const handleUpdateTeamName = () => {
     teamNameUpdate.mutate({ teamId: params?.teamid, newTeamName });
   };
@@ -102,6 +128,10 @@ export default function Page() {
       teamId: params?.teamid,
       verifyStatus: isVerified,
     });
+  };
+
+  const handleDeleteTeam = () => {
+    teamDelete.mutate(params?.teamid);
   };
 
   const handlePrint = () => {
@@ -293,6 +323,31 @@ export default function Page() {
           <p className="text-gray-600">{team?.user.college}</p>
         </div>
         <div className="flex items-center gap-2">
+          {/* Team delete */}
+          {userSession?.user.role === Role.SUPER_ADMIN && (
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline">Delete Team</Button>
+              </DialogTrigger>
+              <DialogContent className="bg-white">
+                <DialogHeader>
+                  <DialogTitle>Delete Team</DialogTitle>
+                  <DialogDescription>
+                    <p>are you sure you want to delete?</p>
+                    <p>(only super admin can do this operation)</p>
+                  </DialogDescription>
+                </DialogHeader>
+
+                <Button
+                  className="bg-red-600 text-white"
+                  onClick={handleDeleteTeam}
+                >
+                  DELETE TEAM
+                </Button>
+              </DialogContent>
+            </Dialog>
+          )}
+
           {team?.verfied ? (
             <Badge className="bg-green-500 px-3 py-1 text-base hover:bg-green-600">
               Verified

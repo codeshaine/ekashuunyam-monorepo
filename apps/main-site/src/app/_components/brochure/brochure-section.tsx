@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const BrochureSection = () => {
   const BROCHURE_LINK = `
-  
+  https://drive.google.com/file/d/1QqJAO58LEjKOtB40Cd5U0dgMWfP-3JGb/view?usp=sharing
   `;
   return (
     <div

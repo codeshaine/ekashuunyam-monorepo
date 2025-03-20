@@ -6,7 +6,7 @@ export default function Developers() {
   const developers = [
     {
       name: "Shainil P S",
-      image: "/pfp/luffy.jpeg",
+      image: "https://media.licdn.com/dms/image/v2/D5603AQGRSXA2S3RGOg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1727230853415?e=1747872000&v=beta&t=UxzfO7pG6FHg1x4sfmXVhxgv4ef6y_GR424lYfxohJE",
       github: "github.com/codeshaine",
       twitter: "x.com/code_shaine",
       portfolio: "shainilps.netlify.app/",
@@ -14,7 +14,7 @@ export default function Developers() {
     },
     {
       name: "Swasthik K",
-      image: "/pfp/luffy.jpeg",
+      image: "https://res.cloudinary.com/dvpaztqr9/image/upload/v1742498061/20241222_145056_dwfz9a.jpg",
       github: "github.com/SwasthK",
       twitter: "x.com/swasthik319",
       portfolio: "swasthk.netlify.app/",
@@ -41,16 +41,17 @@ export default function Developers() {
           .map((dev, index) => (
             <div
               key={index}
-              className="w-full max-w-sm overflow-hidden rounded-xl border border-[#fffdfd4f]"
+              className="w-full max-w-sm overflow-hidden rounded-xl border border-[#fffdfd4f] p-4"
             >
-              <div className="flex items-center justify-center py-4">
-                <Image
-                  src={"/pfp/luffy.jpeg"}
-                  alt={`${dev.name}`}
-                  width={120}
-                  height={120}
-                  className="rounded-full object-cover"
-                />
+              <div className="flex justify-center items-center w-full">
+                <div className="relative  h-52 w-full sm:h-96 sm:w-96 py-4">
+                  <Image
+                    src={dev.image}
+                    alt={`${dev.name}`}
+                    fill
+                    className="rounded object-cover"
+                  />
+                </div>
               </div>
 
               <div className="px-4 py-2 text-white">

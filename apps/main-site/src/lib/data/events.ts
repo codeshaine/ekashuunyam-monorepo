@@ -124,7 +124,7 @@ export const eventsData = [
         heads: [
             {
                 name: "ANKUSH VS",
-                contact: "9632303798",
+                contact: "8073098053",
             },
             {
                 name: "Sudarshan K M",
@@ -164,7 +164,7 @@ export const eventsData = [
             "The fastest and most accurate team wins.",
             "A tiebreaker will decide in case of a tie.",
         ],
-        wanted: 'https://res.cloudinary.com/dvpaztqr9/image/upload/f_auto,q_auto/v1/Ekashunyam2.0/Event-Cards/dchwrxvua7wsjiay5dvh'
+        wanted: 'https://res.cloudinary.com/dvpaztqr9/image/upload/v1742443490/Surprise_Event_1_1_hd73o2.png'
     },
     {
         id: "usopp",
@@ -220,7 +220,7 @@ export const eventsData = [
             "PARTICIPANTS MUST CARRY PENDRIVE FOR SONG SUBMISSION.",
             "JUDGES DECISION IS FINAL.",
         ],
-        wanted: 'https://res.cloudinary.com/dvpaztqr9/image/upload/v1742306536/Dance.png'
+        wanted: 'https://res.cloudinary.com/dvpaztqr9/image/upload/v1742443600/Fashion_Show_2_1_1_dywoef.png'
     },
     {
         id: "brook",
@@ -246,6 +246,6 @@ export const eventsData = [
             "You can use gimble",
             "judge decision is final decision."
         ],
-        wanted: 'https://res.cloudinary.com/dvpaztqr9/image/upload/f_auto,q_auto/v1/Ekashunyam2.0/Event-Cards/wgzcwr04xup44if0x2cx'
+        wanted: 'https://res.cloudinary.com/dvpaztqr9/image/upload/v1742443299/Videography_1_llrbgf.png'
     },
 ];

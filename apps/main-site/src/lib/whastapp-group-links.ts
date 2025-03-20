@@ -19,7 +19,7 @@ export const groupData = [
   {
     name: "Rougue Code",
     subname: "Coding and Debugging",
-    whatsappLink: "https://chat.whatsapp.com/CsbhjZdhFhqFZAsGmNs9a2",
+    whatsappLink: "https://chat.whatsapp.com/D0eDBisczS5DEFi09ExWV3",
   },
   {
     name: "Pirate Grooves",
@@ -39,6 +39,6 @@ export const groupData = [
   {
     name: "Yonko Rumble",
     subname: "IT Quiz",
-    whatsappLink: "https://chat.whatsapp.com/D27JwSUlbvF49ttYz6ib1e",
+    whatsappLink: "https://chat.whatsapp.com/JdA2Sh4YmMx39T71ig2BfH",
   },
 ];

@@ -14,7 +14,7 @@ export const groupData = [
   {
     name: "Warlord's War",
     subname: "Gaming",
-    whatsappLink: "https://chat.whatsapp.com/BhxUdtmCIyvI3CvzCI3cXS",
+    whatsappLink: "https://chat.whatsapp.com/F0JagCEMqwm0SnzAMHPOlr",
   },
   {
     name: "Rougue Code",

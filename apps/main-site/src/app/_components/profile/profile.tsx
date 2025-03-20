@@ -31,6 +31,7 @@ import { useEffect, useState } from "react";
 import { api } from "@/trpc/react";
 import { toast } from "sonner";
 import ProfileSkeleton from "./profile-skeleton";
+import Link from "next/link";
 
 export default function Profile() {
   const {
@@ -164,7 +165,10 @@ export default function Profile() {
                   Edit Profile
                 </Button>
               </DialogTrigger>
-              <DialogContent className="bg-white/95 sm:max-w-md">
+              <DialogContent
+                onWheel={(e) => e.stopPropagation()}
+                className="bg-white/95 sm:max-w-md"
+              >
                 <DialogHeader>
                   <DialogTitle className="text-2xl font-bold text-blue-900">
                     Edit Profile
@@ -233,7 +237,7 @@ export default function Profile() {
                     >
                       <SelectTrigger
                         id="college"
-                        className="w-full border-blue-200 bg-white/90 focus:border-blue-400 focus:ring-blue-400"
+                        className="w-72 border-blue-200 bg-white/90 focus:border-blue-400 focus:ring-blue-400"
                       >
                         <SelectValue placeholder="Select your college" />
                       </SelectTrigger>
@@ -242,13 +246,22 @@ export default function Profile() {
                           <SelectItem
                             key={college}
                             value={college}
-                            className="focus:bg-blue-50"
+                            className="w-96 focus:bg-blue-50"
                           >
                             {college}
                           </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
+                    <div className="flex items-center justify-start gap-2 text-xs text-gray-500">
+                      <Link
+                        href={"/support"}
+                        className="font-semibold text-sky-700 underline"
+                      >
+                        Contact us
+                      </Link>
+                      <p>if your college is not listed</p>
+                    </div>
                   </div>
                   <DialogFooter className="pt-4">
                     <Button

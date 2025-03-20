@@ -7,6 +7,7 @@ import {
   FolderCode,
   House,
   Instagram,
+  KeyRound,
   Menu,
   NotebookPen,
   User,
@@ -60,6 +61,12 @@ export function NavigationBar() {
                 icon={<House />}
                 label="Home"
                 url="/"
+              />
+              <NavItem
+                setOpen={setOpen}
+                icon={<KeyRound />}
+                label="Login"
+                url="/login"
               />
               <NavItem
                 setOpen={setOpen}

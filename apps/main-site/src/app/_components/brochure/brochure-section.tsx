@@ -1,11 +1,10 @@
+import { BROCHURE_LINK } from "@/lib/data/brochure";
 import { ExternalLink, Instagram } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export const BrochureSection = () => {
-  const BROCHURE_LINK = `
-  https://drive.google.com/file/d/1QqJAO58LEjKOtB40Cd5U0dgMWfP-3JGb/view?usp=sharing
-  `;
+  
   return (
     <div
       className="relative min-h-screen w-full overflow-hidden py-8"

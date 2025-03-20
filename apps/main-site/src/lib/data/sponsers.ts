@@ -21,7 +21,7 @@ export const sponsersData: Sponsers[] = [
     {
         name: 'Jaison Dsouza',
         location: 'Church Road, Belthangady',
-        brandName: 'KVL View Hotel',
+        brandName: 'Hotel VL View',
         priority: SponsersPriority.High,
     },
     {
@@ -43,7 +43,7 @@ export const sponsersData: Sponsers[] = [
         priority: SponsersPriority.High,
     },
     {
-        name: 'EV-MLC,Lawyer & Rotary',
+        name: 'MLC,Lawyer & Rotary',
         location: 'Belthangady',
         brandName: 'Prathap Simha Nayak',
         priority: SponsersPriority.High,
@@ -61,7 +61,7 @@ export const sponsersData: Sponsers[] = [
         priority: SponsersPriority.Low,
     },
     {
-        name: 'Vijay Deonha',
+        name: 'Vijay Dcunha',
         location: 'Guruvayanakere',
         brandName: 'Hotel Rays Inn',
         priority: SponsersPriority.Low,
@@ -90,6 +90,7 @@ export const sponsersData: Sponsers[] = [
         brandName: 'Prabhu Clinic',
         priority: SponsersPriority.Low,
     },
+    
 ];
 
 export const WhySponsor = [

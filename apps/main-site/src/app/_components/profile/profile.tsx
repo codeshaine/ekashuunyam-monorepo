@@ -246,7 +246,7 @@ export default function Profile() {
                           <SelectItem
                             key={college}
                             value={college}
-                            className="w-96 focus:bg-blue-50"
+                            className="w-72 focus:bg-blue-50"
                           >
                             {college}
                           </SelectItem>

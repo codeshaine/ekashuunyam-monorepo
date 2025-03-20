@@ -20,7 +20,7 @@ export async function middleware(request: NextRequest) {
 
   const role = token.role as Role;
 
-  if (role === Role.SUPER_ADMIN) {
+  if (role === Role.SUPER_ADMIN || role === Role.REGISTRATION) {
     return NextResponse.next();
   }
 

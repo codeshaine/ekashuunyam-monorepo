@@ -29,6 +29,11 @@ const config = {
         hostname: 'res.cloudinary.com',
         pathname: '**',
       },
+      {
+        protocol: 'https',
+        hostname: 'media.licdn.com',
+        pathname: '**',
+      },
     ],
   },
   reactStrictMode: false

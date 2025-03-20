@@ -145,14 +145,23 @@ export const OnePieceEventModal = ({
         {/* Header with Image and Main Info */}
         <div className="relative w-full">
           {/* Background Image */}
-          <div className="relative h-48 w-full overflow-hidden">
+          <div className="absolute top-0 h-48 w-full overflow-hidden">
+            {/* Black gradient overlay at the bottom */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black"></div>
+
+            {/* Background Image */}
             <Image
               src={image || "/api/placeholder/500/300"}
               alt={title}
               className="h-full w-full object-cover"
               fill
+              style={{
+                filter: "brightness(0.5)",
+              }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-blue-950 to-transparent"></div>
+
+            {/* Blue gradient overlay fading to transparent */}
+            <div className="absolute inset-0 bg-gradient-to-t from-blue-950 via-transparent to-transparent"></div>
           </div>
 
           {/* Event Title Overlay */}
@@ -171,7 +180,7 @@ export const OnePieceEventModal = ({
         </div>
 
         {/* Content */}
-        <ScrollArea className="max-h-[400px] px-6 py-2">
+        <ScrollArea className="px-6 py-2">
           {/* Description */}
           <div className="mb-2 border-b border-amber-600/40 pb-3">
             <p className="text-gray-200">{description}</p>
@@ -241,7 +250,7 @@ export const OnePieceEventModal = ({
               {id === "zoro" && (
                 <p className="capitalize">
                   Topics and general guidelines are present here:{" "}
-                  <Link className="underline text-yellow-300" href={"/hack"}>
+                  <Link className="text-yellow-300 underline" href={"/hack"}>
                     RULESET
                   </Link>
                 </p>

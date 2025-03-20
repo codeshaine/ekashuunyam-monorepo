@@ -1,6 +1,8 @@
 import { z } from "zod";
 
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
+import { Role } from "@/lib/members";
+import { TRPCError } from "@trpc/server";
 
 export const teamRouter = createTRPCRouter({
   getSingleTeam: protectedProcedure
@@ -48,7 +50,7 @@ export const teamRouter = createTRPCRouter({
       const teams = await ctx.db.form.findMany({
         //temporarily removed
         where: {
-          // verfied: true,
+          verfied: true,
           events: {
             some: {
               name: input.eventName,
@@ -152,6 +154,21 @@ export const teamRouter = createTRPCRouter({
         },
         data: {
           teamNmae: input.newTeamName,
+        },
+      });
+      return team;
+    }),
+
+  //dangerous operation
+  deleteTeam: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ ctx, input }) => {
+      if (ctx.session.user.role !== Role.SUPER_ADMIN) {
+        throw new TRPCError({ code: "UNAUTHORIZED" });
+      }
+      const team = await ctx.db.form.delete({
+        where: {
+          id: input,
         },
       });
       return team;

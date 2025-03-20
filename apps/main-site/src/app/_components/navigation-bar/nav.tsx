@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import {
+  BookOpenText,
   CircleDollarSign,
   Contact,
   FolderCode,
@@ -26,6 +27,7 @@ import {
 } from "@/components/ui/drawer";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { BROCHURE_LINK } from "@/lib/data/brochure";
 
 export function NavigationBar() {
   const [open, setOpen] = React.useState(false);
@@ -81,8 +83,14 @@ export function NavigationBar() {
                 label="Register"
                 url="/form/register"
               />
-              {/* <NavItem icon={<BookOpenText />} label="Brochure" url="/" />
-              <NavItem icon={<LocateFixed />} label="Map" url="/" /> */}
+              <NavItem
+                setOpen={setOpen}
+                icon={<BookOpenText />}
+                label="Brochure"
+                target="_blank"
+                url={BROCHURE_LINK}
+              />
+              {/* <NavItem icon={<LocateFixed />} label="Map" url="/" /> */}
               <NavItem
                 setOpen={setOpen}
                 icon={<CircleDollarSign />}

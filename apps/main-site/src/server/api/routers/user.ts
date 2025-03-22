@@ -115,7 +115,13 @@ export const userRouter = createTRPCRouter({
         teamLeaderId: z.string({ message: "Provide leader id" }),
       }),
     )
+
     .query(async ({ ctx, input }) => {
+      if (input.teamLeaderId === "public") {
+        return {
+          isEligible: true,
+        };
+      }
       try {
         const user = await ctx.db.user.findFirst({
           where: {

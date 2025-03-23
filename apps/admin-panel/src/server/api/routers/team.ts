@@ -50,7 +50,7 @@ export const teamRouter = createTRPCRouter({
       const teams = await ctx.db.form.findMany({
         //temporarily removed
         where: {
-          verfied: true,
+          // verfied: true,
           events: {
             some: {
               name: input.eventName,

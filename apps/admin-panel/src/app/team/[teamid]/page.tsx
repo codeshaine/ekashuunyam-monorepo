@@ -467,9 +467,7 @@ export default function Page() {
               <CardContent className="space-y-3">
                 <div className="flex items-center gap-2">
                   <Users className="h-5 w-5 text-gray-500" />
-                  <span>
-                    {team?.fullTeam ? "Full Team" : "Looking for Members"}
-                  </span>
+                  <span>{team?.fullTeam ? "Full Team" : "Partial Team"}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Briefcase className="h-5 w-5 text-gray-500" />

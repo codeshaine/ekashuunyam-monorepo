@@ -147,7 +147,7 @@ export default function TeamsPage() {
                   Team Lead: {team.user?.name ?? "Unknown"}
                 </p>
                 <p className="mt-2 text-sm text-gray-600">
-                  {team.fullTeam ? "Full team" : "Looking for members"}
+                  {team.fullTeam ? "Full Team" : "Partial Team"}
                 </p>
               </CardContent>
               <CardFooter>

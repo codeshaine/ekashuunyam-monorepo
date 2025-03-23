@@ -1,5 +1,6 @@
 export enum Role {
   SUPER_ADMIN = "SUPER_ADMIN",
+  ADMIN = "ADMIN",
   REGISTRATION = "REGISTRATION",
   QUIZ = "QUIZ",
   CODING = "CODING",
@@ -22,6 +23,12 @@ export const allowedMembers = [
     email: "swasth319@gmail.com",
     role: Role.SUPER_ADMIN,
   },
+  //regular admins
+  {
+    email: "dmsuhas@gmail.com",
+    role: Role.ADMIN,
+  },
+
   //registration
   {
     email: "karunyaacharya21@gmail.com",
@@ -111,7 +118,7 @@ export const allowedMembers = [
 
 export type EventRole = Exclude<
   Role,
-  Role.SUPER_ADMIN | Role.REGISTRATION | Role.ERROR
+  Role.SUPER_ADMIN | Role.ADMIN | Role.REGISTRATION | Role.ERROR
 >;
 
 export const RoleToEvent: Record<EventRole, string> = {

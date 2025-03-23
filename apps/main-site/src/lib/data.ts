@@ -30,6 +30,7 @@ export const colleges = [
   "University College, Mangalore",
   "Vivekananda College, Puttur",
   "Yenepoya Institute of Arts, Science, Commerce and Management",
+  "Govt First Grade College,Sullia",
 ];
 
 export const teamNames = [

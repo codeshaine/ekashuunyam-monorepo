@@ -5,7 +5,6 @@ export default function Hack() {
         <h1 className="my-8 text-5xl font-bold text-gray-100">
           Project Seraphim
         </h1>
-
         <section className="mb-5">
           <h2 className="mb-4 text-xl font-semibold text-gray-200">
             Event Overview
@@ -17,7 +16,7 @@ export default function Hack() {
             </li>
             <li>
               <span className="font-medium text-gray-300">Duration:</span> 3
-              hours (min)
+              hours (for coding, but may vary)
             </li>
             <li>
               <span className="font-medium text-gray-300">Objective:</span>{" "}
@@ -26,7 +25,6 @@ export default function Hack() {
             </li>
           </ul>
         </section>
-
         <section className="mb-5">
           <h2 className="mb-4 text-xl font-semibold text-gray-200">
             Rules & Regulations
@@ -40,16 +38,35 @@ export default function Hack() {
               <span className="font-medium">Code Freshness:</span>
               <ul className="mt-2 list-disc space-y-2 pl-6">
                 <li>Start from an empty folder/IDE.</li>
-                <li>
-                  No reuse of old code. AI-generated code is allowed but must be
-                  cited in documentation.
-                </li>
+                <li>No reuse of old code.</li>
               </ul>
             </li>
             <li className="text-gray-300">
               <span className="font-medium">Tech Stack:</span> Any
               language/framework permitted (e.g., JavaScript,Go, React,
               Flutter).
+            </li>
+            <li className="text-gray-300">
+              <span className="font-medium">AI Usage:</span>
+              <ul className="mt-2 list-disc space-y-2 pl-6">
+                <li>
+                  The use of GitHub Copilot, Tabnine, and similar tools for code
+                  completion and suggestions is allowed.
+                </li>
+
+                <li>
+                  AI tools like ChatGPT, Claude, and Gemini may be used for idea
+                  generation, error fixing, and research.
+                </li>
+                <li>
+                  Cursor, Devin, Lovable, and other AI-powered autonomous
+                  development tools are NOT allowed.
+                </li>
+                <li>
+                  AI-generated full codebases or pre-built solutions are
+                  strictly prohibited.
+                </li>
+              </ul>
             </li>
             <li className="text-gray-300">
               <span className="font-medium">Internet Access:</span> Allowed for
@@ -59,9 +76,8 @@ export default function Hack() {
               <span className="font-medium">Progress Tracking:</span>
               <ul className="mt-2 list-disc space-y-2 pl-6">
                 <li>
-                  Git recommended (alternatives accepted: timestamped
-                  screenshots, cloud-based IDEs, time-stamped folders, or hourly
-                  checklists).
+                  Git recommended (alternatives accepted:cloud-based IDEs,
+                  time-stamped folders).
                 </li>
               </ul>
             </li>
@@ -70,14 +86,13 @@ export default function Hack() {
               <ul className="mt-2 list-disc space-y-2 pl-6">
                 <li>3-5 minute live demo (strict cutoff).</li>
                 <li>
-                  Maximum 3 slides (focus on problem, solution, and future
-                  scope).
+                  Maximum 3 slides focus on problem, solution, and future
+                  scope(optional).
                 </li>
               </ul>
             </li>
           </ol>
         </section>
-
         <section className="mb-5">
           <h2 className="mb-4 text-xl font-semibold text-gray-200">
             Problem Statements
@@ -95,17 +110,12 @@ export default function Hack() {
               <li>
                 <span className="font-medium">Examples:</span>
                 <ul className="mt-2 list-disc space-y-1 pl-6">
+                  <li>Subscription-based fitness app with workout plans</li>
                   <li>
-                    Freemium habit-tracking app/website with premium analytics.
+                    Membership site for exclusive content (recipes, parenting
+                    tips, etc.)
                   </li>
-                  <li>
-                    Browser extension offering paid features (e.g., dark mode
-                    for Google Docs).
-                  </li>
-                  <li>
-                    One-click donation platform for creators (demo with
-                    Stripe/PayPal).
-                  </li>
+                  <li>Mobile game with in-app purchases</li>
                 </ul>
               </li>
             </ul>
@@ -145,28 +155,18 @@ export default function Hack() {
                 <ul className="mt-2 list-disc space-y-1 pl-6">
                   <li>CLI tool for bulk file renaming/formatting.</li>
                   <li>VS Code extension for real-time code quality checks.</li>
-                  <li>
-                    Simplified HTTP request library (e.g.,{" "}
-                    <code className="rounded bg-gray-800 px-1 text-gray-200">
-                      fetchDivine()
-                    </code>
-                    ).
-                  </li>
+                  <li>Simplified HTTP request tool like httpie</li>
                 </ul>
               </li>
             </ul>
           </div>
         </section>
-
         <section className="mb-5">
           <h2 className="mb-4 text-xl font-semibold text-gray-200">
             Progress Tracking Alternatives
           </h2>
           <p className="mb-3 text-gray-400">(if Git is not used):</p>
           <ul className="list-disc space-y-2 pl-6">
-            <li className="text-gray-300">
-              Timestamped screenshots of progress (every 30 minutes).
-            </li>
             <li className="text-gray-300">
               Cloud-based IDEs (e.g., Replit, CodeSandbox) with auto-save
               history.
@@ -177,7 +177,6 @@ export default function Hack() {
             </li>
           </ul>
         </section>
-
         <section className="mb-5">
           <h2 className="mb-4 text-xl font-semibold text-gray-200">
             Judging Criteria
@@ -206,36 +205,16 @@ export default function Hack() {
           </ul>
         </section>
 
-        <section className="mb-5">
-          <h2 className="mb-4 text-xl font-semibold text-gray-200">
-            Judges&apos; Notes:
-          </h2>
-          <ul className="list-disc space-y-2 pl-6">
-            <li className="text-gray-300">
-              <span className="font-medium">Creativity {">"} Polish:</span>{" "}
-              Novelty trumps polish.
-            </li>
-            <li className="text-gray-300">
-              <span className="font-medium">AI Use:</span> Teams will be
-              rewarded for augmenting (not replacing) their skills with AI.
-            </li>
-            <li className="text-gray-300">
-              <span className="font-medium">Fairness:</span> No penalties for
-              Git alternatives; focus on output quality.
-            </li>
-          </ul>
-        </section>
-
         <section className="mb-8">
           <h2 className="mb-4 text-xl font-semibold text-gray-200">
             Final Submission
           </h2>
           <p className="text-gray-300">
             Ensure all code, documentation, and progress evidence are submitted
-            at the 3 hour mark.
+            at the 3-hour mark. The proper event schedule will be shared a day
+            before the event.
           </p>
         </section>
-
         <hr className="my-12 border-gray-700" />
       </div>
     </div>

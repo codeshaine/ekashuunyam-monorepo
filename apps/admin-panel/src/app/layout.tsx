@@ -23,7 +23,8 @@ export default async function RootLayout({
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
         {(sesion?.user.role === Role.SUPER_ADMIN ||
-          sesion?.user.role === Role.ADMIN) && <Navbar />}
+          sesion?.user.role === Role.ADMIN ||
+          sesion?.user.role === Role.REGISTRATION) && <Navbar />}
         <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
     </html>

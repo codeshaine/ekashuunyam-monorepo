@@ -235,7 +235,7 @@ export default function Page() {
             </div>
             
             <div class="events-section">
-              <div class="events-title">Registered Events (${team?.events.length ?? 0})</div>
+              <div class="events-title">Registered Events : ${team?.events.length ?? 0}</div>
               <div class="events-grid">
                 ${
                   team?.events

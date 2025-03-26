@@ -45,6 +45,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { z } from "zod";
+import { PrintEventWise } from "@/_components/print-event-wise";
 
 export default function Page() {
   const params = useParams<{ role_name: EventRole }>();
@@ -101,6 +102,7 @@ export default function Page() {
       <Button onClick={toggleSortOrder} variant="outline" className="mb-4">
         Sort: {sortOrder === "asc" ? "oldest" : "Newest"}
       </Button>
+      <PrintEventWise data={data} eventName={result.data} />
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight">
           {params.role_name ? `${params.role_name} Teams` : "All Teams"}
